@@ -1,0 +1,56 @@
+.sidebar{
+  /* border: 1px solid green; */
+  /* display: inline; */
+  height: 100%;
+  background-color: #6686CC;
+  /* width: 20vw; */
+}
+.sideber__logo{
+  /* border: 1px solid red; */
+}
+.sidebar__header{
+  margin-left: 40px;
+  margin-top: 0;
+  color: #FFFFFF;
+}
+.sidebar__button{
+  border: solid 1px #FFFFFF;
+  border-radius: 10px;
+  width: 135px;
+  height: 40px;
+  margin-left: 50px;
+  margin-top: 40px;
+  text-align: center;
+}
+.sidebar__button p {
+  margin-top: 11px;
+  color: #FFFFFF;
+}
+.sidebar__projects{
+  margin-top: 20px;
+}
+.sidebar__projects span{
+  position: relative;
+  top: -7px;
+  margin-left: 20px;
+  color: #FFFFFF;
+
+}
+.sidebar__analytics{
+  margin-top: 20px;
+}
+.sidebar__analytics span{
+  position: relative;
+  top: -7px;
+  margin-left: 20px;
+  color: #FFFFFF;
+}
+.sidebar__teamMembers{
+  margin-top: 20px;
+}
+.sidebar__teamMembers span{
+  position: relative;
+  top: -7px;
+  margin-left: 20px;
+  color: #FFFFFF;
+}
