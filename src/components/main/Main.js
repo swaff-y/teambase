@@ -5,7 +5,7 @@ import "./main.css";
 
 const Main = (props) => {
   return(
-    <div className="main">
+    <div className="main" data-test="component-main">
       <Header />
       <Content />
     </div>

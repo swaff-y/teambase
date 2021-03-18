@@ -8,7 +8,7 @@ import Main from './components/main/Main'
 
 function App() {
   return (
-    <div className="app">
+    <div className="app" data-test="component-app">
       <Sidebar />
       <Main />
     </div>

@@ -3,8 +3,8 @@ import "./content.css";
 
 const Content = (props) => {
   return(
-    <div className="content">
-    
+    <div className="content" data-test="component-content">
+
     </div>
   )
 }

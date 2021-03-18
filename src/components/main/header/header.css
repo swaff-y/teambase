@@ -1,7 +1,7 @@
 .header{
   /* border: 1px solid red; */
   display: grid;
-  grid-template-columns: 400px 3fr;
+  grid-template-columns: 1fr 1fr;
   background-color: #FFFFFF;
   height: 100px;
   /* width: 80vw; */
