@@ -54,3 +54,16 @@
   margin-left: 20px;
   color: #FFFFFF;
 }
+.sidebar__projectList{
+  color: #FFFFFF;
+  margin-left: -10px;
+  list-style-type: none;
+}
+.sidebar__projectList li{
+  /* margin-top: 5px; */
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
+.sidebar__projectList li:hover{
+  background-color: darkblue;
+}
