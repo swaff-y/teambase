@@ -1,4 +1,7 @@
 .projectTitle{
+  position: absolute;
+  width: 500px;
   margin-left: 50px;
   padding-top: 10px;
+  text-overflow: ellipsis;
 }

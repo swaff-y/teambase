@@ -1,6 +1,172 @@
 .content{
-  /* border: 1px solid orange; */
+  position:absolute;
   background-color: #F7F7F7;
   height: 85%;
-  width: 80vw;
+  width: 82%;
+}
+
+.content__spacer{
+  height: 50px;
+}
+
+.content__filterBar{
+  /* border: solid 1px red; */
+  position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: 50px;
+  width: 90%;
+  background-color: #FFFFFF;
+  box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.1);
+  height: 60px;
+}
+
+.content__filterBarFilters{
+  position: absolute;
+  width: 400px;
+  top:50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.content__filterBarFilters span:hover{
+  cursor: pointer;
+}
+
+.content__filterbarCircle{
+  position: relative;
+  padding:3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #F7F7F7;
+  border-radius: 50%;
+}
+
+.content__taskBar{
+  /* border: solid 1px red; */
+  position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: 50px;
+  margin-bottom: 40px;
+  width: 90%;
+  background-color: #FFFFFF;
+  box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.1);
+  height: 40px;
+}
+
+.content__taskBarContents{
+  position: absolute;
+  left: 30px;
+  top:50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.content__filterBar span div{
+  display: inline;
+  margin: 10px;
+}
+
+.content__newTaskButton{
+  /* border: 1px solid red; */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  float:right;
+  text-align: center;
+  height: 100%;
+  width: 150px;
+  color: white;
+  background-color: #6686CC;
+}
+.content__newTaskButton{
+  cursor: pointer;
+}
+.content__newTaskButton p{
+  position: relative;
+  top:25%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.content__userStack{
+  position: relative;
+  left: 38px;
+  /* border:1px solid red; */
+  margin-left: -35px;
+}
+
+.content__headings{
+  /* border: 1px solid red; */
+  position: relative;
+  top: 60px;
+  height: 50px;
+}
+.content__headings span{
+  /* border: 1px solid red; */
+  position: relative;
+  height: 50px;
+  top:25%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #C7C7C7;
+}
+
+#first{
+  margin-left: 30px;
+}
+
+#headerName{
+  left: 90px;
+}
+#headerStatus{
+  left: 248px;
+}
+#headerDueDate{
+  left: 324px;
+}
+#headerProgress{
+  left: 374px;
+}
+#headerAssignees{
+  left: 435px;
+}
+
+#name{
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 10px;
+  width: 220px;
+  text-overflow: ellipsis;
+}
+
+#status{
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 250px;
+  width: 110px;
+}
+
+#dueDate{
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 370px;
+  width: 100px;
+}
+#progress{
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 485px;
+  top: 1px;
+  width: 100px;
+}
+#users{
+  /* border: 1px solid red; */
+  position: relative;
+  left: 590px;
+  top: 12px;
+  width: 100px;
 }

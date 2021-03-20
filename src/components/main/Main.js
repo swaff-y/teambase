@@ -6,8 +6,8 @@ import "./main.css";
 const Main = (props) => {
   return(
     <div className="main" data-test="component-main">
-      <Header />
-      <Content />
+      <Header selectedProject={props.selectedProject}/>
+      <Content selectedProject={props.selectedProject}/>
     </div>
   )
 }

@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import ProjectList from './ProjectList';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import PeopleIcon from '@material-ui/icons/People';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import SettingsIcon from '@material-ui/icons/Settings';
 import api from '../../api';
 import './sidebar.css'
 
@@ -15,7 +14,7 @@ const Sidebar = (props) => {
   const [projectShow, setProjectShow] = useState("none");
 
   useEffect(()=>{
-    api.get('projects-user/96')
+    api.get(`projects-user/${props.user}`)
     .then(res=>{
       setProjectData(res.data);
     })
@@ -44,22 +43,22 @@ const Sidebar = (props) => {
       <div className="sidebar__button">
         <p>New Project</p>
       </div>
-      <div className="sidebar__projects">
+      <div className="sidebar__projects" onClick={projectShowToggle}>
         <ViewListIcon fontSize="medium" style={{marginLeft:'20px', color:'#FFFFFF'}} />
         <span>Projects</span>
         {
           projectShow === 'none'
           ?
-          <ChevronRightIcon fontSize="medium" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}} onClick={projectShowToggle}/>
+          <ChevronRightIcon fontSize="medium" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}}/>
           :
-          <ExpandMoreIcon fontSize="medium" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}} onClick={projectShowToggle}/>
+          <ExpandMoreIcon fontSize="medium" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}}/>
         }
 
       </div>
       <div className="sidebar__projectsShow" style={{display:projectShow}}>
         <ul className="sidebar__projectList">
           {
-            projectData.map((project,index)=><li key={index}><ArrowForwardIcon fontSize="medium" style={{color:'white',position:'relative',top:'7px', left:'-10px'}} /> {project.name} <SettingsIcon fontSize="small" style={{float:'right', position:'relative', top:'7px', marginRight:'10px'}}/></li>)
+            projectData.map((project,index)=><ProjectList key={index} project={project} handleClick={props.selectedProject}/>)
           }
         </ul>
       </div>

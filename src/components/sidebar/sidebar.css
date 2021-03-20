@@ -22,12 +22,18 @@
   margin-top: 40px;
   text-align: center;
 }
+.sidebar__button:hover{
+cursor: pointer;
+}
 .sidebar__button p {
   margin-top: 11px;
   color: #FFFFFF;
 }
 .sidebar__projects{
   margin-top: 20px;
+}
+.sidebar__projects:hover{
+  cursor: pointer;
 }
 .sidebar__projects span{
   position: relative;
@@ -39,6 +45,9 @@
 .sidebar__analytics{
   margin-top: 20px;
 }
+.sidebar__analytics:hover{
+  cursor: pointer;
+}
 .sidebar__analytics span{
   position: relative;
   top: -7px;
@@ -48,6 +57,9 @@
 .sidebar__teamMembers{
   margin-top: 20px;
 }
+.sidebar__teamMembers:hover{
+  cursor: pointer;
+}
 .sidebar__teamMembers span{
   position: relative;
   top: -7px;
@@ -55,15 +67,19 @@
   color: #FFFFFF;
 }
 .sidebar__projectList{
+  position: relative;
+  left: -20px;
   color: #FFFFFF;
-  margin-left: -10px;
+  margin-left: -20px;
   list-style-type: none;
 }
 .sidebar__projectList li{
   /* margin-top: 5px; */
   padding-bottom: 10px;
   padding-left: 20px;
+  width: 229px;
 }
 .sidebar__projectList li:hover{
   background-color: darkblue;
+  cursor: pointer;
 }

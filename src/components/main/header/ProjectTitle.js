@@ -4,7 +4,7 @@ import "./projectTitle.css";
 const ProjectTitle = (props) => {
   return(
     <div className="projectTitle">
-      <h1>Project Title</h1>
+      <h1>{props.selectedProject[0]}</h1>
     </div>
   )
 }
