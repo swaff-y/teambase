@@ -11,15 +11,17 @@ const Content = (props) => {
   // const [projectStatus, setProjectStatus] = useState("In Progress");
 
   useEffect(()=>{
-    api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`)
-    .then(res=>{
-      if(res.data !== null){
-        setSelectedProject(res.data);
-      }
-    })
-    .catch(err=>{
-      console.warn(err);
-    })
+    if(props.selectedProject[1] > 1){
+      api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`)
+      .then(res=>{
+        if(res.data !== null){
+          setSelectedProject(res.data);
+        }
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    }
   },[filterSelection,props.selectedProject[1]]);
 
   const filterSelect = (type) => {
@@ -39,7 +41,7 @@ const Content = (props) => {
       </div>
       <div className="content__spacer"></div>
       {
-        selectedProject.map((task, index)=><TaskBar task={task}/>)
+        selectedProject.map((task, index)=><TaskBar key={index} task={task}/>)
       }
     </div>
   )

@@ -6,20 +6,6 @@ import "./content.css";
 
 const TaskBar = (props) => {
 
-  // const [selectedTask,setSelectedTask] = useState({users:[{}]})
-
-  // useEffect(()=>{
-  //   api.get(`task-users/${props.id}`)
-  //   .then(res=>{
-  //     if(res.data !== null){
-  //       setSelectedTask(res.data);
-  //     }
-  //   })
-  //   .catch(err=>{
-  //     console.warn(err);
-  //   })
-  // },[props.selectedProject]);
-
   return(
     <div className="content__taskBar">
       <div className="content__taskBarContents">
@@ -29,7 +15,7 @@ const TaskBar = (props) => {
         <span id="progress"><LinearProgress variant="determinate" value={50} style={{height:'15px', borderRadius:'3px'}}/></span>
         <span id="users">
           {
-            props.task.users.map((user,index)=><UserStack user={user}/>)
+            props.task.users.map((user,index)=><UserStack key={index} user={user}/>)
           }
         </span>
       </div>
