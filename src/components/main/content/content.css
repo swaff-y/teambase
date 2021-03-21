@@ -30,6 +30,12 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.content__filterBarFilters span{
+  display:inline-block;
+  border-bottom: 3px solid #FFFFFF;
+  height:35px;
+  padding-top: 23px;
+}
 .content__filterBarFilters span:hover{
   cursor: pointer;
 }

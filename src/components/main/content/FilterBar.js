@@ -53,7 +53,14 @@ const FilterBar = (props) => {
     if(props.filterSelection === "New"){
       return {
         backgroundColor: "#9E9999",
-        color: "#FFFFFF"
+        color: "#FFFFFF",
+      }
+    }
+  }
+  const statusCheckNewBorder = () => {
+    if(props.filterSelection === "New"){
+      return {
+        borderBottom: "3px solid darkblue",
       }
     }
   }
@@ -65,6 +72,13 @@ const FilterBar = (props) => {
       }
     }
   }
+  const statusCheckInProgressBorder = () => {
+    if(props.filterSelection === "In Progress"){
+      return {
+        borderBottom: "3px solid darkblue",
+      }
+    }
+  }
   const statusCheckComplete = () => {
     if(props.filterSelection === "Complete"){
       return {
@@ -73,13 +87,30 @@ const FilterBar = (props) => {
       }
     }
   }
+  const statusCheckCompleteBorder = () => {
+    if(props.filterSelection === "Complete"){
+      return {
+        borderBottom: "3px solid darkblue",
+      }
+    }
+  }
 
   return(
     <div className="content__filterBar">
       <div className="content__filterBarFilters">
-        <span id="first" onClick={handleClickNew}>New <div className="content__filterbarCircle" style={ statusCheckNew()}>{newCount(selectedProject.tasks)}</div></span>
-        <span onClick={handleClickInProgress}>In Progress <div className="content__filterbarCircle" style={ statusCheckInProgress()}>{inProgressCount(selectedProject.tasks)}</div></span>
-        <span onClick={handleClickComplete}>Completed <div className="content__filterbarCircle" style={ statusCheckComplete()}>{completeCount(selectedProject.tasks)}</div></span>
+        <span id="first" onClick={handleClickNew} style={statusCheckNewBorder()}>
+          New
+          <div className="content__filterbarCircle" style={ statusCheckNew()}>{newCount(selectedProject.tasks)}</div>
+        </span>
+
+        <span id="second" onClick={handleClickInProgress} style={statusCheckInProgressBorder()}>
+          In Progress
+          <div className="content__filterbarCircle" style={ statusCheckInProgress()}>{inProgressCount(selectedProject.tasks)}</div>
+        </span>
+        <span id="third" onClick={handleClickComplete} style={statusCheckCompleteBorder()}>
+          Completed
+          <div className="content__filterbarCircle" style={ statusCheckComplete()}>{completeCount(selectedProject.tasks)}</div>
+        </span>
       </div>
       <div className="content__newTaskButton">
         <p>New Task</p>
