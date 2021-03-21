@@ -31,7 +31,7 @@ const Content = (props) => {
   return(
     <div className="content" data-test="component-content">
       <div className="content__spacer"></div>
-      <FilterBar filterSelect={filterSelect} selectedProject={props.selectedProject} filterSelection={filterSelection}/>
+      <FilterBar filterSelect={filterSelect} selectedProject={props.selectedProject} filterSelection={filterSelection} showFloatTaskBar={props.showFloatTaskBar}/>
       <div className="content__headings">
         <span id="headerName">Task Name</span>
         <span id="headerStatus">Status</span>

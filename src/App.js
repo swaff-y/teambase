@@ -10,18 +10,24 @@ const USER = 101;
 
 function App() {
   const [selectedProject, setSelectedProject] = useState([]);
-
-
+  const [floatStatus, setFloatStatus] = useState('none');
 
   const project = (projectName,projectId) => {
     setSelectedProject([projectName, projectId]);
   };
 
+  const closeFloatTaskBar = () => {
+    setFloatStatus('none')
+  }
+  const showFloatTaskBar = () => {
+    setFloatStatus('')
+  }
+
   return (
     <div className="app" data-test="component-app">
       <Sidebar selectedProject={project} user={USER}/>
-      <Main selectedProject={selectedProject}/>
-      <FloatTaskBar />
+      <Main selectedProject={selectedProject} showFloatTaskBar={showFloatTaskBar}/>
+      <FloatTaskBar floatStatus={floatStatus} closeFloatTaskBar={closeFloatTaskBar}/>
     </div>
   );
 }

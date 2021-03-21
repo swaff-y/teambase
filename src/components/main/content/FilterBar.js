@@ -112,7 +112,7 @@ const FilterBar = (props) => {
           <div className="content__filterbarCircle" style={ statusCheckComplete()}>{completeCount(selectedProject.tasks)}</div>
         </span>
       </div>
-      <div className="content__newTaskButton">
+      <div className="content__newTaskButton" onClick={props.showFloatTaskBar}>
         <p>New Task</p>
       </div>
     </div>
