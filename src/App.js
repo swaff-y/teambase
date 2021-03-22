@@ -17,10 +17,10 @@ function App() {
   };
 
   const closeFloatTaskBar = () => {
-    setFloatStatus('none')
+    setFloatStatus('none');
   }
   const showFloatTaskBar = () => {
-    setFloatStatus('')
+    setFloatStatus('');
   }
 
   return (
