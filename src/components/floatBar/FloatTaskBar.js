@@ -35,6 +35,22 @@ const FloatTaskBar = (props) => {
 
   useEffect(()=>{
     setAssigneeCount(0);
+    setSelectedDate(Date.now());
+    setFormDetails({
+      name:"",
+      due_date: "",
+      status:"",
+      progress:5,
+      category:"",
+      description:"",
+      assignees:[]
+    });
+    setFormName("");
+    setStatusChange("");
+    setProgressChange(5);
+    setCategoryChange("");
+    setDescriptionChange("");
+    setAssigneesChange([]);
   },[props.floatStatus])
 
   useEffect(()=>{
@@ -126,7 +142,7 @@ const FloatTaskBar = (props) => {
         <form onSubmit={(event)=>event.preventDefault()}>
           <div className="floatbar__row">
             <label for="taskName">Task Name</label><br/>
-            <input id="taskName" type="text" name="taskName" placeholder="Task Name" onChange={handleTaskNameChange}/>
+            <input id="taskName" type="text" name="taskName" placeholder="Task Name" onChange={handleTaskNameChange} value={formName}/>
           </div>
           <div className="floatbar__row bigger">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -158,7 +174,7 @@ const FloatTaskBar = (props) => {
           <div className="floatbar__row" id="date">
             <div className="floatbar__col">
               <label for="status">Status</label><br/>
-              <select onChange={handleStatusChange}>
+              <select onChange={handleStatusChange} value={statusChange}>
                 <option>New</option>
                 <option>In Progress</option>
                 <option>Complete</option>
@@ -166,7 +182,7 @@ const FloatTaskBar = (props) => {
             </div>
             <div className="floatbar__col">
               <label for="progress">Progress</label><br/>
-              <select onChange={handleProgressChange}>
+              <select onChange={handleProgressChange} value={progressChange}>
                 {
                   percentage().map((value,index)=>
                   <option key={index} value={value}>
@@ -177,7 +193,7 @@ const FloatTaskBar = (props) => {
             </div>
             <div className="floatbar__col">
               <label for="category">Category</label><br/>
-              <select onChange={handleCategoryChange}>
+              <select onChange={handleCategoryChange} value={categoryChange}>
                 <option></option>
                 <option>Test</option>
               </select>
@@ -185,7 +201,7 @@ const FloatTaskBar = (props) => {
           </div>
           <div className="floatbar__row">
             <label for="des">Description</label><br/>
-            <textarea id="des" onChange={handleDescriptionChange}></textarea>
+            <textarea id="des" onChange={handleDescriptionChange} value={descriptionChange}></textarea>
           </div>
           <div className="floatbar__row assignees">
             <label for="des">Assignees</label><br/>
