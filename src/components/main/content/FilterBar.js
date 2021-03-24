@@ -15,7 +15,7 @@ const FilterBar = (props) => {
     .catch(err=>{
       console.warn(err);
     })
-  },[props.selectedProject]);
+  },[props.selectedProject,props.floatStatus]);
 
   const handleClickNew = () => {
     props.filterSelect("New")

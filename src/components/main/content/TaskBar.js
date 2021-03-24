@@ -12,7 +12,7 @@ const TaskBar = (props) => {
         <span id="name">{props.task.name}</span>
         <span id="status">{props.task.status}</span>
         <span id="dueDate">{props.task.due_date}</span>
-        <span id="progress"><LinearProgress variant="determinate" value={50} style={{height:'15px', borderRadius:'3px'}}/></span>
+        <span id="progress"><LinearProgress variant="determinate" value={props.task.progress} style={{height:'15px', borderRadius:'3px'}}/></span>
         <span id="users">
           {
             props.task.users.map((user,index)=><UserStack key={index} user={user}/>)

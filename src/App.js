@@ -22,7 +22,7 @@ function App() {
     .catch(err=>{
       console.warn(err);
     })
-  },[floatStatus]);
+  },[]);
 
   const project = (projectName,projectId) => {
     setSelectedProject([projectName, projectId]);
@@ -44,11 +44,13 @@ function App() {
       <Main
         selectedProject={selectedProject}
         showFloatTaskBar={showFloatTaskBar}
+        floatStatus={floatStatus}
       />
       <FloatTaskBar
         floatStatus={floatStatus}
         closeFloatTaskBar={closeFloatTaskBar}
         selectedProject={selectedProject}
+        user={USER}
       />
     </div>
   );

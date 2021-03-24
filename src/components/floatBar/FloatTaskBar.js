@@ -24,7 +24,7 @@ const FloatTaskBar = (props) => {
     progress:5,
     category:"",
     description:"",
-    assignees:[]
+    assignees:[props.user]
   })
   const [formName, setFormName] = useState("");
   const [statusChange, setStatusChange] = useState("");
@@ -43,7 +43,7 @@ const FloatTaskBar = (props) => {
       progress:5,
       category:"",
       description:"",
-      assignees:[]
+      assignees:[props.user]
     });
     setFormName("");
     setStatusChange("");
@@ -110,15 +110,17 @@ const FloatTaskBar = (props) => {
     formDetails.description = e.target.value;
   }
   const handleAssigneesChange = (e) => {
+    assigneesChange.pop();
     assigneesChange.push(e.target.value);
+    formDetails.assignees.pop();
     formDetails.assignees.push(e.target.value);
   }
 
   const saveData = (e) => {
-    console.log("Form Details",formDetails);
+
     api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
     .then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         props.closeFloatTaskBar();
     })
     .catch(err=>{

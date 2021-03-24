@@ -22,7 +22,7 @@ const Content = (props) => {
         console.warn(err);
       })
     }
-  },[filterSelection,props.selectedProject[1]]);
+  },[filterSelection,props.selectedProject[1],props.floatStatus]);
 
   const filterSelect = (type) => {
     setFilterSelection(type);
@@ -34,6 +34,7 @@ const Content = (props) => {
       <FilterBar
         filterSelect={filterSelect}
         selectedProject={props.selectedProject} filterSelection={filterSelection} showFloatTaskBar={props.showFloatTaskBar}
+        floatStatus={props.floatStatus}
       />
       <div className="content__headings">
         <span id="headerName">Task Name</span>
