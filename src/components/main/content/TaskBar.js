@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import UserStack from './UserStack'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import EditIcon from '@material-ui/icons/Edit';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import DeleteIcon from '@material-ui/icons/Delete';
 import api from '../../../api';
 import "./content.css";
 
 const TaskBar = (props) => {
+
+  const iconStyle = {
+    marginRight: "20px",
+    color: "#6686CC"
+  }
 
   return(
     <div className="content__taskBar">
@@ -18,6 +26,11 @@ const TaskBar = (props) => {
             props.task.users.map((user,index)=><UserStack key={index} user={user}/>)
           }
         </span>
+        <div className="content__taskBarIcons">
+          <EditIcon fontSize="medium" style={iconStyle}/>
+          <EventNoteIcon fontSize="medium" style={iconStyle}/>
+          <DeleteIcon fontSize="medium" style={iconStyle}/>
+        </div>
       </div>
     </div>
   )
