@@ -60,7 +60,7 @@ const FilterBar = (props) => {
   const statusCheckNewBorder = () => {
     if(props.filterSelection === "New"){
       return {
-        borderBottom: "3px solid darkblue",
+        borderBottom: "3px solid #6686CC",
       }
     }
   }
@@ -75,7 +75,7 @@ const FilterBar = (props) => {
   const statusCheckInProgressBorder = () => {
     if(props.filterSelection === "In Progress"){
       return {
-        borderBottom: "3px solid darkblue",
+        borderBottom: "3px solid #6686CC",
       }
     }
   }
@@ -90,7 +90,7 @@ const FilterBar = (props) => {
   const statusCheckCompleteBorder = () => {
     if(props.filterSelection === "Complete"){
       return {
-        borderBottom: "3px solid darkblue",
+        borderBottom: "3px solid #6686CC",
       }
     }
   }
