@@ -6,23 +6,10 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import PeopleIcon from '@material-ui/icons/People';
-import api from '../../api';
 import './sidebar.css'
 
 const Sidebar = (props) => {
-  const [projectData, setProjectData] = useState([]);
   const [projectShow, setProjectShow] = useState("none");
-
-  useEffect(()=>{
-    api.get(`projects-user/${props.user}`)
-    .then(res=>{
-      setProjectData(res.data);
-    })
-    .catch(err=>{
-      console.warn(err);
-    })
-
-  },[]);
 
   // console.log(projectData);
 
@@ -58,7 +45,7 @@ const Sidebar = (props) => {
       <div className="sidebar__projectsShow" style={{display:projectShow}}>
         <ul className="sidebar__projectList">
           {
-            projectData.map((project,index)=><ProjectList key={index} project={project} handleClick={props.selectedProject}/>)
+            props.projectData.map((project,index)=><ProjectList key={index} project={project} handleClick={props.selectedProject}/>)
           }
         </ul>
       </div>

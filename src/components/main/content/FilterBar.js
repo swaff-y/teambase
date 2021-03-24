@@ -94,6 +94,14 @@ const FilterBar = (props) => {
       }
     }
   }
+  const checkProject = () => {
+    if(props.selectedProject.length < 1){
+      const style = {
+        backgroundColor: '#bdc7de',
+      }
+      return style;
+    }
+  }
 
   return(
     <div className="content__filterBar">
@@ -112,7 +120,11 @@ const FilterBar = (props) => {
           <div className="content__filterbarCircle" style={ statusCheckComplete()}>{completeCount(selectedProject.tasks)}</div>
         </span>
       </div>
-      <div className="content__newTaskButton" onClick={props.showFloatTaskBar}>
+      <div
+        className="content__newTaskButton"
+        onClick={props.showFloatTaskBar}
+        style={checkProject()}
+      >
         <p>New Task</p>
       </div>
     </div>

@@ -20,7 +20,7 @@ const FloatTaskBar = (props) => {
   const [formDetails, setFormDetails] = useState({
     name:"",
     due_date: "",
-    status:"",
+    status:"New",
     progress:5,
     category:"",
     description:"",
@@ -39,7 +39,7 @@ const FloatTaskBar = (props) => {
     setFormDetails({
       name:"",
       due_date: "",
-      status:"",
+      status:"New",
       progress:5,
       category:"",
       description:"",
@@ -115,10 +115,16 @@ const FloatTaskBar = (props) => {
   }
 
   const saveData = (e) => {
-
+    console.log("Form Details",formDetails);
+    api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
+    .then(res=>{
+        console.log(res.data);
+        props.closeFloatTaskBar();
+    })
+    .catch(err=>{
+      console.warn(err);
+    })
   }
-
-  // console.log(formDetails);
 
   return(
     <div
