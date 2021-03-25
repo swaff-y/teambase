@@ -12,6 +12,9 @@ const Main = (props) => {
       <Content
         selectedProject={props.selectedProject} showFloatTaskBar={props.showFloatTaskBar}
         floatStatus={props.floatStatus}
+        handleTaskEdit={props.handleTaskEdit}
+        handleTaskNote={props.handleTaskNote}
+        handleTaskDelete={props.handleTaskDelete}
       />
     </div>
   )

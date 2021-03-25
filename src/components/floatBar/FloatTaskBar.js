@@ -134,7 +134,15 @@ const FloatTaskBar = (props) => {
       style={{
       display:props.floatStatus
     }}>
-      <h1 className="floatbar__heading">Add Task</h1>
+      {
+        props.edit === true
+        ?
+        <h1 className="floatbar__heading">Edit Task</h1>
+        :
+        <h1 className="floatbar__heading">Add Task</h1>
+      }
+
+
       <CloseIcon
         onClick={props.closeFloatTaskBar}
         fontSize="medium"

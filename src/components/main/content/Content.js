@@ -45,7 +45,14 @@ const Content = (props) => {
       </div>
       <div className="content__spacer"></div>
       {
-        selectedProject.map((task, index)=><TaskBar key={index} task={task}/>)
+        selectedProject.map((task, index)=>
+        <TaskBar
+          key={index}
+          task={task}
+          handleTaskEdit={props.handleTaskEdit}
+          handleTaskNote={props.handleTaskNote}
+          handleTaskDelete={props.handleTaskDelete}
+        />)
       }
     </div>
   )
