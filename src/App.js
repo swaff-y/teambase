@@ -101,10 +101,16 @@ function App() {
       <FloatDeleteTask
         closeFloatTaskDelete={closeFloatTaskDelete}
         floatTaskDelete={floatTaskDelete}
+        selectedProject={selectedProject}
+        user={USER}
+        taskId={taskId}
       />
       <FloatNote
         closeFloatNote={closeFloatNote}
         floatNote={floatNote}
+        selectedProject={selectedProject}
+        user={USER}
+        taskId={taskId}
       />
 
     </div>
