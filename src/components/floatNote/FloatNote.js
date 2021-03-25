@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import "./floatdeletetask.css";
+import "./floatnote.css";
 
-const FloatTaskDelete = (props) => {
+const FloatNote = (props) => {
   return(
     <div
-      className="floatdeletetask"
+      className="floatnote"
       style={{
-      display:props.floatTaskDelete
-    }}
+        display:props.floatNote
+      }}
     >
+
       <CloseIcon
-        onClick={props.closeFloatTaskDelete}
+        onClick={props.closeFloatNote}
         fontSize="medium"
         style={{
           position:'absolute',
@@ -24,4 +25,4 @@ const FloatTaskDelete = (props) => {
   )
 }
 
-export default FloatTaskDelete;
+export default FloatNote;

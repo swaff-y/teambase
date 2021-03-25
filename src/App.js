@@ -5,6 +5,7 @@ import { Route, HashRouter as Router } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar'
 import FloatTaskBar from './components/floatBar/FloatTaskBar'
 import FloatDeleteTask from './components/floatDelete/FloatTaskDelete'
+import FloatNote from './components/floatNote/FloatNote'
 import api from './api';
 import Main from './components/main/Main'
 
@@ -13,6 +14,8 @@ const USER = 101;
 function App() {
   const [selectedProject, setSelectedProject] = useState([]);
   const [floatStatus, setFloatStatus] = useState('none');
+  const [floatTaskDelete, setFloatTaskDelete] = useState('none');
+  const [floatNote, setFloatNote] = useState('none');
   const [projectData, setProjectData] = useState([]);
   const [taskEdit, setTaskEdit] = useState(false);
   const [taskNote, setTaskNote] = useState(false);
@@ -38,6 +41,18 @@ function App() {
     setTaskId();
     setTaskEdit(false);
   }
+  const closeFloatTaskDelete = () => {
+    setFloatTaskDelete('none');
+    setTaskId();
+    setTaskDelete(false);
+  }
+
+  const closeFloatNote = () => {
+    setFloatNote('none');
+    setTaskId();
+    setTaskNote(false);
+  }
+
   const showFloatTaskBar = () => {
     if(selectedProject.length > 0) setFloatStatus('');
   }
@@ -51,11 +66,13 @@ function App() {
   const handleTaskNote = (id) => {
     // console.log("Clicked note", id);
     setTaskNote(true);
+    setFloatNote('');
     setTaskId(id);
   }
   const handleTaskDelete = (id) => {
     // console.log("Clicked delete", id);
     setTaskDelete(true);
+    setFloatTaskDelete('');
     setTaskId(id);
   }
 
@@ -82,7 +99,12 @@ function App() {
         taskId={taskId}
       />
       <FloatDeleteTask
-
+        closeFloatTaskDelete={closeFloatTaskDelete}
+        floatTaskDelete={floatTaskDelete}
+      />
+      <FloatNote
+        closeFloatNote={closeFloatNote}
+        floatNote={floatNote}
       />
 
     </div>
