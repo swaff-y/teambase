@@ -9,7 +9,7 @@ import FloatNote from './components/floatNote/FloatNote'
 import api from './api';
 import Main from './components/main/Main'
 
-const USER = 101;
+const USER = 136;
 
 function App() {
   const [selectedProject, setSelectedProject] = useState([]);
@@ -89,6 +89,7 @@ function App() {
         handleTaskEdit={handleTaskEdit}
         handleTaskNote={handleTaskNote}
         handleTaskDelete={handleTaskDelete}
+        taskDelete={taskDelete}
       />
       <FloatTaskBar
         floatStatus={floatStatus}

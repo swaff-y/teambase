@@ -10,6 +10,15 @@
   text-align: center;
 }
 
-.floatdeletetask h1{
-  font-size: 18pt;
+.floatdeletetask__container{
+  position: absolute;
+  left: 12%;
+  top:40%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+.floatdeletetask__container p{
+  margin-bottom: 25px;
 }

@@ -31,6 +31,7 @@ const FloatTaskAdd = (props) => {
   const [categoryChange, setCategoryChange] = useState("");
   const [descriptionChange, setDescriptionChange] = useState("");
   const [assigneesChange, setAssigneesChange] = useState([]);
+  const [taskCategories, setTaskCategories] = useState([]);
 
   useEffect(()=>{
     setAssigneeCount(0);
@@ -57,6 +58,16 @@ const FloatTaskAdd = (props) => {
     api.get(`/users.json`)
     .then(res=>{
         setUsers(res.data);
+    })
+    .catch(err=>{
+      console.warn(err);
+    })
+  },[props.floatStatus])
+
+  useEffect(()=>{
+    api.get(`/task_categories.json`)
+    .then(res=>{
+        setTaskCategories(res.data);
     })
     .catch(err=>{
       console.warn(err);
@@ -110,9 +121,9 @@ const FloatTaskAdd = (props) => {
     formDetails.description = e.target.value;
   }
   const handleAssigneesChange = (e) => {
-    assigneesChange.pop();
+    // assigneesChange.pop();
     assigneesChange.push(e.target.value);
-    formDetails.assignees.pop();
+    // formDetails.assignees.pop();
     formDetails.assignees.push(e.target.value);
   }
 
@@ -120,7 +131,7 @@ const FloatTaskAdd = (props) => {
 
     api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
     .then(res=>{
-        // console.log(res.data);
+         console.log(res.data);
         props.closeFloatTaskBar();
     })
     .catch(err=>{
@@ -186,7 +197,11 @@ const FloatTaskAdd = (props) => {
             <label for="category">Category</label><br/>
             <select onChange={handleCategoryChange} value={categoryChange}>
               <option></option>
-              <option>Test</option>
+              {
+                taskCategories.map((category, index)=>
+                  <option value={category.id}>{category.name}</option>
+                )
+              }
             </select>
           </div>
         </div>

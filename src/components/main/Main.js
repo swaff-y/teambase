@@ -15,6 +15,7 @@ const Main = (props) => {
         handleTaskEdit={props.handleTaskEdit}
         handleTaskNote={props.handleTaskNote}
         handleTaskDelete={props.handleTaskDelete}
+        taskDelete={props.taskDelete}
       />
     </div>
   )
