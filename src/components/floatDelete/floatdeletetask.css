@@ -7,4 +7,9 @@
   background-color: #FFFFFF;
   /* border: 1px solid lightgrey; */
   box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.floatdeletetask h1{
+  font-size: 18pt;
 }

@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import CloseIcon from '@material-ui/icons/Close';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+
 import "./floatdeletetask.css";
 
 const FloatTaskDelete = (props) => {
@@ -20,6 +23,20 @@ const FloatTaskDelete = (props) => {
           marginTop: '20px',
           marginRight:'20px'
         }}/>
+
+      <h1>DELETE TASK</h1>
+
+      <p>Are you sure you want to delete this task?</p>
+
+      <Button
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        startIcon={<DeleteIcon />}
+      >
+        Delete
+      </Button>
+
     </div>
   )
 }
