@@ -8,3 +8,16 @@
   /* border: 1px solid lightgrey; */
   box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.1);
 }
+
+.floatnotetask__container{
+  position: absolute;
+  left: 12%;
+  top:40%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+.floatnotetask__container p{
+  margin-bottom: 25px;
+}

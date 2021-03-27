@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import UserStack from './UserStack'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,7 +11,6 @@ import "./content.css";
 const TaskBar = (props) => {
 
   const iconStyle = {
-    marginRight: "20px",
     color: "#6686CC"
   }
 
@@ -27,21 +27,23 @@ const TaskBar = (props) => {
           }
         </span>
         <div className="content__taskBarIcons">
-          <EditIcon
-            fontSize="small"
+          <IconButton
             style={iconStyle}
             onClick={()=>props.handleTaskEdit(props.task.id)}
-          />
-          <EventNoteIcon
-            fontSize="small"
+          >
+            <EditIcon fontSize="small"/>
+          </IconButton>
+          <IconButton
             style={iconStyle}
             onClick={()=>props.handleTaskNote(props.task.id)}
-          />
-          <DeleteIcon
-            fontSize="small"
-            style={iconStyle}
-            onClick={()=>props.handleTaskDelete(props.task.id)}
-          />
+          >
+            <EventNoteIcon fontSize="small"/>
+          </IconButton>
+          <IconButton
+            style={iconStyle} onClick={()=>props.handleTaskDelete(props.task.id)}
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
         </div>
       </div>
     </div>
