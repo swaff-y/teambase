@@ -28,17 +28,17 @@ const TaskBar = (props) => {
         </span>
         <div className="content__taskBarIcons">
           <EditIcon
-            fontSize="medium"
+            fontSize="small"
             style={iconStyle}
             onClick={()=>props.handleTaskEdit(props.task.id)}
           />
           <EventNoteIcon
-            fontSize="medium"
+            fontSize="small"
             style={iconStyle}
             onClick={()=>props.handleTaskNote(props.task.id)}
           />
           <DeleteIcon
-            fontSize="medium"
+            fontSize="small"
             style={iconStyle}
             onClick={()=>props.handleTaskDelete(props.task.id)}
           />

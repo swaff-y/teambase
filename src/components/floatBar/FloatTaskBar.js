@@ -35,7 +35,7 @@ const FloatTaskBar = (props) => {
 
       <CloseIcon
         onClick={props.closeFloatTaskBar}
-        fontSize="medium"
+        fontSize="small"
         style={{
           position:'absolute',
           right: '0px',
@@ -47,7 +47,13 @@ const FloatTaskBar = (props) => {
       {
         props.edit === true
         ?
-        <FloatTaskEdit />
+        <FloatTaskEdit
+          floatStatus={props.floatStatus}
+          closeFloatTaskBar={props.closeFloatTaskBar}
+          selectedProject={props.selectedProject}
+          user={props.user}
+          taskId={props.taskId}
+        />
         :
         <FloatTaskAdd
           floatStatus={props.floatStatus}

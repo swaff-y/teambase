@@ -30,7 +30,7 @@ const FloatTaskDelete = (props) => {
     >
       <CloseIcon
         onClick={props.closeFloatTaskDelete}
-        fontSize="medium"
+        fontSize="small"
         style={{
           position:'absolute',
           right: '0px',

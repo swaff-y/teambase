@@ -13,7 +13,7 @@ const FloatNote = (props) => {
 
       <CloseIcon
         onClick={props.closeFloatNote}
-        fontSize="medium"
+        fontSize="small"
         style={{
           position:'absolute',
           right: '0px',

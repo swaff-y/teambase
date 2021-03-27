@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
@@ -143,7 +142,7 @@ const FloatTaskAdd = (props) => {
     <div className="floatbar__container">
       <form onSubmit={(event)=>event.preventDefault()}>
         <div className="floatbar__row">
-          <label for="taskName">Task Name</label><br/>
+          <label htmlFor="taskName">Task Name</label><br/>
           <input id="taskName" type="text" name="taskName" placeholder="Task Name" onChange={handleTaskNameChange} value={formName}/>
         </div>
         <div className="floatbar__row bigger">
@@ -175,51 +174,79 @@ const FloatTaskAdd = (props) => {
         </div>
         <div className="floatbar__row" id="date">
           <div className="floatbar__col">
-            <label for="status">Status</label><br/>
-            <select onChange={handleStatusChange} value={statusChange}>
+            <label htmlFor="status">Status</label><br/>
+            <select
+              onChange={handleStatusChange}
+              value={statusChange}
+            >
               <option>New</option>
               <option>In Progress</option>
               <option>Complete</option>
             </select>
           </div>
           <div className="floatbar__col">
-            <label for="progress">Progress</label><br/>
-            <select onChange={handleProgressChange} value={progressChange}>
+            <label htmlFor="progress">Progress</label><br/>
+            <select
+              onChange={handleProgressChange}
+              value={progressChange}
+            >
               {
                 percentage().map((value,index)=>
-                <option key={index} value={value}>
-                  {value}%
+                <option
+                  key={index}
+                  value={value}
+                >
+                  {
+                    value
+                  }%
                 </option>)
               }
             </select>
           </div>
           <div className="floatbar__col">
-            <label for="category">Category</label><br/>
+            <label htmlFor="category">Category</label><br/>
             <select onChange={handleCategoryChange} value={categoryChange}>
               <option></option>
               {
                 taskCategories.map((category, index)=>
-                  <option value={category.id}>{category.name}</option>
+                  <option
+                    key={index}
+                    value={category.id}
+                  >
+                  {
+                    category.name
+                  }
+                  </option>
                 )
               }
             </select>
           </div>
         </div>
         <div className="floatbar__row">
-          <label for="des">Description</label><br/>
-          <textarea id="des" onChange={handleDescriptionChange} value={descriptionChange}></textarea>
+          <label htmlFor="des">Description</label><br/>
+          <textarea id="des"
+            onChange={handleDescriptionChange}
+            value={descriptionChange}>
+          </textarea>
         </div>
         <div className="floatbar__row assignees">
-          <label for="des">Assignees</label><br/>
+          <label htmlFor="des">Assignees</label><br/>
             <ul>
               {
                 assigneesArr().map((value,index)=>
-                  <li>
+                  <li key={index}>
                     <select onChange={handleAssigneesChange}>
                       <option></option>
                       {
                         users.map((user,index)=>
-                        <option value={user.id}>{user.name}</option>
+                        <option
+                          key={index}
+                          value={user.id}
+                        >
+                        {
+                          user.name
+                        }
+                        </option>
                         )
                       }
                     </select>

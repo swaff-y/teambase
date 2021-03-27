@@ -10,7 +10,27 @@ const ProjectList = (props) => {
   }
 
   return(
-    <li onClick={handleClick}><ArrowForwardIcon fontSize="medium" style={{color:'white',position:'relative',top:'7px', left:'-10px'}} /> {props.project.name} <SettingsIcon fontSize="small" style={{float:'right', position:'relative', top:'7px', marginRight:'10px'}}/></li>
+    <li onClick={handleClick}>
+      <ArrowForwardIcon
+      fontSize="small"
+      style={{
+        color:'white',
+        position:'relative',
+        top:'7px',
+        left:'-10px'}}
+      />
+        {
+          props.project.name
+        }
+      <SettingsIcon
+        fontSize="small"
+        style={{
+          float:'right',
+          position:'relative',
+          top:'7px',
+          marginRight:'10px'
+        }}
+      /></li>
   )
 }
 

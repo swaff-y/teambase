@@ -31,14 +31,14 @@ const Sidebar = (props) => {
         <p>New Project</p>
       </div>
       <div className="sidebar__projects" onClick={projectShowToggle}>
-        <ViewListIcon fontSize="medium" style={{marginLeft:'20px', color:'#FFFFFF'}} />
+        <ViewListIcon fontSize="small" style={{marginLeft:'20px', color:'#FFFFFF'}} />
         <span>Projects</span>
         {
           projectShow === 'none'
           ?
-          <ChevronRightIcon fontSize="medium" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}}/>
+          <ChevronRightIcon fontSize="small" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}}/>
           :
-          <ExpandMoreIcon fontSize="medium" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}}/>
+          <ExpandMoreIcon fontSize="small" style={{position:'relative', top:'-1px', color: 'white', marginLeft:'90px'}}/>
         }
 
       </div>
@@ -50,11 +50,11 @@ const Sidebar = (props) => {
         </ul>
       </div>
       <div className="sidebar__analytics">
-        <InsertChartIcon fontSize="medium" style={{marginLeft:'20px', color:'#FFFFFF'}}/>
+        <InsertChartIcon fontSize="small" style={{marginLeft:'20px', color:'#FFFFFF'}}/>
         <span>Analytics</span>
       </div>
       <div className="sidebar__teamMembers">
-        <PeopleIcon fontSize="medium" style={{marginLeft:'20px', color:'#FFFFFF'}}/>
+        <PeopleIcon fontSize="small" style={{marginLeft:'20px', color:'#FFFFFF'}}/>
         <span>Team Members</span>
       </div>
     </div>
