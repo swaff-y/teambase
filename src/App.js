@@ -5,6 +5,7 @@ import Sidebar from './components/sidebar/Sidebar'
 import FloatTaskBar from './components/floatBar/FloatTaskBar'
 import FloatDeleteTask from './components/floatDelete/FloatTaskDelete'
 import FloatNote from './components/floatNote/FloatNote'
+import FloatProject from './components/floatProject/FloatProject.js'
 import api from './api';
 import Main from './components/main/Main'
 
@@ -15,10 +16,12 @@ function App() {
   const [floatStatus, setFloatStatus] = useState('none');
   const [floatTaskDelete, setFloatTaskDelete] = useState('none');
   const [floatNote, setFloatNote] = useState('none');
+  const [floatProject, setFloatProject] = useState('none');
   const [projectData, setProjectData] = useState([]);
   const [taskEdit, setTaskEdit] = useState(false);
   const [taskNote, setTaskNote] = useState(false);
   const [taskDelete, setTaskDelete] = useState(false);
+  const [projectMain, setProjectMain] = useState(false);
   const [taskId, setTaskId] = useState();
 
   useEffect(()=>{
@@ -51,6 +54,10 @@ function App() {
     setTaskId();
     setTaskNote(false);
   }
+  const closeFloatProject= () => {
+    setFloatProject('none');
+    setProjectMain(false);
+  }
 
   const showFloatTaskBar = () => {
     if(selectedProject.length > 0) setFloatStatus('');
@@ -74,12 +81,18 @@ function App() {
     setFloatTaskDelete('');
     setTaskId(id);
   }
+  const handleProject = () => {
+    // console.log("Clicked delete", id);
+    setProjectMain(true);
+    setFloatProject('');
+  }
 
   return (
     <div className="app" data-test="component-app">
       <Sidebar
         selectedProject={project}
         projectData={projectData}
+        handleProject={handleProject}
       />
       <Main
         selectedProject={selectedProject}
@@ -111,6 +124,12 @@ function App() {
         selectedProject={selectedProject}
         user={USER}
         taskId={taskId}
+      />
+      <FloatProject
+        closeFloatProject={closeFloatProject}
+        floatProject={floatProject}
+        selectedProject={selectedProject}
+        user={USER}
       />
 
     </div>

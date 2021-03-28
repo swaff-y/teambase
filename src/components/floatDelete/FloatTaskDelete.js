@@ -28,16 +28,24 @@ const FloatTaskDelete = (props) => {
       display:props.floatTaskDelete
     }}
     >
-      <CloseIcon
+
+      <IconButton
         onClick={props.closeFloatTaskDelete}
-        fontSize="small"
         style={{
           position:'absolute',
           right: '0px',
-          color:'#000000',
+          color:'##6686CC',
           marginTop: '20px',
           marginRight:'20px'
-        }}/>
+        }}
+      >
+        <CloseIcon
+          onClick={props.closeFloatTaskDelete}
+          fontSize="small"
+          style={{
+            color:'#000000',
+          }}/>
+      </IconButton>
 
       <div className="floatdeletetask__container">
         <h1>DELETE TASK</h1>

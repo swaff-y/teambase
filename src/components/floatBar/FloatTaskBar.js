@@ -1,17 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import FloatTaskAdd from './FloatTaskAdd';
 import FloatTaskEdit from './FloatTaskEdit';
-import api from '../../api';
-
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import IconButton from '@material-ui/core/IconButton';
 
 import "./floatbar.css";
 
@@ -32,17 +23,22 @@ const FloatTaskBar = (props) => {
         <h1 className="floatbar__heading">Add Task</h1>
       }
 
-
-      <CloseIcon
+      <IconButton
         onClick={props.closeFloatTaskBar}
-        fontSize="small"
         style={{
           position:'absolute',
           right: '0px',
-          color:'#000000',
-          marginTop: '-60px',
+          color:'##6686CC',
+          marginTop: '-70px',
           marginRight:'20px'
-        }}/>
+        }}
+      >
+        <CloseIcon
+          fontSize="small"
+          style={{
+            color:'#000000',
+          }}/>
+      </IconButton>
 
       {
         props.edit === true
