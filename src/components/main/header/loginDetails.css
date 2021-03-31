@@ -1,5 +1,7 @@
 .loginDetails{
-  text-align: right;
+  position: absolute;
+  left: 1250px;
+  width: 200px;
   margin-right: 5vw;
   padding-top: 10px;
 }

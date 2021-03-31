@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Button from '@material-ui/core/Button';
 import api from '../../api';
 import "./floatbar.css";
 
@@ -317,7 +318,20 @@ const FloatTaskEdit = (props) => {
                 color:"lightgrey"
               }}/>
             }
-          <button id="saveButton" onClick={saveData}>Save</button>
+            <Button
+              onClick={saveData}
+              variant="contained"
+              color="primary"
+              style={{
+                position: "relative",
+                left: "-20px",
+                width: "300px",
+                borderRadius: "0",
+                color: "#FFFFFF",
+              }}
+            >
+            save
+            </Button>
         </div>
       </form>
     </div>

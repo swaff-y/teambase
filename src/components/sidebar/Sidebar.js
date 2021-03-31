@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import PeopleIcon from '@material-ui/icons/People';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import './sidebar.css'
 
 const Sidebar = (props) => {
@@ -35,9 +36,17 @@ const Sidebar = (props) => {
         />
         <h1 className="sidebar__header">Teambase</h1>
       </div>
-      <div className="sidebar__button">
-        <p>New Project</p>
-      </div>
+      <Button
+       variant="outlined"
+       style={{
+         color: '#FFFFFF',
+         border: '1px solid #FFFFFF',
+         marginLeft: '50px',
+         marginTop: '10px',
+       }}
+      >
+      New Project
+      </Button>
       <div
         className="sidebar__projects"
         onClick={projectShowToggle}
@@ -63,22 +72,22 @@ const Sidebar = (props) => {
           projectShow === 'none'
           ?
           <ChevronRightIcon
-            fontSize="small"
+            fontSize="large"
             style={{
               position:'relative',
               top:'-1px',
               color: 'white',
-              marginLeft:'90px'
+              marginLeft:'80px'
             }}
           />
           :
           <ExpandMoreIcon
-            fontSize="small"
+            fontSize="large"
             style={{
               position:'relative',
               top:'-1px',
               color: 'white',
-              marginLeft:'90px'
+              marginLeft:'80px'
             }}
           />
         }
@@ -88,7 +97,13 @@ const Sidebar = (props) => {
       <div className="sidebar__projectsShow" style={{display:projectShow}}>
         <ul className="sidebar__projectList">
           {
-            props.projectData.map((project,index)=><ProjectList key={index} project={project} handleClick={props.selectedProject}         handleProject={props.handleProject}/>)
+            props.projectData.map((project,index)=>
+              <ProjectList
+                key={index}
+                project={project}
+                handleClick={props.selectedProject}         handleProject={props.handleProject}
+                user={props.user}
+              />)
           }
         </ul>
       </div>

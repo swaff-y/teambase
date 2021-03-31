@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Button from '@material-ui/core/Button';
 import api from '../../../api';
 import "./content.css";
 
@@ -99,12 +100,32 @@ const FilterBar = (props) => {
     }
   }
   const checkProject = () => {
+    let style = {};
     if(props.selectedProject.length < 1){
-      const style = {
+      style = {
+        borderRadius: "0",
+        color: "#FFFFFF",
+        borderTopRightRadius: "10px",
+        borderBottomRightRadius: "10px",
+        float: "right",
+        height: "100%",
+        width: "150px",
+        color: "#FFFFFF",
         backgroundColor: '#bdc7de',
       }
-      return style;
+    }else{
+      style = {
+        borderRadius: "0",
+        color: "#FFFFFF",
+        borderTopRightRadius: "10px",
+        borderBottomRightRadius: "10px",
+        float: "right",
+        height: "100%",
+        width: "150px",
+        color: "#FFFFFF"
+      }
     }
+    return style;
   }
 
   return(
@@ -124,15 +145,25 @@ const FilterBar = (props) => {
           <div className="content__filterbarCircle" style={ statusCheckComplete()}>{completeCount(selectedProject.tasks)}</div>
         </span>
       </div>
-      <div
-        className="content__newTaskButton"
+
+      <Button
         onClick={props.showFloatTaskBar}
+        variant="contained"
+        color="primary"
         style={checkProject()}
       >
-        <p>New Task</p>
-      </div>
+      New Task
+      </Button>
     </div>
   )
 }
 
 export default FilterBar;
+
+// <div
+//   className="content__newTaskButton"
+//   onClick={props.showFloatTaskBar}
+//   style={checkProject()}
+// >
+//   <p>New Task</p>
+// </div>

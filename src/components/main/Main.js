@@ -10,6 +10,7 @@ const Main = (props) => {
         selectedProject={props.selectedProject}
       />
       <Content
+      user={props.user}
         selectedProject={props.selectedProject} showFloatTaskBar={props.showFloatTaskBar}
         floatStatus={props.floatStatus}
         handleTaskEdit={props.handleTaskEdit}
