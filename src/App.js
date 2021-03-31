@@ -1,4 +1,4 @@
-import './app.css';
+import './App.css';
 import React, {useEffect, useState} from 'react';
 import { Route, HashRouter as Router } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar'
