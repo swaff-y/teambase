@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import UserSelect from "./UserSelect";
 import Button from '@material-ui/core/Button';
 import api from '../../api';
 import "./floatbar.css";
@@ -14,7 +14,6 @@ import {
 const FloatTaskEdit = (props) => {
 
   const [selectedDate, setSelectedDate] = useState(Date.now());
-  const [assigneeCount, setAssigneeCount] = useState(0);
   const [users, setUsers] = useState([]);
   const [formDetails, setFormDetails] = useState({
     name:"",
@@ -30,7 +29,7 @@ const FloatTaskEdit = (props) => {
   const [progressChange, setProgressChange] = useState(5);
   const [categoryChange, setCategoryChange] = useState([]);
   const [descriptionChange, setDescriptionChange] = useState("");
-  const [assigneesChange, setAssigneesChange] = useState([]);
+  const [assigneesChange, setAssigneesChange] = useState([""]);
   const [taskCategories, setTaskCategories] = useState([]);
 
 
@@ -38,7 +37,6 @@ const FloatTaskEdit = (props) => {
   useEffect(()=>{
     api.get(`/task-read/${props.taskId}`)
     .then(res=>{
-      console.log(res.data.task_category.name);
       setFormName(res.data.name);
       setStatusChange(res.data.status);
       setProgressChange(res.data.progress);
@@ -53,7 +51,7 @@ const FloatTaskEdit = (props) => {
       formDetails.description = res.data.description
       formDetails.assignees = res.data.users
 
-      console.log(formDetails);
+      // console.log(formDetails);
     })
     .catch(err=>{
       console.warn(err);
@@ -63,7 +61,7 @@ const FloatTaskEdit = (props) => {
   // console.log(categoryChange);
 
   useEffect(()=>{
-    setAssigneeCount(0);
+    let isCancelled = false;
     setSelectedDate(Date.now());
     setFormDetails({
       name:"",
@@ -79,18 +77,11 @@ const FloatTaskEdit = (props) => {
     setProgressChange(5);
     setCategoryChange("");
     setDescriptionChange("");
-    setAssigneesChange([]);
+    setAssigneesChange([""]);
     setUsers([])
-  },[props.floatStatus])
-
-  useEffect(()=>{
-    api.get(`/users.json`)
-    .then(res=>{
-        setUsers(res.data);
-    })
-    .catch(err=>{
-      console.warn(err);
-    })
+    return () => {
+      isCancelled = true;
+    };
   },[props.floatStatus])
 
   useEffect(()=>{
@@ -116,17 +107,17 @@ const FloatTaskEdit = (props) => {
     return arr;
   }
 
-  const assigneesArr = () => {
-    const arr = [];
-    for( let i = 0; i <= assigneeCount; i++ ){
-      arr.push(i);
-    }
-    return arr;
+  const handleAddAssignee = () => {
+    setAssigneesChange([...assigneesChange, {id:"",name:""}]);
   }
 
-  const handleAddAssignee = () => {
-    let count = assigneeCount + 1;
-    setAssigneeCount(count);
+  const handleRemoveAssignee = (id) => {
+    setAssigneesChange(assigneesChange.filter(item => item.id !== id))
+  }
+
+  const handleUpdateAssignee = (id) => {
+    setAssigneesChange(assigneesChange.splice(index,1,{id:id,name:name}));
+    console.log(assigneesChange);
   }
 
   const handleTaskNameChange = (e) => {
@@ -155,15 +146,18 @@ const FloatTaskEdit = (props) => {
     formDetails.description = e.target.value;
   }
   const handleAssigneesChange = (e) => {
-    // assigneesChange.pop();
+    if(assigneesChange[assigneesChange.length-1] === ""){
+       assigneesChange.pop();
+       formDetails.assignees.pop();
+    }
+
     assigneesChange.push(e.target.value);
-    // formDetails.assignees.pop();
     formDetails.assignees.push(e.target.value);
   }
 
   const saveData = (e) => {
 
-    api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
+    api.post(`ww`,formDetails)
     .then(res=>{
          console.log(res.data);
         props.closeFloatTaskBar();
@@ -278,53 +272,27 @@ const FloatTaskEdit = (props) => {
           <label htmlFor="des">Assignees</label><br/>
             <ul>
               {
-                assigneesArr().map((value,index)=>
-                  <li key={index}>
-                    <select onChange={handleAssigneesChange}>
-                      <option></option>
-                      {
-                        users.map((user,index)=>
-                        <option
-                          key={index}
-                          value={user.id}
-                        >
-                        {
-                          user.name
-                        }
-                        </option>
-                        )
-                      }
-                    </select>
-                  </li>
+                assigneesChange.map((assignee, index)=>
+                <UserSelect
+                  key="index"
+                  assignee={assignee}
+                  last={assigneesChange.length - 1}
+                  index={index}
+                  handleRemoveAssignee={handleRemoveAssignee}
+                  handleAddAssignee={handleAddAssignee}
+                  handleUpdateAssignee={handleUpdateAssignee}
+                />
                 )
               }
             </ul>
-            {
-              assigneeCount <= 8
-              ?
-              <AddCircleOutlineIcon
-                onClick={handleAddAssignee}
-                fontSize="small" style={{
-                  position: "relative",
-                  left: "280px",
-                  top: "-58px"
-              }}/>
-              :
-              <AddCircleOutlineIcon
-              fontSize="small"
-              style={{
-                position: "relative",
-                left: "280px", top: "-58px",
-                color:"lightgrey"
-              }}/>
-            }
+
             <Button
               onClick={saveData}
               variant="contained"
               color="primary"
               style={{
                 position: "relative",
-                left: "-20px",
+                left: "0",
                 width: "300px",
                 borderRadius: "0",
                 color: "#FFFFFF",
@@ -339,3 +307,23 @@ const FloatTaskEdit = (props) => {
 }
 
 export default FloatTaskEdit;
+
+// {
+//   assigneeCount <= 8
+//   ?
+//   <AddCircleOutlineIcon
+//     onClick={handleAddAssignee}
+//     fontSize="small" style={{
+//       position: "relative",
+//       left: "280px",
+//       top: "-58px"
+//   }}/>
+//   :
+//   <AddCircleOutlineIcon
+//   fontSize="small"
+//   style={{
+//     position: "relative",
+//     left: "280px", top: "-58px",
+//     color:"lightgrey"
+//   }}/>
+// }
