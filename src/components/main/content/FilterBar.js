@@ -110,7 +110,6 @@ const FilterBar = (props) => {
         float: "right",
         height: "100%",
         width: "150px",
-        color: "#FFFFFF",
         backgroundColor: '#bdc7de',
       }
     }else{
@@ -121,8 +120,7 @@ const FilterBar = (props) => {
         borderBottomRightRadius: "10px",
         float: "right",
         height: "100%",
-        width: "150px",
-        color: "#FFFFFF"
+        width: "150px"
       }
     }
     return style;

@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import { Route, HashRouter as Router } from 'react-router-dom';
+// import { Route, HashRouter as Router } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar'
 import FloatTaskBar from './components/floatBar/FloatTaskBar'
 import FloatDeleteTask from './components/floatDelete/FloatTaskDelete'
@@ -19,9 +19,9 @@ function App() {
   const [floatProject, setFloatProject] = useState('none');
   const [projectData, setProjectData] = useState([]);
   const [taskEdit, setTaskEdit] = useState(false);
-  const [taskNote, setTaskNote] = useState(false);
+  // const [taskNote, setTaskNote] = useState(false);
   const [taskDelete, setTaskDelete] = useState(false);
-  const [projectMain, setProjectMain] = useState(false);
+  // const [projectMain, setProjectMain] = useState(false);
   const [taskId, setTaskId] = useState();
 
   useEffect(()=>{
@@ -52,11 +52,11 @@ function App() {
   const closeFloatNote = () => {
     setFloatNote('none');
     setTaskId();
-    setTaskNote(false);
+    // setTaskNote(false);
   }
   const closeFloatProject= () => {
     setFloatProject('none');
-    setProjectMain(false);
+    // setProjectMain(false);
   }
 
   const showFloatTaskBar = () => {
@@ -71,7 +71,7 @@ function App() {
   }
   const handleTaskNote = (id) => {
     // console.log("Clicked note", id);
-    setTaskNote(true);
+    // setTaskNote(true);
     setFloatNote('');
     setTaskId(id);
   }
@@ -83,7 +83,7 @@ function App() {
   }
   const handleProject = () => {
     // console.log("Clicked delete", id);
-    setProjectMain(true);
+    // setProjectMain(true);
     setFloatProject('');
   }
 

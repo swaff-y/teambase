@@ -14,7 +14,7 @@ import {
 const FloatTaskEdit = (props) => {
 
   const [selectedDate, setSelectedDate] = useState(Date.now());
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [formDetails, setFormDetails] = useState({
     name:"",
     due_date: "",
@@ -32,8 +32,6 @@ const FloatTaskEdit = (props) => {
   const [assigneesChange, setAssigneesChange] = useState([""]);
   const [taskCategories, setTaskCategories] = useState([]);
 
-
-
   useEffect(()=>{
     api.get(`/task-read/${props.taskId}`)
     .then(res=>{
@@ -43,22 +41,21 @@ const FloatTaskEdit = (props) => {
       setCategoryChange([res.data.task_category.id,res.data.task_category.name]);
       setDescriptionChange(res.data.description);
       setAssigneesChange(res.data.users);
-      formDetails.name = res.data.name;
-      formDetails.due_date = res.data.due_date
-      formDetails.status = res.data.status
-      formDetails.progress = res.data.progress
-      formDetails.category = res.data.task_category.id
-      formDetails.description = res.data.description
-      formDetails.assignees = res.data.users
-
+      const newFormDetails = formDetails;
+      newFormDetails.name = res.data.name;
+      newFormDetails.due_date = res.data.due_date
+      newFormDetails.status = res.data.status
+      newFormDetails.progress = res.data.progress
+      newFormDetails.category = res.data.task_category.id
+      newFormDetails.description = res.data.description
+      newFormDetails.assignees = res.data.users
+      setFormDetails(newFormDetails);
       // console.log(formDetails);
     })
     .catch(err=>{
       console.warn(err);
     })
   },[]);
-
-  // console.log(categoryChange);
 
   useEffect(()=>{
     let isCancelled = false;
@@ -78,9 +75,9 @@ const FloatTaskEdit = (props) => {
     setCategoryChange("");
     setDescriptionChange("");
     setAssigneesChange([""]);
-    setUsers([])
+    // setUsers([])
     return () => {
-      isCancelled = true;
+      // isCancelled = true;
     };
   },[props.floatStatus])
 
@@ -96,7 +93,9 @@ const FloatTaskEdit = (props) => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    formDetails.due_date = date;
+    const newFormDetails = formDetails;
+    newFormDetails.due_date = date;
+    setFormDetails(newFormDetails);
   };
 
   const percentage = () => {
@@ -107,30 +106,51 @@ const FloatTaskEdit = (props) => {
     return arr;
   }
 
+//Edit assignees
   const handleAddAssignee = () => {
     setAssigneesChange([...assigneesChange, {id:"",name:""}]);
   }
 
-  const handleRemoveAssignee = (id) => {
-    setAssigneesChange(assigneesChange.filter(item => item.id !== id))
+  const handleRemoveAssignee = (index) => {
+    const newArr = [...assigneesChange];
+    newArr.splice(index,1);
+    setAssigneesChange(newArr);
   }
 
   const handleUpdateAssignee = (id) => {
-    setAssigneesChange(assigneesChange.splice(index,1,{id:id,name:name}));
-    console.log(assigneesChange);
+
+    const idSplit = id.split(",");
+    const newArr = [...assigneesChange];
+
+    api.get(`/users/${idSplit[0]}.json`)
+    .then(res=>{
+      newArr[idSplit[1]] = res.data;
+      setAssigneesChange(newArr);
+
+    })
+    .catch(err=>{
+      console.warn(err);
+    })
   }
+//Edit assignees
 
   const handleTaskNameChange = (e) => {
     setFormName(e.target.value);
-    formDetails.name = e.target.value;
+    const newFormDetails = formDetails;
+    newFormDetails.name = e.target.value;
+    setFormDetails(newFormDetails);
   }
   const handleStatusChange = (e) => {
     setStatusChange(e.target.value);
-    formDetails.status = e.target.value;
+    const newFormDetails = formDetails;
+    newFormDetails.status = e.target.value;
+    setFormDetails(newFormDetails);
   }
   const handleProgressChange = (e) => {
     setProgressChange(e.target.value);
-    formDetails.progress = e.target.value;
+    const newFormDetails = formDetails;
+    newFormDetails.progress = e.target.value;
+    setFormDetails(newFormDetails);
   }
   const handleCategoryChange = (e) => {
 
@@ -139,21 +159,25 @@ const FloatTaskEdit = (props) => {
         setCategoryChange([taskCategories[i].id,taskCategories[i].name]);
       };
     };
-    formDetails.category = e.target.value;
+    const newFormDetails = formDetails;
+    newFormDetails.category = e.target.value;
+    setFormDetails(newFormDetails);
   }
   const handleDescriptionChange = (e) => {
     setDescriptionChange(e.target.value);
-    formDetails.description = e.target.value;
+    const newFormDetails = formDetails;
+    newFormDetails.description = e.target.value;
+    setFormDetails(newFormDetails);
   }
-  const handleAssigneesChange = (e) => {
-    if(assigneesChange[assigneesChange.length-1] === ""){
-       assigneesChange.pop();
-       formDetails.assignees.pop();
-    }
-
-    assigneesChange.push(e.target.value);
-    formDetails.assignees.push(e.target.value);
-  }
+  // const handleAssigneesChange = (e) => {
+  //   if(assigneesChange[assigneesChange.length-1] === ""){
+  //      assigneesChange.pop();
+  //      formDetails.assignees.pop();
+  //   }
+  //
+  //   assigneesChange.push(e.target.value);
+  //   formDetails.assignees.push(e.target.value);
+  // }
 
   const saveData = (e) => {
 
@@ -166,7 +190,7 @@ const FloatTaskEdit = (props) => {
       console.warn(err);
     })
   }
-
+   console.log("The state: ", formDetails);
   return(
     <div className="floatbar__container">
       <form onSubmit={(event)=>event.preventDefault()}>
@@ -274,7 +298,7 @@ const FloatTaskEdit = (props) => {
               {
                 assigneesChange.map((assignee, index)=>
                 <UserSelect
-                  key="index"
+                  key={index}
                   assignee={assignee}
                   last={assigneesChange.length - 1}
                   index={index}

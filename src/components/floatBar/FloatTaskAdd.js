@@ -52,7 +52,7 @@ const FloatTaskAdd = (props) => {
     setDescriptionChange("");
     setAssigneesChange([]);
     setUsers([])
-  },[props.floatStatus])
+  },[])
 
   useEffect(()=>{
     api.get(`/users.json`)

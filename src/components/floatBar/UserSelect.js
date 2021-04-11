@@ -6,8 +6,6 @@ import api from '../../api';
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
 
-  console.log("test");
-
   useEffect(()=>{
     api.get(`/users.json`)
     .then(res=>{
@@ -19,18 +17,19 @@ const UserSelect = (props) => {
   },[])
 
   const handleSelect = (e) => {
-    console.log(e.target.value);
+    // console.log("The index: ", e.target.);
+    props.handleUpdateAssignee(e.target.value);
   }
-  let test = -1;
+  // let test = -1;
   return(
     <li className="">
       <select className="" onChange={handleSelect}>
-        <option value={[props.assignee.id,props.assignee.name]}>{props.assignee.name}</option>
+        <option value={[props.assignee.id,props.index]}>{props.assignee.name}</option>
         {
           users.map((user, index)=>
             <option
               key={index}
-              value={user.id}
+              value={[user.id, props.index]}
             >{user.name}</option>
           )
         }
@@ -39,7 +38,7 @@ const UserSelect = (props) => {
           props.last !== props.index
           ?
           <RemoveCircleIcon
-            onClick={()=>props.handleRemoveAssignee(props.assignee.id)}
+            onClick={()=>props.handleRemoveAssignee(props.index)}
             style={{
               position: 'relative',
               top: '8px'

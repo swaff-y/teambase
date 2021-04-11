@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+// import React, {useEffect, useState} from 'react';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Avatar from 'react-avatar';
 import "./loginDetails.css";

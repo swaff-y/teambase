@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import ProjectList from './ProjectList';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ViewListIcon from '@material-ui/icons/ViewList';
