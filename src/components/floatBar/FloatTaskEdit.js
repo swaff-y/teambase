@@ -163,6 +163,7 @@ const FloatTaskEdit = (props) => {
     newFormDetails.category = e.target.value;
     setFormDetails(newFormDetails);
   }
+
   const handleDescriptionChange = (e) => {
     setDescriptionChange(e.target.value);
     const newFormDetails = formDetails;
@@ -190,7 +191,7 @@ const FloatTaskEdit = (props) => {
       console.warn(err);
     })
   }
-   console.log("The state: ", formDetails);
+   // console.log("The state: ", formDetails);
   return(
     <div className="floatbar__container">
       <form onSubmit={(event)=>event.preventDefault()}>
