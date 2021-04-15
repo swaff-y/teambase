@@ -107,31 +107,27 @@ const FloatTaskEdit = (props) => {
   }
 
 //Edit assignees
-  const handleAddAssignee = () => {
-    setAssigneesChange([...assigneesChange, {id:"",name:""}]);
-  }
-
   const handleRemoveAssignee = (index) => {
     const newArr = [...assigneesChange];
     newArr.splice(index,1);
     setAssigneesChange(newArr);
   }
 
-  const handleUpdateAssignee = (id) => {
+  const handleAddAssignee = (id) => {
+    console.log("AddSelectedUser");
+    // const idSplit = id.split(",");
+    // const newArr = [...assigneesChange];
 
-    const idSplit = id.split(",");
-    const newArr = [...assigneesChange];
-
-    api.get(`/users/${idSplit[0]}.json`)
+    api.get(`/users/${id}.json`)
     .then(res=>{
-      newArr[idSplit[1]] = res.data;
-      setAssigneesChange(newArr);
-
+      // newArr[idSplit[1]] = res.data;
+      setAssigneesChange([...assigneesChange,res.data]);
     })
     .catch(err=>{
       console.warn(err);
     })
   }
+  console.log("AssigneesChange: ",assigneesChange);
 //Edit assignees
 
   const handleTaskNameChange = (e) => {
@@ -295,21 +291,11 @@ const FloatTaskEdit = (props) => {
         </div>
         <div className="floatbar__row assignees">
           <label htmlFor="des">Assignees</label><br/>
-            <ul>
-              {
-                assigneesChange.map((assignee, index)=>
-                <UserSelect
-                  key={index}
-                  assignee={assignee}
-                  last={assigneesChange.length - 1}
-                  index={index}
-                  handleRemoveAssignee={handleRemoveAssignee}
-                  handleAddAssignee={handleAddAssignee}
-                  handleUpdateAssignee={handleUpdateAssignee}
-                />
-                )
-              }
-            </ul>
+            <UserSelect
+              assignees={assigneesChange}
+              handleRemoveAssignee={handleRemoveAssignee}
+              handleAddAssignee={handleAddAssignee}
+            />
 
             <Button
               onClick={saveData}
@@ -317,10 +303,12 @@ const FloatTaskEdit = (props) => {
               color="primary"
               style={{
                 position: "relative",
-                left: "0",
+                left: "5px",
                 width: "300px",
                 borderRadius: "0",
                 color: "#FFFFFF",
+                marginTop: "30px",
+                marginBottom: "10px"
               }}
             >
             save

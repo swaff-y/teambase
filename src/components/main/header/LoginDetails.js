@@ -6,8 +6,20 @@ import "./loginDetails.css";
 const LoginDetails = (props) => {
   return(
     <div className="loginDetails" data-test="component-loginDetails">
-      <SettingsIcon fontSize="large" style={{marginTop:"30px"}}/>
-      <Avatar name="Kyle Swaffield" size="60" round style={{marginTop:"-30px", marginLeft:"20px"}}/>
+      <SettingsIcon
+        fontSize="large"
+        style={{
+          marginTop:"30px"
+        }}
+      />
+      <Avatar
+        name="Kyle Swaffield"
+        size="60"
+        round
+        style={{
+          marginTop:"-30px",
+          marginLeft:"20px"}}
+      />
     </div>
   )
 }

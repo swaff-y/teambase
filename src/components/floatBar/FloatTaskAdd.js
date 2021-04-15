@@ -50,7 +50,7 @@ const FloatTaskAdd = (props) => {
     setProgressChange(5);
     setCategoryChange("");
     setDescriptionChange("");
-    setAssigneesChange([{id:"",name:""}]);
+    setAssigneesChange([]);
     // setUsers([])
     return () => {
       // isCancelled = true;
@@ -104,38 +104,27 @@ const FloatTaskAdd = (props) => {
   // }
 
   //Edit assignees
-    const handleAddAssignee = () => {
-      setAssigneesChange([...assigneesChange, {id:"",name:""}]);
-    }
-
     const handleRemoveAssignee = (index) => {
-      console.log("Index:", index);
       const newArr = [...assigneesChange];
-      // const newArr = assigneesChange;
-      console.log("Array befor:",newArr);
       newArr.splice(index,1);
-      console.log("Array after:",newArr);
       setAssigneesChange(newArr);
-      console.log("Assignees:",assigneesChange);
     }
 
-    const handleUpdateAssignee = (id) => {
-      console.log("The Id",id);
-      const idSplit = id.split(",");
-      const newArr = [...assigneesChange];
-      // const newArr = [];
+    const handleAddAssignee = (id) => {
+      console.log("AddSelectedUser");
+      // const idSplit = id.split(",");
+      // const newArr = [...assigneesChange];
 
-      api.get(`/users/${idSplit[0]}.json`)
+      api.get(`/users/${id}.json`)
       .then(res=>{
-        console.log(res.data);
-        newArr[idSplit[1]] = res.data;
-        setAssigneesChange(newArr);
+        // newArr[idSplit[1]] = res.data;
+        setAssigneesChange([...assigneesChange,res.data]);
       })
       .catch(err=>{
         console.warn(err);
       })
     }
-    console.log("Assignees Change: ",assigneesChange);
+    console.log("AssigneesChange: ",assigneesChange);
   //Edit assignees
 
   const handleTaskNameChange = (e) => {
@@ -285,31 +274,24 @@ const FloatTaskAdd = (props) => {
         </div>
         <div className="floatbar__row assignees">
           <label htmlFor="des">Assignees</label><br/>
-          <ul>
-            {
-              assigneesChange.map((assignee, index)=>
-              <UserSelect
-                key={index}
-                assignee={assignee}
-                last={assigneesChange.length - 1}
-                index={index}
-                handleRemoveAssignee={handleRemoveAssignee}
-                handleAddAssignee={handleAddAssignee}
-                handleUpdateAssignee={handleUpdateAssignee}
-              />
-              )
-            }
-          </ul>
+          <UserSelect
+            assignees={assigneesChange}
+            handleRemoveAssignee={handleRemoveAssignee}
+            handleAddAssignee={handleAddAssignee}
+          />
+
           <Button
             onClick={saveData}
             variant="contained"
             color="primary"
             style={{
               position: "relative",
-              left: "-20px",
+              left: "5px",
               width: "300px",
               borderRadius: "0",
               color: "#FFFFFF",
+              marginTop: "30px",
+              marginBottom: "10px"
             }}
           >
           save

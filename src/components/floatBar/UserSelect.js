@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import Avatar from 'react-avatar';
 import api from '../../api';
 
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
 
   useEffect(()=>{
     api.get(`/users.json`)
@@ -17,43 +19,54 @@ const UserSelect = (props) => {
   },[])
 
   const handleSelect = (e) => {
-     console.log("The index: ", e.target.value);
-    props.handleUpdateAssignee(e.target.value);
+    // props.handleUpdateAssignee(e.target.value);
+    setSelectedUser(e.target.value);
+    console.log("Selected User:", selectedUser);
   }
   // let test = -1;
   return(
-    <li className="">
+    <div className="floatbar__assignees">
+      {
+        props.assignees.map((assignee,index)=>
+        <>
+          <Avatar
+            key={index}
+            name={assignee.name}
+            size="30"
+            round
+          />
+          <HighlightOffIcon
+            onClick={()=>{props.handleRemoveAssignee(index)}}
+            style={{
+              position: "relative",
+              top: "-10px",
+              right: "10",
+              width:"18px",
+              height:"18px",
+            }}
+          />
+        </>
+        )
+      }
       <select className="" onChange={handleSelect}>
-        <option value={[props.assignee.id,props.index]} >{props.assignee.name} </option>
+        <option></option>
         {
           users.map((user, index)=>
             <option
               key={index}
-              value={[user.id, props.index]}
+              value={[user.id]}
             >{user.name}</option>
           )
         }
       </select>
-        {
-          props.last !== props.index
-          ?
-          <RemoveCircleIcon
-            onClick={()=>props.handleRemoveAssignee(props.index)}
-            style={{
-              position: 'relative',
-              top: '8px'
-            }}
-          />
-          :
           <AddCircleOutlineIcon
-            onClick={()=>props.handleAddAssignee()}
+            onClick={()=>props.handleAddAssignee(selectedUser)}
             style={{
               position: 'relative',
               top: '8px'
             }}
           />
-        }
-    </li>
+    </div>
   )
 }
 
