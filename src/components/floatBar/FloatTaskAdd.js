@@ -50,7 +50,7 @@ const FloatTaskAdd = (props) => {
     setProgressChange(5);
     setCategoryChange("");
     setDescriptionChange("");
-    setAssigneesChange([""]);
+    setAssigneesChange([{id:"",name:""}]);
     // setUsers([])
     return () => {
       // isCancelled = true;
@@ -109,26 +109,33 @@ const FloatTaskAdd = (props) => {
     }
 
     const handleRemoveAssignee = (index) => {
+      console.log("Index:", index);
       const newArr = [...assigneesChange];
+      // const newArr = assigneesChange;
+      console.log("Array befor:",newArr);
       newArr.splice(index,1);
+      console.log("Array after:",newArr);
       setAssigneesChange(newArr);
+      console.log("Assignees:",assigneesChange);
     }
 
     const handleUpdateAssignee = (id) => {
-
+      console.log("The Id",id);
       const idSplit = id.split(",");
       const newArr = [...assigneesChange];
+      // const newArr = [];
 
       api.get(`/users/${idSplit[0]}.json`)
       .then(res=>{
+        console.log(res.data);
         newArr[idSplit[1]] = res.data;
         setAssigneesChange(newArr);
-
       })
       .catch(err=>{
         console.warn(err);
       })
     }
+    console.log("Assignees Change: ",assigneesChange);
   //Edit assignees
 
   const handleTaskNameChange = (e) => {

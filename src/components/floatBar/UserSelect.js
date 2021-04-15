@@ -17,14 +17,14 @@ const UserSelect = (props) => {
   },[])
 
   const handleSelect = (e) => {
-    // console.log("The index: ", e.target.);
+     console.log("The index: ", e.target.value);
     props.handleUpdateAssignee(e.target.value);
   }
   // let test = -1;
   return(
     <li className="">
       <select className="" onChange={handleSelect}>
-        <option value={[props.assignee.id,props.index]}>{props.assignee.name}</option>
+        <option value={[props.assignee.id,props.index]} >{props.assignee.name} </option>
         {
           users.map((user, index)=>
             <option
