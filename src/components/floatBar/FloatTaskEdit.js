@@ -22,7 +22,7 @@ const FloatTaskEdit = (props) => {
     progress:5,
     category:"",
     description:"",
-    assignees:[props.user]
+    assignees:[]
   })
   const [formName, setFormName] = useState("");
   const [statusChange, setStatusChange] = useState("");
@@ -49,9 +49,14 @@ const FloatTaskEdit = (props) => {
       newFormDetails.progress = res.data.progress
       newFormDetails.category = res.data.task_category.id
       newFormDetails.description = res.data.description
-      newFormDetails.assignees = res.data.users
+      const inst = [];
+      for( let i = 0; i < res.data.users.length; i++ ){
+        inst.push(res.data.users[0].id)
+      }
+      newFormDetails.assignees = inst;
+      newFormDetails.project_id = res.data.project_id
       setFormDetails(newFormDetails);
-      // console.log(formDetails);
+       console.log("After set",formDetails);
     })
     .catch(err=>{
       console.warn(err);
@@ -68,7 +73,7 @@ const FloatTaskEdit = (props) => {
       progress:5,
       category:"",
       description:"",
-      assignees:[props.user]
+      assignees:[]
     });
     setFormName("");
     setStatusChange("");
@@ -182,8 +187,8 @@ const FloatTaskEdit = (props) => {
   // }
 
   const saveData = (e) => {
-
-    api.post(`ww`,formDetails)
+    console.log(formDetails);
+    api.post(`/task-update/${props.taskId}`,formDetails)
     .then(res=>{
          console.log(res.data);
         props.closeFloatTaskBar();
@@ -192,7 +197,7 @@ const FloatTaskEdit = (props) => {
       console.warn(err);
     })
   }
-   // console.log("The state: ", formDetails);
+   console.log("The state: ", formDetails);
   return(
     <div className="floatbar__container">
       <form onSubmit={(event)=>event.preventDefault()}>
