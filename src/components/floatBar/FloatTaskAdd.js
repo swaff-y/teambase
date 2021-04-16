@@ -32,7 +32,7 @@ const FloatTaskAdd = (props) => {
   const [descriptionChange, setDescriptionChange] = useState("");
   const [assigneesChange, setAssigneesChange] = useState([]);
   const [taskCategories, setTaskCategories] = useState([]);
-  const [selected, setSelected] = useState([""]);
+  const [selected, setSelected] = useState('');
 
   useEffect(()=>{
     let isCancelled = false;
@@ -185,6 +185,8 @@ const FloatTaskAdd = (props) => {
       console.warn(err);
     })
   }
+
+  console.log(formDetails);
 
   return(
     <div className="floatbar__container">

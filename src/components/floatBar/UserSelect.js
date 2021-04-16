@@ -7,7 +7,7 @@ import api from '../../api';
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
-  const [selected, setSelected] = useState(props.selected);
+  // const [selected, setSelected] = useState(props.selected);
 
   useEffect(()=>{
     api.get(`/users.json`)
@@ -55,7 +55,7 @@ const UserSelect = (props) => {
         {
           users.map((user, index)=>
             <option
-              key={index}
+              key={index + "b"}
               value={[user.id]}
             >{user.name}</option>
           )

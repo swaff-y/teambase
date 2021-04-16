@@ -31,7 +31,7 @@ const FloatTaskEdit = (props) => {
   const [descriptionChange, setDescriptionChange] = useState("");
   const [assigneesChange, setAssigneesChange] = useState([""]);
   const [taskCategories, setTaskCategories] = useState([]);
-  const [selected, setSelected] = useState([""]);
+  const [selected, setSelected] = useState('');
 
   useEffect(()=>{
     api.get(`/task-read/${props.taskId}`)
