@@ -37,6 +37,7 @@ const UserSelect = (props) => {
           />
           <HighlightOffIcon
             onClick={()=>{props.handleRemoveAssignee(index)}}
+            key={index+"a"}
             style={{
               position: "relative",
               top: "-10px",
