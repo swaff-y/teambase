@@ -7,6 +7,7 @@ import api from '../../api';
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
+  const [selected, setSelected] = useState(props.selected);
 
   useEffect(()=>{
     api.get(`/users.json`)
@@ -21,7 +22,7 @@ const UserSelect = (props) => {
   const handleSelect = (e) => {
     // props.handleUpdateAssignee(e.target.value);
     setSelectedUser(e.target.value);
-    console.log("Selected User:", selectedUser);
+    props.handleSelected(e.target.value);
   }
   // let test = -1;
   return(
@@ -49,7 +50,7 @@ const UserSelect = (props) => {
         </>
         )
       }
-      <select className="" onChange={handleSelect}>
+      <select className="" value={props.selected} onChange={handleSelect}>
         <option></option>
         {
           users.map((user, index)=>

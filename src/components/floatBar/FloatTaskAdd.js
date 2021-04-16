@@ -32,6 +32,7 @@ const FloatTaskAdd = (props) => {
   const [descriptionChange, setDescriptionChange] = useState("");
   const [assigneesChange, setAssigneesChange] = useState([]);
   const [taskCategories, setTaskCategories] = useState([]);
+  const [selected, setSelected] = useState([""]);
 
   useEffect(()=>{
     let isCancelled = false;
@@ -109,9 +110,13 @@ const FloatTaskAdd = (props) => {
       newArr.splice(index,1);
       setAssigneesChange(newArr);
     }
+    const handleSelected = (value) => {
+      setSelected(value);
+    }
 
     const handleAddAssignee = (id) => {
       console.log("AddSelectedUser");
+      setSelected("");
       // const idSplit = id.split(",");
       // const newArr = [...assigneesChange];
 
@@ -124,7 +129,7 @@ const FloatTaskAdd = (props) => {
         console.warn(err);
       })
     }
-    console.log("AssigneesChange: ",assigneesChange);
+    // console.log("AssigneesChange: ",assigneesChange);
   //Edit assignees
 
   const handleTaskNameChange = (e) => {
@@ -275,6 +280,8 @@ const FloatTaskAdd = (props) => {
         <div className="floatbar__row assignees">
           <label htmlFor="des">Assignees</label><br/>
           <UserSelect
+            handleSelected={handleSelected}
+            selected={selected}
             assignees={assigneesChange}
             handleRemoveAssignee={handleRemoveAssignee}
             handleAddAssignee={handleAddAssignee}
