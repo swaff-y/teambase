@@ -255,7 +255,7 @@ const FloatTaskAdd = (props) => {
           </div>
           <div className="floatbar__col">
             <label htmlFor="category">Category</label><br/>
-            <select onChange={handleCategoryChange} value={categoryChange}>
+            <select onChange={handleCategoryChange} value={categoryChange[0]}>
               <option></option>
               {
                 taskCategories.map((category, index)=>
