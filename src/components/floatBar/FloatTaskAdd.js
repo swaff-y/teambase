@@ -23,7 +23,7 @@ const FloatTaskAdd = (props) => {
     progress:5,
     category:"",
     description:"",
-    assignees:[props.user]
+    assignees:[]
   })
   const [formName, setFormName] = useState("");
   const [statusChange, setStatusChange] = useState("");
@@ -44,7 +44,7 @@ const FloatTaskAdd = (props) => {
       progress:5,
       category:"",
       description:"",
-      assignees:[props.user]
+      assignees:[]
     });
     setFormName("");
     setStatusChange("");
@@ -109,13 +109,16 @@ const FloatTaskAdd = (props) => {
       const newArr = [...assigneesChange];
       newArr.splice(index,1);
       setAssigneesChange(newArr);
+      const newFormDetails = formDetails;
+      newFormDetails.name = assigneesChange;
+      setFormDetails(newFormDetails);
     }
     const handleSelected = (value) => {
       setSelected(value);
     }
 
     const handleAddAssignee = (id) => {
-      console.log("AddSelectedUser");
+
       setSelected("");
       // const idSplit = id.split(",");
       // const newArr = [...assigneesChange];
@@ -124,12 +127,15 @@ const FloatTaskAdd = (props) => {
       .then(res=>{
         // newArr[idSplit[1]] = res.data;
         setAssigneesChange([...assigneesChange,res.data]);
+        const newFormDetails = formDetails;
+        newFormDetails.assignees.push(res.data.id);
+        setFormDetails(newFormDetails);
       })
       .catch(err=>{
         console.warn(err);
       })
     }
-    // console.log("AssigneesChange: ",assigneesChange);
+
   //Edit assignees
 
   const handleTaskNameChange = (e) => {
@@ -175,10 +181,10 @@ const FloatTaskAdd = (props) => {
   // }
 
   const saveData = (e) => {
-
+    console.log("Before submit: ", formDetails );
     api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
     .then(res=>{
-         console.log(res.data);
+
         props.closeFloatTaskBar();
     })
     .catch(err=>{
@@ -186,7 +192,7 @@ const FloatTaskAdd = (props) => {
     })
   }
 
-  console.log(formDetails);
+
 
   return(
     <div className="floatbar__container">

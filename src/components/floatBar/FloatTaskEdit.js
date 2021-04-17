@@ -117,7 +117,11 @@ const FloatTaskEdit = (props) => {
     const newArr = [...assigneesChange];
     newArr.splice(index,1);
     setAssigneesChange(newArr);
+    const newFormDetails = formDetails;
+    newFormDetails.assignees = assigneesChange;
+    setFormDetails(newFormDetails);
   }
+
   const handleSelected = (value) => {
     setSelected(value);
   }
@@ -132,6 +136,9 @@ const FloatTaskEdit = (props) => {
     .then(res=>{
       // newArr[idSplit[1]] = res.data;
       setAssigneesChange([...assigneesChange,res.data]);
+      const newFormDetails = formDetails;
+      newFormDetails.assignees.push(res.data.id);
+      setFormDetails(newFormDetails);
     })
     .catch(err=>{
       console.warn(err);
