@@ -52,7 +52,7 @@ const FloatTaskEdit = (props) => {
       const inst = [];
       for( let i = 0; i < res.data.users.length; i++ ){
         inst.push(res.data.users[i].id)
-        console.log("users", res.data.users[i].id);
+        // console.log("users", res.data.users[i].id);
       }
       newFormDetails.assignees = inst;
       newFormDetails.project_id = res.data.project_id
@@ -187,7 +187,7 @@ const FloatTaskEdit = (props) => {
   }
 
   const saveData = (e) => {
-    console.log("Before submit: ",formDetails);
+    // console.log("Before submit: ",formDetails);
     api.post(`/task-update/${props.taskId}`,formDetails)
     .then(res=>{
         props.closeFloatTaskBar();
