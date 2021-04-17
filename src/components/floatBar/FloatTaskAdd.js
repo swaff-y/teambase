@@ -110,7 +110,7 @@ const FloatTaskAdd = (props) => {
       newArr.splice(index,1);
       setAssigneesChange(newArr);
       const newFormDetails = formDetails;
-      newFormDetails.name = assigneesChange;
+      newFormDetails.assignees = assigneesChange;
       setFormDetails(newFormDetails);
     }
     const handleSelected = (value) => {
@@ -181,7 +181,7 @@ const FloatTaskAdd = (props) => {
   // }
 
   const saveData = (e) => {
-    console.log("Before submit: ", formDetails );
+    // console.log("Before submit: ", formDetails );
     api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
     .then(res=>{
 

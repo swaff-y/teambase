@@ -29,7 +29,7 @@ const FloatTaskEdit = (props) => {
   const [progressChange, setProgressChange] = useState(5);
   const [categoryChange, setCategoryChange] = useState([]);
   const [descriptionChange, setDescriptionChange] = useState("");
-  const [assigneesChange, setAssigneesChange] = useState([""]);
+  const [assigneesChange, setAssigneesChange] = useState([]);
   const [taskCategories, setTaskCategories] = useState([]);
   const [selected, setSelected] = useState('');
 
@@ -51,17 +51,19 @@ const FloatTaskEdit = (props) => {
       newFormDetails.description = res.data.description
       const inst = [];
       for( let i = 0; i < res.data.users.length; i++ ){
-        inst.push(res.data.users[0].id)
+        inst.push(res.data.users[i].id)
+        console.log("users", res.data.users[i].id);
       }
       newFormDetails.assignees = inst;
       newFormDetails.project_id = res.data.project_id
       setFormDetails(newFormDetails);
-       console.log("After set",formDetails);
     })
     .catch(err=>{
       console.warn(err);
     })
   },[]);
+
+  console.log("On load: ", formDetails);
 
   useEffect(()=>{
     let isCancelled = false;
@@ -80,7 +82,7 @@ const FloatTaskEdit = (props) => {
     setProgressChange(5);
     setCategoryChange("");
     setDescriptionChange("");
-    setAssigneesChange([""]);
+    setAssigneesChange([]);
     // setUsers([])
     return () => {
       // isCancelled = true;
@@ -117,8 +119,12 @@ const FloatTaskEdit = (props) => {
     const newArr = [...assigneesChange];
     newArr.splice(index,1);
     setAssigneesChange(newArr);
+    const idArray = []
+    for(let i = 0; i < newArr.length;i++){
+      idArray.push(newArr[i].id);
+    }
     const newFormDetails = formDetails;
-    newFormDetails.assignees = assigneesChange;
+    newFormDetails.assignees = idArray;
     setFormDetails(newFormDetails);
   }
 
@@ -127,14 +133,10 @@ const FloatTaskEdit = (props) => {
   }
 
   const handleAddAssignee = (id) => {
-    // console.log("AddSelectedUser");
     setSelected("");
-    // const idSplit = id.split(",");
-    // const newArr = [...assigneesChange];
 
     api.get(`/users/${id}.json`)
     .then(res=>{
-      // newArr[idSplit[1]] = res.data;
       setAssigneesChange([...assigneesChange,res.data]);
       const newFormDetails = formDetails;
       newFormDetails.assignees.push(res.data.id);
@@ -183,28 +185,18 @@ const FloatTaskEdit = (props) => {
     newFormDetails.description = e.target.value;
     setFormDetails(newFormDetails);
   }
-  // const handleAssigneesChange = (e) => {
-  //   if(assigneesChange[assigneesChange.length-1] === ""){
-  //      assigneesChange.pop();
-  //      formDetails.assignees.pop();
-  //   }
-  //
-  //   assigneesChange.push(e.target.value);
-  //   formDetails.assignees.push(e.target.value);
-  // }
 
   const saveData = (e) => {
-    console.log(formDetails);
+    console.log("Before submit: ",formDetails);
     api.post(`/task-update/${props.taskId}`,formDetails)
     .then(res=>{
-         console.log(res.data);
         props.closeFloatTaskBar();
     })
     .catch(err=>{
       console.warn(err);
     })
   }
-   console.log("The state: ", formDetails);
+
   return(
     <div className="floatbar__container">
       <form onSubmit={(event)=>event.preventDefault()}>
