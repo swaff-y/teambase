@@ -109,8 +109,12 @@ const FloatTaskAdd = (props) => {
       const newArr = [...assigneesChange];
       newArr.splice(index,1);
       setAssigneesChange(newArr);
+      const idArray = []
+      for(let i = 0; i < newArr.length;i++){
+        idArray.push(newArr[i].id);
+      }
       const newFormDetails = formDetails;
-      newFormDetails.assignees = assigneesChange;
+      newFormDetails.assignees = idArray;
       setFormDetails(newFormDetails);
     }
     const handleSelected = (value) => {
