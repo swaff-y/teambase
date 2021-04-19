@@ -14,12 +14,24 @@ const TaskBar = (props) => {
     color: "#6686CC"
   }
 
+  const formatDate = (date) => {
+    const year = new Date(date).getFullYear();
+    let month = new Date(date).getMonth();
+    const day = new Date(date).getDate();
+
+    if(month.toString().length === 1){
+      month = "0" + month.toString();
+    }
+
+    return [year, month, day].join('-');
+  }
+
   return(
     <div className="content__taskBar">
       <div className="content__taskBarContents">
         <span id="name">{props.task.name}</span>
         <span id="status">{props.task.status}</span>
-        <span id="dueDate">{props.task.due_date}</span>
+        <span id="dueDate">{formatDate(props.task.due_date)}</span>
         <span id="progress"><LinearProgress variant="determinate" value={props.task.progress} style={{height:'15px', borderRadius:'3px'}}/></span>
         <span id="users">
           {

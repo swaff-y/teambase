@@ -7,7 +7,6 @@ import api from '../../api';
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
-  // const [selected, setSelected] = useState(props.selected);
 
   useEffect(()=>{
     api.get(`/users.json`)
@@ -20,25 +19,24 @@ const UserSelect = (props) => {
   },[])
 
   const handleSelect = (e) => {
-    // props.handleUpdateAssignee(e.target.value);
     setSelectedUser(e.target.value);
     props.handleSelected(e.target.value);
   }
-  // let test = -1;
+
   return(
     <div className="floatbar__assignees">
       {
         props.assignees.map((assignee,index)=>
         <>
           <Avatar
-            key={index}
+            key={assignee.id}
             name={assignee.name}
             size="30"
             round
           />
           <HighlightOffIcon
             onClick={()=>{props.handleRemoveAssignee(index)}}
-            key={index+"a"}
+            key={index}
             style={{
               position: "relative",
               top: "-10px",
@@ -55,7 +53,7 @@ const UserSelect = (props) => {
         {
           users.map((user, index)=>
             <option
-              key={index + "b"}
+              key={[user.id]}
               value={[user.id]}
             >{user.name}</option>
           )

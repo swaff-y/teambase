@@ -79,8 +79,9 @@ const FloatTaskAdd = (props) => {
   },[props.floatStatus])
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    formDetails.due_date = date;
+    console.log(date.getTime());
+    setSelectedDate(date.getTime());
+    formDetails.due_date = date.getTime();
   };
 
   const percentage = () => {
@@ -90,19 +91,6 @@ const FloatTaskAdd = (props) => {
     }
     return arr;
   }
-
-  // const assigneesArr = () => {
-  //   const arr = [];
-  //   for( let i = 0; i <= assigneeCount; i++ ){
-  //     arr.push(i);
-  //   }
-  //   return arr;
-  // }
-  //
-  // const handleAddAssignee = () => {
-  //   let count = assigneeCount + 1;
-  //   setAssigneeCount(count);
-  // }
 
   //Edit assignees
     const handleRemoveAssignee = (index) => {
