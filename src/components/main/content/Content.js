@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import FilterBar from "./FilterBar";
 import TaskBar from "./TaskBar";
 import api from '../../../api';
@@ -50,18 +51,59 @@ const Content = (props) => {
         <span id="headerAssignees">Assignees</span>
       </div>
       <div className="content__spacer"></div>
-      {
-        selectedProject.map((task, index)=>
-        <TaskBar
-          key={index}
-          task={task}
-          handleTaskEdit={props.handleTaskEdit}
-          handleTaskNote={props.handleTaskNote}
-          handleTaskDelete={props.handleTaskDelete}
-        />)
-      }
+      <DragDropContext>
+        <Droppable droppableId="characters">
+          {(provided) =>
+            (
+              <div className="tasks" {...provided.droppableProps} ref={provided.innerRef}>
+              {
+                selectedProject.map((task, index)=>{
+                  return(
+                    <Draggable key={index} draggableId={task} index={index}>
+                      {(provided) => (
+                        <TaskBar
+                          key={index}
+                          task={task}
+                          handleTaskEdit={props.handleTaskEdit}
+                          handleTaskNote={props.handleTaskNote}
+                          handleTaskDelete={props.handleTaskDelete}
+                        />)
+                      }
+                    </Draggable>
+                  );
+                })
+              }
+              </div>
+            )
+          }
+        </Droppable>
+      </DragDropContext>
     </div>
   )
 }
 
 export default Content;
+
+// <DragDropContext>
+//   <Droppable droppableId="characters">
+//     {(provided) =>
+//       (
+//         <div className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+//         selectedProject.map((task, index)=>{
+//           return(
+//             <Draggable key={index}>
+//               {(provided) => (
+//                 <TaskBar
+//                   key={index}
+//                   task={task}
+//                   handleTaskEdit={props.handleTaskEdit}
+//                   handleTaskNote={props.handleTaskNote}
+//                   handleTaskDelete={props.handleTaskDelete}
+//                 />)
+//               }
+//             </Draggable>)}
+//         </div>
+//       )
+//     }
+//   </Droppable>
+// </DragDropContext>
