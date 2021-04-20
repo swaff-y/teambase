@@ -52,21 +52,27 @@ const Content = (props) => {
       </div>
       <div className="content__spacer"></div>
       <DragDropContext>
-        <Droppable droppableId="characters">
+        <Droppable droppableId="task">
           {(provided) =>
             (
               <div className="tasks" {...provided.droppableProps} ref={provided.innerRef}>
               {
-                selectedProject.map((task, index)=>{
+                selectedProject.map(({id,name,status,due_date,progress,users}, index)=>{
                   return(
-                    <Draggable key={index} draggableId={task} index={index}>
+                    <Draggable key={name} draggableId={name} index={index}>
                       {(provided) => (
                         <TaskBar
                           key={index}
-                          task={task}
+                          id={id}
+                          name={name}
+                          status={status}
+                          dueDate={due_date}
+                          progress={progress}
+                          users={users}
                           handleTaskEdit={props.handleTaskEdit}
                           handleTaskNote={props.handleTaskNote}
                           handleTaskDelete={props.handleTaskDelete}
+                          innerRef={provided.innerRef} drags={provided.draggableProps} handles={provided.dragHandleProps}
                         />)
                       }
                     </Draggable>
@@ -83,27 +89,3 @@ const Content = (props) => {
 }
 
 export default Content;
-
-// <DragDropContext>
-//   <Droppable droppableId="characters">
-//     {(provided) =>
-//       (
-//         <div className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-//         selectedProject.map((task, index)=>{
-//           return(
-//             <Draggable key={index}>
-//               {(provided) => (
-//                 <TaskBar
-//                   key={index}
-//                   task={task}
-//                   handleTaskEdit={props.handleTaskEdit}
-//                   handleTaskNote={props.handleTaskNote}
-//                   handleTaskDelete={props.handleTaskDelete}
-//                 />)
-//               }
-//             </Draggable>)}
-//         </div>
-//       )
-//     }
-//   </Droppable>
-// </DragDropContext>

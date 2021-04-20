@@ -15,6 +15,7 @@ const TaskBar = (props) => {
   }
 
   const formatDate = (date) => {
+    console.log("The date",date);
     const year = new Date(date).getFullYear();
     let month = new Date(date).getMonth();
     const day = new Date(date).getDate();
@@ -27,32 +28,32 @@ const TaskBar = (props) => {
   }
 
   return(
-    <div className="content__taskBar">
+    <div className="content__taskBar" ref={props.innerRef} {...props.drags} {...props.handles}>
       <div className="content__taskBarContents">
-        <span id="name">{props.task.name}</span>
-        <span id="status">{props.task.status}</span>
-        <span id="dueDate">{formatDate(props.task.due_date)}</span>
-        <span id="progress"><LinearProgress variant="determinate" value={props.task.progress} style={{height:'15px', borderRadius:'3px'}}/></span>
+        <span id="name">{props.name}</span>
+        <span id="status">{props.status}</span>
+        <span id="dueDate">{formatDate(props.dueDate)}</span>
+        <span id="progress"><LinearProgress variant="determinate" value={props.progress} style={{height:'15px', borderRadius:'3px'}}/></span>
         <span id="users">
           {
-            props.task.users.map((user,index)=><UserStack key={index} user={user}/>)
+            props.users.map((user,index)=><UserStack key={index} user={user}/>)
           }
         </span>
         <div className="content__taskBarIcons">
           <IconButton
             style={iconStyle}
-            onClick={()=>props.handleTaskEdit(props.task.id)}
+            onClick={()=>props.handleTaskEdit(props.id)}
           >
             <EditIcon fontSize="small"/>
           </IconButton>
           <IconButton
             style={iconStyle}
-            onClick={()=>props.handleTaskNote(props.task.id)}
+            onClick={()=>props.handleTaskNote(props.id)}
           >
             <EventNoteIcon fontSize="small"/>
           </IconButton>
           <IconButton
-            style={iconStyle} onClick={()=>props.handleTaskDelete(props.task.id)}
+            style={iconStyle} onClick={()=>props.handleTaskDelete(props.id)}
           >
             <DeleteIcon fontSize="small" />
           </IconButton>
