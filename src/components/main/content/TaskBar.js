@@ -15,7 +15,7 @@ const TaskBar = (props) => {
   }
 
   const formatDate = (date) => {
-    console.log("The date",date);
+    // console.log("The date",date);
     const year = new Date(date).getFullYear();
     let month = new Date(date).getMonth();
     const day = new Date(date).getDate();

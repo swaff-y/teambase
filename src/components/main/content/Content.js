@@ -33,6 +33,16 @@ const Content = (props) => {
   const filterSelect = (type) => {
     setFilterSelection(type);
   }
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(selectedProject);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setSelectedProject(items);
+  }
+
   // console.log(filterSelection)
   return(
     <div className="content" data-test="component-content">
@@ -51,11 +61,14 @@ const Content = (props) => {
         <span id="headerAssignees">Assignees</span>
       </div>
       <div className="content__spacer"></div>
-      <DragDropContext>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="task">
           {(provided) =>
             (
-              <div className="tasks" {...provided.droppableProps} ref={provided.innerRef}>
+              <div
+                className="tasks"
+                {...provided.droppableProps}
+                ref={provided.innerRef}>
               {
                 selectedProject.map(({id,name,status,due_date,progress,users}, index)=>{
                   return(
@@ -79,6 +92,7 @@ const Content = (props) => {
                   );
                 })
               }
+              {provided.placeholder}
               </div>
             )
           }
