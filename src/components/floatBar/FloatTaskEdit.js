@@ -331,23 +331,3 @@ const FloatTaskEdit = (props) => {
 }
 
 export default FloatTaskEdit;
-
-// {
-//   assigneeCount <= 8
-//   ?
-//   <AddCircleOutlineIcon
-//     onClick={handleAddAssignee}
-//     fontSize="small" style={{
-//       position: "relative",
-//       left: "280px",
-//       top: "-58px"
-//   }}/>
-//   :
-//   <AddCircleOutlineIcon
-//   fontSize="small"
-//   style={{
-//     position: "relative",
-//     left: "280px", top: "-58px",
-//     color:"lightgrey"
-//   }}/>
-// }

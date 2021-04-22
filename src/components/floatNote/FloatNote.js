@@ -9,16 +9,38 @@ import "./floatnote.css";
 
 const FloatNote = (props) => {
   const [name, setName] = useState();
+  const [text, setText] = useState("");
 
   useEffect(()=>{
-    api.get(`/task-read/${props.taskId}`)
+    if(props.taskId !== undefined){
+      api.get(`/task-read/${props.taskId}`)
+      .then(res=>{
+        setName(res.data.name);
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    }
+  },[props.floatNote]);
+
+  const handleText = (e) => {
+    setText(e.target.value);
+  }
+  const handleClose = () => {
+    setText("");
+    props.closeFloatNote();
+  }
+
+  const saveNote = () => {
+    api.post(`/note-create/${props.taskId}/${props.user}`,{note:text})
     .then(res=>{
-      setName(res.data.name);
+      setText("");
+      props.closeFloatNote();
     })
     .catch(err=>{
       console.warn(err);
     })
-  },[props.floatNote]);
+  }
 
   return(
     <div
@@ -28,7 +50,7 @@ const FloatNote = (props) => {
       }}
     >
       <IconButton
-        onClick={props.closeFloatNote}
+        onClick={handleClose}
         style={{
           position:'absolute',
           right: '0px',
@@ -38,7 +60,6 @@ const FloatNote = (props) => {
         }}
       >
         <CloseIcon
-
           fontSize="small"
           style={{
             color:'#000000',
@@ -51,11 +72,16 @@ const FloatNote = (props) => {
           <h3>Task Name</h3>
           <p>{name}</p>
 
-          <textarea className="floatnotetask__textArea">
+          <textarea
+            className="floatnotetask__textArea"
+            onChange={handleText}
+            value={text}
+          >
           </textarea>
 
           <div className="floatnotetask__buttonContainer">
             <Button
+              onClick={saveNote}
               variant="contained"
               color="primary"
               style={{marginRight:"20px"}}
@@ -68,7 +94,7 @@ const FloatNote = (props) => {
               variant="contained"
               color="secondary"
               startIcon={<ExitToAppIcon />}
-              onClick={props.closeFloatNote}
+              onClick={handleClose}
             >
               Return
             </Button>
