@@ -129,16 +129,16 @@ const FilterBar = (props) => {
   return(
     <div className="content__filterBar">
       <div className="content__filterBarFilters">
-        <span id="first" onClick={handleClickNew} style={statusCheckNewBorder()}>
+        <span id="firstFilter" onClick={handleClickNew} style={statusCheckNewBorder()}>
           New
           <div className="content__filterbarCircle" style={ statusCheckNew()}>{newCount(selectedProject.tasks)}</div>
         </span>
 
-        <span id="second" onClick={handleClickInProgress} style={statusCheckInProgressBorder()}>
+        <span id="secondFilter" onClick={handleClickInProgress} style={statusCheckInProgressBorder()}>
           In Progress
           <div className="content__filterbarCircle" style={ statusCheckInProgress()}>{inProgressCount(selectedProject.tasks)}</div>
         </span>
-        <span id="third" onClick={handleClickComplete} style={statusCheckCompleteBorder()}>
+        <span id="thirdFilter" onClick={handleClickComplete} style={statusCheckCompleteBorder()}>
           Completed
           <div className="content__filterbarCircle" style={ statusCheckComplete()}>{completeCount(selectedProject.tasks)}</div>
         </span>

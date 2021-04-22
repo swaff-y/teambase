@@ -54,6 +54,7 @@ const Content = (props) => {
         taskDelete={props.taskDelete}
       />
       <div className="content__headings">
+        <span id="headerPriority">Priority</span>
         <span id="headerName">Task Name</span>
         <span id="headerStatus">Status</span>
         <span id="headerDueDate">Due Date</span>
@@ -76,6 +77,7 @@ const Content = (props) => {
                       {(provided) => (
                         <TaskBar
                           key={index}
+                          index={index + 1}
                           id={id}
                           name={name}
                           status={status}

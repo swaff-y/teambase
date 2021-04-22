@@ -128,12 +128,18 @@
   color: #C7C7C7;
 }
 
-#first{
+/* #first{
+  margin-left: 90px;
+} */
+#firstFilter{
   margin-left: 30px;
 }
 
+#headerPriority{
+  left: 70px;
+}
 #headerName{
-  left: 90px;
+  left: 110px;
 }
 #headerStatus{
   left: 248px;
@@ -145,13 +151,20 @@
   left: 374px;
 }
 #headerAssignees{
-  left: 435px;
+  left: 445px;
 }
 
-#name{
+#priority{
   /* border: 1px solid red; */
   position: absolute;
   left: 10px;
+  width: 220px;
+  text-overflow: ellipsis;
+}
+#name{
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 80px;
   width: 220px;
   text-overflow: ellipsis;
 }
@@ -159,27 +172,27 @@
 #status{
   /* border: 1px solid red; */
   position: absolute;
-  left: 250px;
+  left: 300px;
   width: 110px;
 }
 
 #dueDate{
   /* border: 1px solid red; */
   position: absolute;
-  left: 370px;
+  left: 420px;
   width: 100px;
 }
 #progress{
   /* border: 1px solid red; */
   position: absolute;
-  left: 485px;
+  left: 535px;
   top: 1px;
   width: 100px;
 }
 #users{
   /* border: 1px solid red; */
   position: relative;
-  left: 590px;
+  left: 650px;
   top: 12px;
   width: 100px;
 }

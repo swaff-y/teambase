@@ -30,6 +30,7 @@ const TaskBar = (props) => {
   return(
     <div className="content__taskBar" ref={props.innerRef} {...props.drags} {...props.handles}>
       <div className="content__taskBarContents">
+        <span id="priority">{props.index}</span>
         <span id="name">{props.name}</span>
         <span id="status">{props.status}</span>
         <span id="dueDate">{formatDate(props.dueDate)}</span>
