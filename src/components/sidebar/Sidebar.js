@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ProjectList from './ProjectList';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ViewListIcon from '@material-ui/icons/ViewList';
@@ -8,10 +8,18 @@ import InsertChartIcon from '@material-ui/icons/InsertChart';
 import PeopleIcon from '@material-ui/icons/People';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './sidebar.css'
 
 const Sidebar = (props) => {
   const [projectShow, setProjectShow] = useState("none");
+  const [projectList,setProjectList] = useState(props.projectData)
+
+  // console.log("project data: ",props.projectData, projectList);
+
+  useEffect(()=>{
+    setProjectList(props.projectData)
+  },[props.projectData])
 
   // console.log(projectData);
 
@@ -21,6 +29,15 @@ const Sidebar = (props) => {
       return;
     }
     setProjectShow('none');
+  }
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(projectList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setProjectList(items);
   }
 
   return(
@@ -95,17 +112,46 @@ const Sidebar = (props) => {
 
       </div>
       <div className="sidebar__projectsShow" style={{display:projectShow}}>
-        <ul className="sidebar__projectList">
-          {
-            props.projectData.map((project,index)=>
-              <ProjectList
-                key={index}
-                project={project}
-                handleClick={props.selectedProject}         handleProject={props.handleProject}
-                user={props.user}
-              />)
-          }
-        </ul>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="project">
+            {
+              (provided)=>(
+                <ul className="sidebar__projectList"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                >
+                  {
+                    projectList.map(({id,name},index)=>{
+                      return(
+                        <Draggable
+                          key={name}
+                          draggableId={name}
+                          index={index}>
+                          {
+                            (provided)=>(
+                              <ProjectList
+                                key={index}
+                                id={id}
+                                name={name}
+                                handleClick={props.selectedProject}
+                                handleProject={props.handleProject}
+                                user={props.user}
+                                innerRef={provided.innerRef}
+                                drags={provided.draggableProps}
+                                handles={provided.dragHandleProps}
+                              />
+                            )
+                          }
+                        </Draggable>
+                      )
+                    })
+                  }
+                  {provided.placeholder}
+                </ul>
+              )
+            }
+          </Droppable>
+        </DragDropContext>
       </div>
       <div className="sidebar__analytics">
         <IconButton

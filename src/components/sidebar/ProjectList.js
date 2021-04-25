@@ -6,11 +6,14 @@ import "./sidebar.css";
 const ProjectList = (props) => {
 
   const handleClick = () => {
-    props.handleClick(props.project.name,props.project.id);
+    props.handleClick(props.name,props.id);
   }
 
   return(
-    <li onClick={handleClick}>
+    <li
+      onClick={handleClick}
+      ref={props.innerRef} {...props.drags} {...props.handles}
+    >
       <ArrowForwardIcon
       fontSize="small"
       style={{
@@ -20,7 +23,7 @@ const ProjectList = (props) => {
         left:'-10px'}}
       />
         {
-          props.project.name
+          props.name
         }
       <SettingsIcon
         fontSize="small"
