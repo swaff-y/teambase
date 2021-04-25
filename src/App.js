@@ -42,7 +42,7 @@ function App() {
             returnArray.push(projectArray[i]);
           }
         }
-        console.log("The project data:",projectArray);
+        // console.log("The project data:",projectArray);
         projectArray.sort(compareNumbers)
         setProjectData(projectArray);
       }
