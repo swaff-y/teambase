@@ -9,7 +9,7 @@ import FloatProject from './components/floatProject/FloatProject.js'
 import api from './api';
 import Main from './components/main/Main'
 
-const USER = 171;
+const USER = 176;
 
 function App() {
   const [selectedProject, setSelectedProject] = useState([]);
@@ -27,12 +27,34 @@ function App() {
   useEffect(()=>{
     api.get(`projects-user/${USER}`)
     .then(res=>{
-      setProjectData(res.data);
+      if(res.data.length < 1){
+        setProjectData(res.data);
+      }else{
+        const projectArray = res.data;
+        const numbers = [];
+        for( let i = 0; i < projectArray.length; i++ ){
+          numbers.push(projectArray[i].priority)
+        }
+        numbers.sort(compareNumbers);
+        const returnArray = [];
+        for( let i = 0; i < numbers.length; i++ ){
+          if(projectArray[i].priority === i){
+            returnArray.push(projectArray[i]);
+          }
+        }
+        console.log("The project data:",projectArray);
+        projectArray.sort(compareNumbers)
+        setProjectData(projectArray);
+      }
     })
     .catch(err=>{
       console.warn(err);
     })
   },[]);
+
+  const compareNumbers = (num1,num2) => {
+	   return num1 - num2; //switch around to change direction
+  }
 
   const project = (projectName,projectId) => {
     setSelectedProject([projectName, projectId]);
