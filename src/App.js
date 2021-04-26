@@ -1,6 +1,5 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-// import { Route, HashRouter as Router } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar'
 import FloatTaskBar from './components/floatBar/FloatTaskBar'
 import FloatDeleteTask from './components/floatDelete/FloatTaskDelete'
@@ -19,9 +18,7 @@ function App() {
   const [floatProject, setFloatProject] = useState('none');
   const [projectData, setProjectData] = useState([]);
   const [taskEdit, setTaskEdit] = useState(false);
-  // const [taskNote, setTaskNote] = useState(false);
   const [taskDelete, setTaskDelete] = useState(false);
-  // const [projectMain, setProjectMain] = useState(false);
   const [taskId, setTaskId] = useState();
 
   useEffect(()=>{
@@ -45,7 +42,6 @@ function App() {
             }
           }
         }
-        console.log("The project data:",returnArray);
         setProjectData(returnArray);
       }
     })
@@ -55,7 +51,7 @@ function App() {
   },[]);
 
   const compareNumbers = (num1,num2) => {
-	   return num1 - num2; //switch around to change direction
+	   return num1 - num2;
   }
 
   const project = (projectName,projectId) => {
@@ -75,12 +71,10 @@ function App() {
 
   const closeFloatNote = () => {
     setFloatNote('none');
-    setTaskId();
-    // setTaskNote(false);
+    setTaskId()
   }
   const closeFloatProject= () => {
     setFloatProject('none');
-    // setProjectMain(false);
   }
 
   const showFloatTaskBar = () => {
@@ -88,26 +82,20 @@ function App() {
   }
 
   const handleTaskEdit = (id) => {
-    // console.log("Clicked edit", id);
     setTaskEdit(true);
     setTaskId(id);
     setFloatStatus('');
   }
   const handleTaskNote = (id) => {
-    // console.log("Clicked note", id);
-    // setTaskNote(true);
     setFloatNote('');
     setTaskId(id);
   }
   const handleTaskDelete = (id) => {
-    // console.log("Clicked delete", id);
     setTaskDelete(true);
     setFloatTaskDelete('');
     setTaskId(id);
   }
   const handleProject = () => {
-    // console.log("Clicked delete", id);
-    // setProjectMain(true);
     setFloatProject('');
   }
 

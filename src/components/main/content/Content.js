@@ -17,6 +17,17 @@ const Content = (props) => {
       .then(res=>{
         if(res.data !== null){
           setSelectedProject(res.data);
+        }else if(res.data.length < 1){
+          setSelectedProject(res.data);
+        }else{
+          const taskArray = res.data;
+          const numbers = [];
+          for( let i = 0; i < taskArray.length; i++ ){
+            numbers.push(taskArray[i].priority);
+        }
+          console.log("Pre-sort: ", numbers);
+          numbers.sort(compareNumbers);
+          console.log("Post-sort: ", numbers);
         }
       })
       .catch(err=>{
@@ -29,6 +40,10 @@ const Content = (props) => {
       props.floatStatus,
       props.taskDelete
     ]);
+
+  const compareNumbers = (num1,num2) => {
+     return num1 - num2;
+  }
 
   const filterSelect = (type) => {
     setFilterSelection(type);
