@@ -20,6 +20,7 @@ function App() {
   const [taskEdit, setTaskEdit] = useState(false);
   const [taskDelete, setTaskDelete] = useState(false);
   const [taskId, setTaskId] = useState();
+  const [projectEdit, setProjectEdit] = useState(false);
 
   useEffect(()=>{
     api.get(`projects-user/${USER}`)
@@ -95,7 +96,12 @@ function App() {
     setFloatTaskDelete('');
     setTaskId(id);
   }
-  const handleProject = () => {
+  const handleProjectEdit = () => {
+    setProjectEdit(true);
+    setFloatProject('');
+  }
+  const handleProjectAdd = () => {
+    setProjectEdit(false);
     setFloatProject('');
   }
 
@@ -104,7 +110,8 @@ function App() {
       <Sidebar
         selectedProject={project}
         projectData={projectData}
-        handleProject={handleProject}
+        handleProjectAdd={handleProjectAdd}
+        handleProjectEdit={handleProjectEdit}
       />
       <Main
         selectedProject={selectedProject}
@@ -142,6 +149,7 @@ function App() {
         floatProject={floatProject}
         selectedProject={selectedProject}
         user={USER}
+        edit={projectEdit}
       />
 
     </div>

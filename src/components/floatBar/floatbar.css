@@ -43,14 +43,7 @@
 .bigger label{
   font-size: 13pt !important;
 }
-.floatbar__row input{
-  margin-top: 10px;
-  height: 40px;
-  width: 300px;
-  border: none;
-  border-radius: 2px;
-  padding-left: 10px;
-}
+
 .floatbar__row input{
   margin-top: 10px;
   height: 40px;

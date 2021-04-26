@@ -14,7 +14,7 @@ import {
 const FloatTaskEdit = (props) => {
 
   const [selectedDate, setSelectedDate] = useState(Date.now());
-  // const [users, setUsers] = useState([]);
+
   const [formDetails, setFormDetails] = useState({
     name:"",
     due_date: "",
@@ -146,7 +146,7 @@ const FloatTaskEdit = (props) => {
       console.warn(err);
     })
   }
-  // console.log("AssigneesChange: ",assigneesChange);
+
 //Edit assignees
 
   const handleTaskNameChange = (e) => {

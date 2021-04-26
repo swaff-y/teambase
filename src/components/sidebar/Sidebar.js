@@ -61,13 +61,14 @@ const Sidebar = (props) => {
         <h1 className="sidebar__header">Teambase</h1>
       </div>
       <Button
-       variant="outlined"
-       style={{
-         color: '#FFFFFF',
-         border: '1px solid #FFFFFF',
-         marginLeft: '50px',
-         marginTop: '10px',
-       }}
+        onClick={props.handleProjectAdd}
+        variant="outlined"
+        style={{
+          color: '#FFFFFF',
+          border: '1px solid #FFFFFF',
+          marginLeft: '50px',
+          marginTop: '10px',
+        }}
       >
       New Project
       </Button>
@@ -141,7 +142,7 @@ const Sidebar = (props) => {
                                 id={id}
                                 name={name}
                                 handleClick={props.selectedProject}
-                                handleProject={props.handleProject}
+                                handleProjectEdit={props.handleProjectEdit}
                                 user={props.user}
                                 innerRef={provided.innerRef}
                                 drags={provided.draggableProps}

@@ -35,7 +35,7 @@ const ProjectList = (props) => {
           top:'7px',
           marginRight:'10px'
         }}
-        onClick={props.handleProject}
+        onClick={props.handleProjectEdit}
       /></li>
   )
 }

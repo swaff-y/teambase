@@ -3,8 +3,88 @@
   top: 5%;
   left: 40%;
   width: 400px;
-  height: 600px;
-  background-color: #FFFFFF;
+  height: 680px;
+  background-color: #F7F7F7;
   /* border: 1px solid lightgrey; */
   box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.1);
+}
+
+.floatproject__banner{
+  position: absolute;
+  width: 400px;
+  height: 80px;
+  background-color: #F7F7F7;
+}
+
+.floatproject__heading{
+  margin-left: 35px;
+  margin-bottom: 30px;
+}
+
+.floatproject__row{
+  height: 80px;
+  margin-left: 30px;
+}
+
+.floatproject__row label{
+  height: 80px;
+  margin-left: 5px;
+  color: darkgrey;
+  font-size: 10pt;
+}
+.bigger label{
+  font-size: 13pt !important;
+}
+.floatproject__row input{
+  margin-top: 10px;
+  height: 40px;
+  width: 330px;
+  border: none;
+  border-radius: 2px;
+  padding-left: 5px;
+}
+
+.floatproject__row textarea{
+  margin-top: 10px;
+  height: 100px;
+  width: 315px;
+  border: none;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.floatproject__col{
+  /* border: 1px solid red; */
+  width: 110px;
+  display: inline-block;
+}
+.floatproject__col select{
+  /* border: 1px solid red; */
+  margin-top: 10px;
+  height: 40px;
+  width: 100px;
+  border: none;
+  border-radius: 2px;
+  padding-left: 5px;
+}
+
+.floatproject__assignees{
+  /* border: 1px solid red; */
+  margin-left: 10px;
+  margin-top: 15px;
+}
+.floatproject__assignees select{
+  margin-top: 10px;
+  /* position: relative;
+  left: -38px; */
+  height: 40px;
+  width: 268px;
+  border: none;
+  border-radius: 2px;
+  /* margin-left: -35px; */
+  margin-right:10px;
+}
+
+#date{
+  margin-top: 15px;
 }
