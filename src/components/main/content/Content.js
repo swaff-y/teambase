@@ -37,7 +37,6 @@ const Content = (props) => {
               }
             }
           }
-          
           setSelectedProject(returnArray);
         }
       })
@@ -65,6 +64,16 @@ const Content = (props) => {
     const items = Array.from(selectedProject);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
+
+    for( let i = 0; i < items.length; i++ ){
+      api.post(`task-priority-update/${items[i].id}/${i+1}`)
+      .then(res=>{
+        // console.log("The return: ",res.data, "The item: ", items[i]);
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    }
 
     setSelectedProject(items);
   }

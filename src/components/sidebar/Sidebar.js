@@ -37,7 +37,7 @@ const Sidebar = (props) => {
     for( let i = 0; i < items.length; i++ ){
       api.post(`project-priority-update/${items[i].id}/${i+1}`)
       .then(res=>{
-          console.log("The return: ",res.data, "The item: ", items[i]);
+          // console.log("The return: ",res.data, "The item: ", items[i]);
       })
       .catch(err=>{
         console.warn(err);
