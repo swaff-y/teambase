@@ -9,7 +9,7 @@ import FloatProject from './components/floatProject/FloatProject.js'
 import api from './api';
 import Main from './components/main/Main'
 
-const USER = 176;
+const USER = 196;
 
 function App() {
   const [selectedProject, setSelectedProject] = useState([]);
@@ -36,15 +36,17 @@ function App() {
           numbers.push(projectArray[i].priority)
         }
         numbers.sort(compareNumbers);
+        //this is a O(n^2) --> refactor in the future
         const returnArray = [];
         for( let i = 0; i < numbers.length; i++ ){
-          if(projectArray[i].priority === i){
-            returnArray.push(projectArray[i]);
+          for( let j = 0; j < projectArray.length; j++ ){
+            if(projectArray[j].priority === numbers[i]){
+              returnArray.push(projectArray[j]);
+            }
           }
         }
-        // console.log("The project data:",projectArray);
-        projectArray.sort(compareNumbers)
-        setProjectData(projectArray);
+        console.log("The project data:",returnArray);
+        setProjectData(returnArray);
       }
     })
     .catch(err=>{

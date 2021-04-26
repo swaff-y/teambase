@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './sidebar.css'
+import api from '../../api';
 
 const Sidebar = (props) => {
   const [projectShow, setProjectShow] = useState("none");
@@ -36,6 +37,17 @@ const Sidebar = (props) => {
     const items = Array.from(projectList);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
+
+    for( let i = 0; i < items.length; i++ ){
+      console.log(`item no. ${i+1}`,items[i].id,items[i].priority);
+      api.post(`project-priority-update/${items[i].id}/${i+1}`)
+      .then(res=>{
+          console.log("The return: ",res.data, "The item: ", items[i]);
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    }
 
     setProjectList(items);
   }

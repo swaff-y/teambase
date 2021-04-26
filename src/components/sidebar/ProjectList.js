@@ -23,6 +23,8 @@ const ProjectList = (props) => {
         left:'-10px'}}
       />
         {
+          props.name.length > 20 ? props.name.substring(0,20) + "..."
+          :
           props.name
         }
       <SettingsIcon
