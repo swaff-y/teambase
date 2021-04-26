@@ -39,7 +39,7 @@ const Sidebar = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      console.log(`item no. ${i+1}`,items[i].id,items[i].priority);
+      // console.log(`item no. ${i+1}`,items[i].id,items[i].priority);
       api.post(`project-priority-update/${items[i].id}/${i+1}`)
       .then(res=>{
           console.log("The return: ",res.data, "The item: ", items[i]);
