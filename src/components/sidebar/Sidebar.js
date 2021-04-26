@@ -16,13 +16,9 @@ const Sidebar = (props) => {
   const [projectShow, setProjectShow] = useState("none");
   const [projectList,setProjectList] = useState(props.projectData)
 
-  // console.log("project data: ",props.projectData, projectList);
-
   useEffect(()=>{
     setProjectList(props.projectData)
   },[props.projectData])
-
-  // console.log(projectData);
 
   const projectShowToggle = () => {
     if(projectShow === "none"){
@@ -39,7 +35,6 @@ const Sidebar = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      // console.log(`item no. ${i+1}`,items[i].id,items[i].priority);
       api.post(`project-priority-update/${items[i].id}/${i+1}`)
       .then(res=>{
           console.log("The return: ",res.data, "The item: ", items[i]);

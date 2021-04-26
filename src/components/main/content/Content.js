@@ -12,22 +12,33 @@ const Content = (props) => {
   // const [projectStatus, setProjectStatus] = useState("In Progress");
 
   useEffect(()=>{
+
     if(props.selectedProject[1] > 1){
       api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`)
       .then(res=>{
-        if(res.data !== null){
-          setSelectedProject(res.data);
-        }else if(res.data.length < 1){
+
+        if(res.data.length < 1){
           setSelectedProject(res.data);
         }else{
           const taskArray = res.data;
           const numbers = [];
           for( let i = 0; i < taskArray.length; i++ ){
             numbers.push(taskArray[i].priority);
-        }
-          console.log("Pre-sort: ", numbers);
+          }
+
           numbers.sort(compareNumbers);
-          console.log("Post-sort: ", numbers);
+
+          //this is a O(n^2) --> refactor in the future
+          const returnArray = [];
+          for( let i = 0; i < numbers.length; i++ ){
+            for( let j = 0; j < taskArray.length; j++ ){
+              if(taskArray[j].priority === numbers[i]){
+                returnArray.push(taskArray[j]);
+              }
+            }
+          }
+          
+          setSelectedProject(returnArray);
         }
       })
       .catch(err=>{
