@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import UserSelect from "../floatBar/UserSelect";
 import CloseIcon from '@material-ui/icons/Close';
@@ -31,8 +31,19 @@ const FloatProjectAdd = (props) => {
     status: "",
     category:"",
     description: "",
-    due_date: ""
+    due_date: "",
+    assignees: []
   });
+
+  useEffect(()=>{
+    api.get(`/project_categories.json`)
+    .then(res=>{
+        setProjectCategories(res.data);
+    })
+    .catch(err=>{
+      console.warn(err);
+    })
+  },[props.floatStatus])
 
   const handleProjectNameChange = (e) => {
     setFormName(e.target.value);
@@ -125,14 +136,14 @@ const FloatProjectAdd = (props) => {
   //Edit assignees
 
   const saveData = (e) => {
-    // console.log("Before submit: ",formDetails);
-    api.post(`/task-update/${props.taskId}`,formDetails)
-    .then(res=>{
-        props.closeFloatTaskBar();
-    })
-    .catch(err=>{
-      console.warn(err);
-    })
+     console.log("Before submit: ",formDetails);
+    // api.post(`/project-create/${props.user}`,formDetails)
+    // .then(res=>{
+    //     props.closeFloatTaskBar();
+    // })
+    // .catch(err=>{
+    //   console.warn(err);
+    // })
   }
 
   return(
