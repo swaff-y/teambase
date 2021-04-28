@@ -258,7 +258,7 @@ const FloatProjectAdd = (props) => {
               style={{
                 position: "relative",
                 left: "5px",
-                width: "300px",
+                width: "330px",
                 borderRadius: "0",
                 color: "#FFFFFF",
                 marginTop: "30px",

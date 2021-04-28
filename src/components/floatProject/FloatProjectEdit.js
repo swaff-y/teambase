@@ -136,7 +136,7 @@ const FloatProjectEdit = (props) => {
     }
 
   return(
-    <div className="">
+    <div className="floatbar__container">
     <form onSubmit={(event)=>event.preventDefault()}>
       <div className="floatproject__row">
         <label htmlFor="taskName">Project Name</label><br/>
@@ -146,7 +146,7 @@ const FloatProjectEdit = (props) => {
           name="projectName"
           placeholder="Project Name"
           onChange={handleProjectNameChange}
-          value={formName}
+          value={props.projectID[0]}
         />
       </div>
 
@@ -181,7 +181,8 @@ const FloatProjectEdit = (props) => {
     <div className="floatproject__row" id="date">
       <div className="floatproject__col">
         <label htmlFor="status">Status</label><br/>
-        <select onChange={handleStatusChange} value={statusChange}>
+        <select
+          onChange={handleStatusChange} value={statusChange}>
           <option>New</option>
           <option>In Progress</option>
           <option>Complete</option>
@@ -257,7 +258,7 @@ const FloatProjectEdit = (props) => {
             style={{
               position: "relative",
               left: "5px",
-              width: "300px",
+              width: "330px",
               borderRadius: "0",
               color: "#FFFFFF",
               marginTop: "30px",

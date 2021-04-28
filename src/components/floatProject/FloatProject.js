@@ -40,9 +40,18 @@ const FloatProject = (props) => {
       {
         props.edit === true
         ?
-        <FloatProjectEdit/>
+        <FloatProjectEdit
+          floatStatus={props.floatStatus}
+          closeFloatProjectBar={props.closeFloatTaskBar}
+          user={props.user}
+          projectID={props.selectedProject}
+        />
         :
-        <FloatProjectAdd/>
+        <FloatProjectAdd
+          floatStatus={props.floatStatus}
+          closeFloatProjectBar={props.closeFloatTaskBar}
+          user={props.user}
+        />
       }
 
     </div>
