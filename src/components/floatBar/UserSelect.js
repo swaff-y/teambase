@@ -48,7 +48,12 @@ const UserSelect = (props) => {
         </>
         )
       }
-      <select className="" value={props.selected} onChange={handleSelect}>
+      <select
+        className="user__select"
+        value={props.selected}
+        onChange={handleSelect}
+        style={props.inStyle}
+      >
         <option></option>
         {
           users.map((user, index)=>

@@ -18,7 +18,7 @@ const FloatTaskAdd = (props) => {
   // const [users, setUsers] = useState([]);
   const [formDetails, setFormDetails] = useState({
     name:"",
-    due_date: "",
+    due_date: Date.now(),
     status:"New",
     progress:5,
     category:"",
