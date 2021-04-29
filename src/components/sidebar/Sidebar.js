@@ -132,8 +132,8 @@ const Sidebar = (props) => {
                     projectList.map(({id,name},index)=>{
                       return(
                         <Draggable
-                          key={name}
-                          draggableId={name}
+                          key={name + id}
+                          draggableId={name + id}
                           index={index}>
                           {
                             (provided)=>(
