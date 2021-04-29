@@ -42,14 +42,14 @@ const FloatProject = (props) => {
         ?
         <FloatProjectEdit
           floatStatus={props.floatStatus}
-          closeFloatProjectBar={props.closeFloatTaskBar}
+          closeFloatProjectBar={props.closeFloatProject}
           user={props.user}
           projectID={props.selectedProject}
         />
         :
         <FloatProjectAdd
           floatStatus={props.floatStatus}
-          closeFloatProjectBar={props.closeFloatTaskBar}
+          closeFloatProjectBar={props.closeFloatProject}
           user={props.user}
         />
       }

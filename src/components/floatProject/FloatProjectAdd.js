@@ -39,6 +39,29 @@ const FloatProjectAdd = (props) => {
   });
 
   useEffect(()=>{
+    setSelectedDate(Date.now());
+    setFormDetails({
+      name:"",
+      due_date: "",
+      status:"New",
+      progress:5,
+      category:"",
+      description:"",
+      assignees:[]
+    });
+    setFormName("");
+    setStatusChange("");
+    setProgressChange(5);
+    setCategoryChange([]);
+    setDescriptionChange("");
+    setAssigneesChange([]);
+    // setUsers([])
+    return () => {
+      // isCancelled = true;
+    };
+  },[props.floatStatus])
+
+  useEffect(()=>{
     api.get(`/project_categories.json`)
     .then(res=>{
         setProjectCategories(res.data);
@@ -139,14 +162,30 @@ const FloatProjectAdd = (props) => {
   //Edit assignees
 
   const saveData = (e) => {
-     console.log("Before submit: ",formDetails);
-    // api.post(`/project-create/${props.user}`,formDetails)
-    // .then(res=>{
-    //     props.closeFloatTaskBar();
-    // })
-    // .catch(err=>{
-    //   console.warn(err);
-    // })
+    // console.log("Before submit: ",formDetails);
+    api.post(`/project-create/${props.user}`,formDetails)
+    .then(res=>{
+        props.closeFloatProjectBar();
+        setSelectedDate(Date.now());
+        setFormDetails({
+          name:"",
+          due_date: "",
+          status:"New",
+          progress:5,
+          category:"",
+          description:"",
+          assignees:[]
+        });
+        setFormName("");
+        setStatusChange("");
+        setProgressChange(5);
+        setCategoryChange([]);
+        setDescriptionChange("");
+        setAssigneesChange([]);
+    })
+    .catch(err=>{
+      console.warn(err);
+    })
   }
 
   return(

@@ -23,6 +23,9 @@ const FloatProjectEdit = (props) => {
     const [assigneesChange, setAssigneesChange] = useState([]);
     const [selected, setSelected] = useState('');
     const [statusChange, setStatusChange] = useState('');
+    const [style, setStyle] = useState({
+      width:"310px"
+    });
 
     const [formDetails ,setFormDetails] = useState({
       name: "",
@@ -249,6 +252,7 @@ const FloatProjectEdit = (props) => {
             assignees={assigneesChange}
             handleRemoveAssignee={handleRemoveAssignee}
             handleAddAssignee={handleAddAssignee}
+            inStyle={style}
           />
 
           <Button

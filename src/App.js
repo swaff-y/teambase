@@ -76,6 +76,7 @@ function App() {
   }
   const closeFloatProject= () => {
     setFloatProject('none');
+    setProjectEdit(false);
   }
 
   const showFloatTaskBar = () => {

@@ -35,7 +35,7 @@ const FloatTaskAdd = (props) => {
   const [selected, setSelected] = useState('');
 
   useEffect(()=>{
-    let isCancelled = false;
+    // let isCancelled = false;
     setSelectedDate(Date.now());
     setFormDetails({
       name:"",
@@ -112,12 +112,9 @@ const FloatTaskAdd = (props) => {
     const handleAddAssignee = (id) => {
 
       setSelected("");
-      // const idSplit = id.split(",");
-      // const newArr = [...assigneesChange];
 
       api.get(`/users/${id}.json`)
       .then(res=>{
-        // newArr[idSplit[1]] = res.data;
         setAssigneesChange([...assigneesChange,res.data]);
         const newFormDetails = formDetails;
         newFormDetails.assignees.push(res.data.id);
@@ -165,12 +162,6 @@ const FloatTaskAdd = (props) => {
     newFormDetails.description = e.target.value;
     setFormDetails(newFormDetails);
   }
-  // const handleAssigneesChange = (e) => {
-  //   // assigneesChange.pop();
-  //   assigneesChange.push(e.target.value);
-  //   // formDetails.assignees.pop();
-  //   formDetails.assignees.push(e.target.value);
-  // }
 
   const saveData = (e) => {
     // console.log("Before submit: ", formDetails );
