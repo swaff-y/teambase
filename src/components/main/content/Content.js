@@ -108,7 +108,10 @@ const Content = (props) => {
                 {
                   selectedProject.map(({id,name,status,due_date,progress,users}, index)=>{
                     return(
-                      <Draggable key={name} draggableId={name} index={index}>
+                      <Draggable
+                        key={name + id}
+                        draggableId={name + id} 
+                        index={index}>
                         {(provided) => (
                           <TaskBar
                             key={index}
