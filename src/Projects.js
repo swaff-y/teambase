@@ -7,7 +7,7 @@ import FloatProject from './components/floatProject/FloatProject.js'
 import api from './api';
 import Main from './components/main/Main'
 
-const projects = () => {
+const Projects = (props) => {
   const [selectedProject, setSelectedProject] = useState([]);
   const [floatStatus, setFloatStatus] = useState('none');
   const [floatTaskDelete, setFloatTaskDelete] = useState('none');

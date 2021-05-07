@@ -9,6 +9,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Link } from "react-router-dom";
 import './sidebar.css'
 import api from '../../api';
 
@@ -76,47 +77,49 @@ const Sidebar = (props) => {
         className="sidebar__projects"
         onClick={projectShowToggle}
       >
-        <IconButton
-        style={{
-          position: 'relative',
-          top: '20px',
-          marginLeft: '-15px',
-          color:'#6686CC',
-          borderRadius: '1px',
-          fontSize: '14pt'
-        }}
-        >
-          <ViewListIcon
-            fontSize="small"
-            style={{
-              marginRight:'25px'}}
-          />
-          Projects
+        <Link to="/projects">
+          <IconButton
+          style={{
+            position: 'relative',
+            top: '20px',
+            marginLeft: '-15px',
+            color:'#6686CC',
+            borderRadius: '1px',
+            fontSize: '14pt'
+          }}
+          >
+            <ViewListIcon
+              fontSize="small"
+              style={{
+                marginRight:'25px'}}
+            />
+            Projects
 
-        {
-          projectShow === 'none'
-          ?
-          <ChevronRightIcon
-            fontSize="large"
-            style={{
-              position:'relative',
-              top:'-1px',
-              color: 'white',
-              marginLeft:'80px'
-            }}
-          />
-          :
-          <ExpandMoreIcon
-            fontSize="large"
-            style={{
-              position:'relative',
-              top:'-1px',
-              color: 'white',
-              marginLeft:'80px'
-            }}
-          />
-        }
-        </IconButton>
+          {
+            projectShow === 'none'
+            ?
+            <ChevronRightIcon
+              fontSize="large"
+              style={{
+                position:'relative',
+                top:'-1px',
+                color: 'white',
+                marginLeft:'80px'
+              }}
+            />
+            :
+            <ExpandMoreIcon
+              fontSize="large"
+              style={{
+                position:'relative',
+                top:'-1px',
+                color: 'white',
+                marginLeft:'80px'
+              }}
+            />
+          }
+          </IconButton>
+        </Link>
 
       </div>
       <div className="sidebar__projectsShow" style={{display:projectShow}}>
@@ -162,48 +165,52 @@ const Sidebar = (props) => {
         </DragDropContext>
       </div>
       <div className="sidebar__analytics">
-        <IconButton
-        style={{
-          position: 'relative',
-          top: '0px',
-          color:'#6686CC',
-          borderRadius: '1px',
-          fontSize: '14pt',
-          width: "100%",
-        }}
-        >
-          <InsertChartIcon
-            fontSize="small"
-            style={{
-              marginLeft:'-95px',
-              marginRight:'25px',
-              color:'#FFFFFF'
-            }}
-          />
-          Analytics
-        </IconButton>
+        <Link to="/analytics">
+          <IconButton
+          style={{
+            position: 'relative',
+            top: '0px',
+            color:'#6686CC',
+            borderRadius: '1px',
+            fontSize: '14pt',
+            width: "100%",
+          }}
+          >
+            <InsertChartIcon
+              fontSize="small"
+              style={{
+                marginLeft:'-95px',
+                marginRight:'25px',
+                color:'#FFFFFF'
+              }}
+            />
+            Analytics
+          </IconButton>
+        </Link>
       </div>
       <div className="sidebar__teamMembers">
-        <IconButton
-        style={{
-          position: 'relative',
-          top: '-15px',
-          color:'#6686CC',
-          borderRadius: '1px',
-          fontSize: '14pt',
-          width: "100%",
-        }}
-        >
-          <PeopleIcon
-            fontSize="small"
-            style={{
-              marginLeft:'-40px',
-              marginRight:'25px',
-              color:'#FFFFFF'
-            }}
-          />
-          Team Members
-        </IconButton>
+        <Link to="/team_members">
+          <IconButton
+          style={{
+            position: 'relative',
+            top: '-15px',
+            color:'#6686CC',
+            borderRadius: '1px',
+            fontSize: '14pt',
+            width: "100%",
+          }}
+          >
+            <PeopleIcon
+              fontSize="small"
+              style={{
+                marginLeft:'-40px',
+                marginRight:'25px',
+                color:'#FFFFFF'
+              }}
+            />
+            Team Members
+          </IconButton>
+        </Link>
       </div>
     </div>
   )
