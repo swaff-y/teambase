@@ -1,6 +1,4 @@
-import './App.css';
 import React, {useEffect, useState} from 'react';
-import { Route, HashRouter as Router } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar'
 import FloatTaskBar from './components/floatBar/FloatTaskBar'
 import FloatDeleteTask from './components/floatDelete/FloatTaskDelete'
@@ -9,48 +7,54 @@ import FloatProject from './components/floatProject/FloatProject.js'
 import api from './api';
 import Main from './components/main/Main'
 
-//136
-
-const Projects = (props) => {
-  const USER = props.match.params.user_id
-
-  const [selectedProject, setSelectedProject] = useState(0);
+const projects = () => {
+  const [selectedProject, setSelectedProject] = useState([]);
   const [floatStatus, setFloatStatus] = useState('none');
   const [floatTaskDelete, setFloatTaskDelete] = useState('none');
   const [floatNote, setFloatNote] = useState('none');
   const [floatProject, setFloatProject] = useState('none');
   const [projectData, setProjectData] = useState([]);
   const [taskEdit, setTaskEdit] = useState(false);
-  const [taskNote, setTaskNote] = useState(false);
   const [taskDelete, setTaskDelete] = useState(false);
-  const [projectMain, setProjectMain] = useState(false);
   const [taskId, setTaskId] = useState();
+  const [projectEdit, setProjectEdit] = useState(false);
 
   useEffect(()=>{
-    api.get(`projects-user/${USER}`)
+    api.get(`projects-user/${props.user}`)
     .then(res=>{
-      setProjectData(res.data);
+      if(res.data.length < 1){
+        setProjectData(res.data);
+      }else{
+        const projectArray = res.data;
+        const numbers = [];
+        for( let i = 0; i < projectArray.length; i++ ){
+          numbers.push(projectArray[i].priority)
+        }
+        numbers.sort(compareNumbers);
+        //this is a O(n^2) --> refactor in the future
+        const returnArray = [];
+        for( let i = 0; i < numbers.length; i++ ){
+          for( let j = 0; j < projectArray.length; j++ ){
+            if(projectArray[j].priority === numbers[i]){
+              returnArray.push(projectArray[j]);
+            }
+          }
+        }
+        setProjectData(returnArray);
+      }
     })
     .catch(err=>{
       console.warn(err);
     })
+  },[floatProject]);
 
-    if(props.match.path.substr(props.match.path.length - 7) === "addtask"){
-      setFloatStatus('')
-    }
-  },[]);
+  const compareNumbers = (num1,num2) => {
+	   return num1 - num2;
+  }
 
-  useEffect(()=>{
-    if(props.match.path.substr(props.match.path.length - 7) === "addtask"){
-      setFloatStatus('')
-    }
-  },[props.match.path])
-
-   // console.log("ProjectData, ", props.match.params.project_id);
-
-  useEffect(()=>{
-    setSelectedProject(props.match.params.project_id)
-  },[props.match.params.project_id])
+  const project = (projectName,projectId) => {
+    setSelectedProject([projectName, projectId]);
+  };
 
   const closeFloatTaskBar = () => {
     setFloatStatus('none');
@@ -65,53 +69,51 @@ const Projects = (props) => {
 
   const closeFloatNote = () => {
     setFloatNote('none');
-    setTaskId();
-    setTaskNote(false);
+    setTaskId()
   }
   const closeFloatProject= () => {
     setFloatProject('none');
-    setProjectMain(false);
+    setProjectEdit(false);
   }
 
-  // const showFloatTaskBar = () => {
-  //   if(selectedProject.length > 0) setFloatStatus('');
-  // }
+  const showFloatTaskBar = () => {
+    if(selectedProject.length > 0) setFloatStatus('');
+  }
 
   const handleTaskEdit = (id) => {
-    // console.log("Clicked edit", id);
     setTaskEdit(true);
     setTaskId(id);
     setFloatStatus('');
   }
-
   const handleTaskNote = (id) => {
-    // console.log("Clicked note", id);
-    setTaskNote(true);
     setFloatNote('');
     setTaskId(id);
   }
   const handleTaskDelete = (id) => {
-    // console.log("Clicked delete", id);
     setTaskDelete(true);
     setFloatTaskDelete('');
     setTaskId(id);
   }
-  const handleProject = () => {
-    // console.log("Clicked delete", id);
-    setProjectMain(true);
+  const handleProjectEdit = () => {
+    setProjectEdit(true);
+    setFloatProject('');
+  }
+  const handleProjectAdd = () => {
+    setProjectEdit(false);
     setFloatProject('');
   }
 
   return (
     <div className="app" data-test="component-app">
       <Sidebar
+        selectedProject={project}
         projectData={projectData}
-        handleProject={handleProject}
-        user={USER}
+        handleProjectAdd={handleProjectAdd}
+        handleProjectEdit={handleProjectEdit}
       />
       <Main
         selectedProject={selectedProject}
-        user={USER}
+        showFloatTaskBar={showFloatTaskBar}
         floatStatus={floatStatus}
         handleTaskEdit={handleTaskEdit}
         handleTaskNote={handleTaskNote}
@@ -122,7 +124,7 @@ const Projects = (props) => {
         floatStatus={floatStatus}
         closeFloatTaskBar={closeFloatTaskBar}
         selectedProject={selectedProject}
-        user={USER}
+        user={props.user}
         edit={taskEdit}
         taskId={taskId}
       />
@@ -130,25 +132,25 @@ const Projects = (props) => {
         closeFloatTaskDelete={closeFloatTaskDelete}
         floatTaskDelete={floatTaskDelete}
         selectedProject={selectedProject}
-        user={USER}
+        user={props.user}
         taskId={taskId}
       />
       <FloatNote
         closeFloatNote={closeFloatNote}
         floatNote={floatNote}
         selectedProject={selectedProject}
-        user={USER}
+        user={props.user}
         taskId={taskId}
       />
       <FloatProject
         closeFloatProject={closeFloatProject}
         floatProject={floatProject}
         selectedProject={selectedProject}
-        user={USER}
+        user={props.user}
+        edit={projectEdit}
       />
 
     </div>
   );
 }
-
 export default Projects;
