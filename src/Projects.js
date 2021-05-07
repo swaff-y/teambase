@@ -6,6 +6,7 @@ import FloatNote from './components/floatNote/FloatNote'
 import FloatProject from './components/floatProject/FloatProject.js'
 import api from './api';
 import Main from './components/main/Main'
+import {Helmet} from 'react-helmet'
 
 const Projects = (props) => {
   const [selectedProject, setSelectedProject] = useState([]);
@@ -105,6 +106,10 @@ const Projects = (props) => {
 
   return (
     <div className="app" data-test="component-app">
+      <Helmet>
+        <title>Teambase - Projects</title>
+          <meta name="description" content="Project tool" />
+      </Helmet>
       <Sidebar
         selectedProject={project}
         projectData={projectData}
