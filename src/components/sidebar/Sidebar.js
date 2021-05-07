@@ -138,7 +138,7 @@ const Sidebar = (props) => {
                           {
                             (provided)=>(
                               <ProjectList
-                                key={index}
+                                key={name + id}
                                 id={id}
                                 name={name}
                                 handleClick={props.selectedProject}

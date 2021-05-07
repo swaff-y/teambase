@@ -27,16 +27,14 @@ const UserSelect = (props) => {
     <div className="floatbar__assignees">
       {
         props.assignees.map((assignee,index)=>
-        <>
+        <span key={index}>
           <Avatar
-            key={assignee.id}
             name={assignee.name}
             size="30"
             round
           />
           <HighlightOffIcon
             onClick={()=>{props.handleRemoveAssignee(index)}}
-            key={index}
             style={{
               position: "relative",
               top: "-10px",
@@ -45,7 +43,7 @@ const UserSelect = (props) => {
               height:"18px",
             }}
           />
-        </>
+        </span>
         )
       }
       <select
@@ -58,7 +56,7 @@ const UserSelect = (props) => {
         {
           users.map((user, index)=>
             <option
-              key={[user.id]}
+              key={index}
               value={[user.id]}
             >{user.name}</option>
           )

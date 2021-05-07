@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import UserSelect from "../floatBar/UserSelect";
 import CloseIcon from '@material-ui/icons/Close';
@@ -14,7 +14,7 @@ import api from '../../api';
 
 const FloatProjectEdit = (props) => {
 
-    const [formName ,setFormName] = useState("");
+    const [formName,setFormName] = useState(props.projectID[0]);
     const [selectedDate, setSelectedDate] = useState(Date.now());
     const [progressChange, setProgressChange] = useState(5);
     const [projectCategories ,setProjectCategories] = useState([]);
@@ -36,6 +36,46 @@ const FloatProjectEdit = (props) => {
       description: "",
       due_date: ""
     });
+
+    useEffect(()=>{
+      api.get(`/project-read/${props.projectID[1]}`)
+      .then(res=>{
+        setFormName(res.data.name);
+        setStatusChange(res.data.status);
+        setProgressChange(res.data.progress);
+        setCategoryChange([res.data.project_category.id,res.data.project_category.name]);
+        setDescriptionChange(res.data.description);
+        setAssigneesChange(res.data.users);
+        const newFormDetails = formDetails;
+        newFormDetails.name = res.data.name;
+        newFormDetails.due_date = res.data.due_date
+        newFormDetails.status = res.data.status
+        newFormDetails.progress = res.data.progress
+        newFormDetails.category = res.data.project_category.id
+        newFormDetails.description = res.data.description
+        const inst = [];
+        for( let i = 0; i < res.data.users.length; i++ ){
+          inst.push(res.data.users[i].id)
+          // console.log("users", res.data.users[i].id);
+        }
+        newFormDetails.assignees = inst;
+        newFormDetails.project_id = res.data.project_id
+        setFormDetails(newFormDetails);
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    },[]);
+
+    useEffect(()=>{
+      api.get(`/project_categories.json`)
+      .then(res=>{
+          setProjectCategories(res.data);
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    },[props.floatStatus])
 
     const handleProjectNameChange = (e) => {
       setFormName(e.target.value);
@@ -129,9 +169,19 @@ const FloatProjectEdit = (props) => {
 
     const saveData = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.post(`/task-update/${props.taskId}`,formDetails)
+      api.post(`/project-update/${props.projectID[1]}`,formDetails)
       .then(res=>{
-          props.closeFloatTaskBar();
+          props.closeFloatProjectBar();
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    }
+    const deleteProject = (e) => {
+      // console.log("Before submit: ",formDetails);
+      api.delete(`/project-delete/${props.projectID[1]}`)
+      .then(res=>{
+          props.closeFloatProjectBar();
       })
       .catch(err=>{
         console.warn(err);
@@ -149,7 +199,7 @@ const FloatProjectEdit = (props) => {
           name="projectName"
           placeholder="Project Name"
           onChange={handleProjectNameChange}
-          value={props.projectID[0]}
+          value={formName}
         />
       </div>
 
@@ -270,6 +320,22 @@ const FloatProjectEdit = (props) => {
             }}
           >
           save
+          </Button>
+          <Button
+            onClick={deleteProject}
+            variant="contained"
+            color="secondary"
+            style={{
+              position: "relative",
+              left: "5px",
+              width: "330px",
+              borderRadius: "0",
+              color: "#FFFFFF",
+              marginTop: "0px",
+              marginBottom: "10px"
+            }}
+          >
+          Delete Project
           </Button>
         </div>
 

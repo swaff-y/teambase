@@ -49,7 +49,7 @@ function App() {
     .catch(err=>{
       console.warn(err);
     })
-  },[]);
+  },[floatProject]);
 
   const compareNumbers = (num1,num2) => {
 	   return num1 - num2;
