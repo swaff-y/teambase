@@ -9,8 +9,11 @@ const Main = (props) => {
       <Header
         selectedProject={props.selectedProject}
       />
+      {
+        
+      }
       <Content
-      user={props.user}
+        user={props.user}
         selectedProject={props.selectedProject} showFloatTaskBar={props.showFloatTaskBar}
         floatStatus={props.floatStatus}
         handleTaskEdit={props.handleTaskEdit}
