@@ -6,6 +6,7 @@ import Login from "./Login"
 import Projects from "./Projects"
 import Analytics from "./Analytics"
 import TeamMembers from "./TeamMembers"
+import { useHistory, useParams } from "react-router-dom";
 import api from './api';
 
 const USER = 236;
@@ -21,6 +22,8 @@ const App = () => {
   const [taskDelete, setTaskDelete] = useState(false);
   const [taskId, setTaskId] = useState();
   const [projectEdit, setProjectEdit] = useState(false);
+
+  let history = useHistory();
 
   useEffect(()=>{
     api.get(`projects-user/${USER}`)

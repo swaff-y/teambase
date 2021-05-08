@@ -9,7 +9,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import './sidebar.css'
 import api from '../../api';
 
@@ -60,6 +60,10 @@ const Sidebar = (props) => {
   const handleTeamMembersClick = (e) => {
     history.push(`/team_members/${params.user}`)
   }
+  const handleNewProjectButtonClick = () => {
+    props.handleProjectAdd()
+    history.push(`/projects/${params.user}`)
+  }
 
   return(
     <div className="sidebar" data-test="component-sidebar">
@@ -75,7 +79,7 @@ const Sidebar = (props) => {
         <h1 className="sidebar__header">Teambase</h1>
       </div>
       <Button
-        onClick={props.handleProjectAdd}
+        onClick={handleNewProjectButtonClick}
         variant="outlined"
         style={{
           color: '#FFFFFF',
