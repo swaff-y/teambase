@@ -9,13 +9,16 @@ import PeopleIcon from '@material-ui/icons/People';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import './sidebar.css'
 import api from '../../api';
 
 const Sidebar = (props) => {
   const [projectShow, setProjectShow] = useState("none");
   const [projectList,setProjectList] = useState(props.projectData)
+
+  let history = useHistory();
+  let params = useParams();
 
   useEffect(()=>{
     setProjectList(props.projectData)
@@ -48,6 +51,16 @@ const Sidebar = (props) => {
     setProjectList(items);
   }
 
+  const handleProjectsClick = (e) => {
+    history.push(`/projects/${params.user}`)
+  }
+  const handleAnalyticsClick = (e) => {
+    history.push(`/analytics/${params.user}`)
+  }
+  const handleTeamMembersClick = (e) => {
+    history.push(`/team_members/${params.user}`)
+  }
+
   return(
     <div className="sidebar" data-test="component-sidebar">
       <div className="sideber__logo">
@@ -77,7 +90,6 @@ const Sidebar = (props) => {
         className="sidebar__projects"
         onClick={projectShowToggle}
       >
-        <Link to="/projects">
           <IconButton
           style={{
             position: 'relative',
@@ -87,6 +99,7 @@ const Sidebar = (props) => {
             borderRadius: '1px',
             fontSize: '14pt'
           }}
+          onClick={handleProjectsClick}
           >
             <ViewListIcon
               fontSize="small"
@@ -119,8 +132,6 @@ const Sidebar = (props) => {
             />
           }
           </IconButton>
-        </Link>
-
       </div>
       <div className="sidebar__projectsShow" style={{display:projectShow}}>
         <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -165,7 +176,6 @@ const Sidebar = (props) => {
         </DragDropContext>
       </div>
       <div className="sidebar__analytics">
-        <Link to="/analytics">
           <IconButton
           style={{
             position: 'relative',
@@ -175,6 +185,7 @@ const Sidebar = (props) => {
             fontSize: '14pt',
             width: "100%",
           }}
+          onClick={handleAnalyticsClick}
           >
             <InsertChartIcon
               fontSize="small"
@@ -186,10 +197,8 @@ const Sidebar = (props) => {
             />
             Analytics
           </IconButton>
-        </Link>
       </div>
       <div className="sidebar__teamMembers">
-        <Link to="/team_members">
           <IconButton
           style={{
             position: 'relative',
@@ -199,6 +208,7 @@ const Sidebar = (props) => {
             fontSize: '14pt',
             width: "100%",
           }}
+          onClick={handleTeamMembersClick}
           >
             <PeopleIcon
               fontSize="small"
@@ -210,7 +220,6 @@ const Sidebar = (props) => {
             />
             Team Members
           </IconButton>
-        </Link>
       </div>
     </div>
   )

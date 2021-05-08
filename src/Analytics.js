@@ -7,7 +7,7 @@ import {Helmet} from 'react-helmet'
 
 const Analytics = (props) => {
   return(
-    <div className="analytics">
+    <div className="app">
     <Helmet>
       <title>Teambase - Analytics</title>
         <meta name="description" content="Team Members" />

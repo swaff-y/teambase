@@ -117,9 +117,8 @@ const App = () => {
         <Route exact path="/">
           <Login/>
         </Route>
-        <Route path="/projects">
+        <Route exact path="/projects/:user">
           <Projects
-            user={USER}
             project={project}
             selectedProject={selectedProject}
             floatStatus={floatStatus}
@@ -143,9 +142,8 @@ const App = () => {
             handleProjectAdd={handleProjectAdd}
           />
         </Route>
-        <Route path="/analytics">
+        <Route exact path="/analytics/:user">
           <Analytics
-            user={USER}
             project={project}
             projectData={projectData}
             handleProjectAdd={handleProjectAdd}
@@ -153,7 +151,6 @@ const App = () => {
             closeFloatProject={closeFloatProject}
             floatProject={floatProject}
             selectedProject={selectedProject}
-            user={USER}
             projectEdit={projectEdit}
             showFloatTaskBar={showFloatTaskBar}
             floatStatus={floatStatus}
@@ -163,8 +160,23 @@ const App = () => {
             taskDelete={taskDelete}
           />
         </Route>
-        <Route path="/team_members">
-          <TeamMembers user={USER}/>
+        <Route path="/team_members/:user">
+          <TeamMembers
+            project={project}
+            projectData={projectData}
+            handleProjectAdd={handleProjectAdd}
+            handleProjectEdit={handleProjectEdit}
+            closeFloatProject={closeFloatProject}
+            floatProject={floatProject}
+            selectedProject={selectedProject}
+            projectEdit={projectEdit}
+            showFloatTaskBar={showFloatTaskBar}
+            floatStatus={floatStatus}
+            handleTaskEdit={handleTaskEdit}
+            handleTaskNote={handleTaskNote}
+            handleTaskDelete={handleTaskDelete}
+            taskDelete={taskDelete}
+          />
         </Route>
       </Router>
     </div>
