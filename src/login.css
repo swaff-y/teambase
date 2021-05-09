@@ -40,7 +40,7 @@
   padding-left: 10px;
 }
 
-form {
+.login__form {
   /* border: solid red 1px; */
   width: 317px;
   margin: auto;

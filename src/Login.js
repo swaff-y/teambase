@@ -36,7 +36,10 @@ const Login = (props) => {
           }}
         />
         <p>Please login below</p>
-        <form onSubmit={(event)=>event.preventDefault()}>
+        <form
+          onSubmit={(event)=>event.preventDefault()}
+          className="login__form"
+        >
           <div className="login__input">
 
             <input
