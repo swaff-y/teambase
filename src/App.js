@@ -23,8 +23,6 @@ const App = () => {
   const [taskId, setTaskId] = useState();
   const [projectEdit, setProjectEdit] = useState(false);
 
-  let history = useHistory();
-
   useEffect(()=>{
     api.get(`projects-user/${USER}`)
     .then(res=>{

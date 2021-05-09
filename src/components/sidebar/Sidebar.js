@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Logo from '../Logo';
 import ProjectList from './ProjectList';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ViewListIcon from '@material-ui/icons/ViewList';
@@ -67,17 +68,12 @@ const Sidebar = (props) => {
 
   return(
     <div className="sidebar" data-test="component-sidebar">
-      <div className="sideber__logo">
-        <FilterHdrIcon
-          fontSize="large"
-          style={{
-            marginTop:'15px',
-            marginLeft: '100px',
-            color: '#FFFFFF'
-          }}
-        />
-        <h1 className="sidebar__header">Teambase</h1>
-      </div>
+      <Logo
+        style={{
+          margin: 'auto',
+          width: '200px'
+        }}
+      />
       <Button
         onClick={handleNewProjectButtonClick}
         variant="outlined"

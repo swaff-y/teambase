@@ -13,7 +13,7 @@ const LoginDetails = (props) => {
         }}
       />
       <Avatar
-        name="Kyle Swaffield"
+        name={props.userName}
         size="60"
         round
         style={{
