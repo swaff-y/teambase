@@ -6,10 +6,13 @@ import FloatNote from './components/floatNote/FloatNote'
 import FloatProject from './components/floatProject/FloatProject'
 import Main from './components/main/Main'
 import {Helmet} from 'react-helmet'
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+
+const USER = localStorage.user
 
 const Projects = (props) => {
-  let params = useParams();
+  // let params = useParams();
+  // const user = params.user;
 
   return (
     <div className="app" data-test="component-app">
@@ -36,7 +39,7 @@ const Projects = (props) => {
         floatStatus={props.floatStatus}
         closeFloatTaskBar={props.closeFloatTaskBar}
         selectedProject={props.selectedProject}
-        user={params.user}
+        user={USER}
         edit={props.taskEdit}
         taskId={props.taskId}
       />
@@ -44,21 +47,21 @@ const Projects = (props) => {
         closeFloatTaskDelete={props.closeFloatTaskDelete}
         floatTaskDelete={props.floatTaskDelete}
         selectedProject={props.selectedProject}
-        user={params.user}
+        user={USER}
         taskId={props.taskId}
       />
       <FloatNote
         closeFloatNote={props.closeFloatNote}
         floatNote={props.floatNote}
         selectedProject={props.selectedProject}
-        user={params.user}
+        user={USER}
         taskId={props.taskId}
       />
       <FloatProject
         closeFloatProject={props.closeFloatProject}
         floatProject={props.floatProject}
         selectedProject={props.selectedProject}
-        user={params.user}
+        user={USER}
         edit={props.projectEdit}
       />
 

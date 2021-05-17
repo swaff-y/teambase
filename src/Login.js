@@ -3,6 +3,8 @@ import Logo from './components/Logo'
 import Button from '@material-ui/core/Button';
 import {Helmet} from 'react-helmet';
 import { useHistory } from "react-router-dom";
+import fetch from 'isomorphic-fetch';
+import api from './api';
 import "./login.css";
 
 const Login = (props) => {
@@ -18,8 +20,45 @@ const Login = (props) => {
     setPassword(e.target.value);
   }
   const handleLogin = () => {
-    const USER = 236;
-    history.push(`/projects/${USER}`)
+    let request = {"auth": {"email": email, "password": password}}
+    let requestLogin = {"email": email}
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+
+    api.post(`/user_token`, request, {
+      headers: headers
+    })
+    .then(res=>{
+      // console.log("JWT", res.data);
+      localStorage.setItem("jwt", res.data.jwt)
+
+      console.log("Local:", localStorage.jwt);
+
+      const authHeaders = {
+        'Authorization': 'Bearer ' + localStorage.jwt
+      }
+
+      api.post(`/user_login`, requestLogin, {
+        headers: authHeaders
+      })
+      .then(res=>{
+        // console.log("email: ",res.data.id);
+        localStorage.setItem("user", res.data.id)
+        history.push(`/projects/${localStorage.user}`)
+      })
+      .catch(err=>{
+        console.warn(err);
+      })
+    })
+    .catch(err=>{
+      console.warn(err);
+    })
+
+
+
+    // const USER = 236;
+    // history.push(`/projects/${USER}`)
   }
 
   return(

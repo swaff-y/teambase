@@ -9,9 +9,12 @@ import TeamMembers from "./TeamMembers"
 import { useHistory, useParams } from "react-router-dom";
 import api from './api';
 
-const USER = 236;
+const USER = localStorage.user;
 
 const App = () => {
+  // let params = useParams();
+  // const user = params.user;
+
   const [selectedProject, setSelectedProject] = useState([]);
   const [floatStatus, setFloatStatus] = useState('none');
   const [floatTaskDelete, setFloatTaskDelete] = useState('none');

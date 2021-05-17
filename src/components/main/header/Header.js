@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import ProjectTitle from "./ProjectTitle"
 import LoginDetails from "./LoginDetails"
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./header.css";
 import api from '../../../api';
+
+const USER = localStorage.user
 
 const Header = (props) => {
   const [userName, setUserName] = useState("");
   let history = useHistory();
-  let params = useParams();
+  // let params = useParams();
 
   useEffect(()=>{
-    api.get(`/user-one/${params.user}`)
+    api.get(`/user-one/${USER}`)
     .then(res=>{
       setUserName(res.data.name)
     })

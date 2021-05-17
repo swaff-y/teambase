@@ -15,6 +15,7 @@
     "date-fns": "^2.19.0",
     "enzyme": "^3.11.0",
     "history": "^4.10.1",
+    "isomorphic-fetch": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-avatar": "^3.10.0",
