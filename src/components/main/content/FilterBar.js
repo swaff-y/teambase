@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import api from '../../../api';
 import "./content.css";
+import { authHeaders } from '../../../authUtils';
 
 const FilterBar = (props) => {
   const [selectedProject, setSelectedProject] = useState({tasks:[{name:"default"}]});
 
   useEffect(()=>{
-    api.get(`project-user/${props.selectedProject[1]}`)
+    api.get(`project-user/${props.selectedProject[1]}`,{
+      headres: authHeaders()
+    })
     .then(res=>{
       if(res.data !== null){
         setSelectedProject(res.data);

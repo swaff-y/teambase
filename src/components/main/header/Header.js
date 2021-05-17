@@ -4,6 +4,7 @@ import LoginDetails from "./LoginDetails"
 import { useHistory } from "react-router-dom";
 import "./header.css";
 import api from '../../../api';
+import { authHeaders } from '../../../authUtils';
 
 const USER = localStorage.user
 
@@ -13,7 +14,9 @@ const Header = (props) => {
   // let params = useParams();
 
   useEffect(()=>{
-    api.get(`/user-one/${USER}`)
+    api.get(`/user-one/${USER}`,{
+      headres: authHeaders()
+    })
     .then(res=>{
       setUserName(res.data.name)
     })

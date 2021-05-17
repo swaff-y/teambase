@@ -3,6 +3,7 @@ import UserSelect from "./UserSelect";
 import Button from '@material-ui/core/Button';
 import api from '../../api';
 import "./floatbar.css";
+import { authHeaders } from '../../authUtils';
 
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -113,7 +114,9 @@ const FloatTaskAdd = (props) => {
 
       setSelected("");
 
-      api.get(`/users/${id}.json`)
+      api.get(`/users/${id}.json`,{
+        headres: authHeaders()
+      })
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);
         const newFormDetails = formDetails;
@@ -165,7 +168,9 @@ const FloatTaskAdd = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ", formDetails );
-    api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
+    api.post(`/task-create/${props.selectedProject[1]}`,formDetails,{
+      headres: authHeaders()
+    })
     .then(res=>{
 
         props.closeFloatTaskBar();

@@ -4,6 +4,7 @@ import FilterBar from "./FilterBar";
 import TaskBar from "./TaskBar";
 import api from '../../../api';
 import "./content.css";
+import { authHeaders } from '../../../authUtils';
 
 const Content = (props) => {
 
@@ -14,7 +15,9 @@ const Content = (props) => {
   useEffect(()=>{
 
     if(props.selectedProject[1] > 1){
-      api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`)
+      api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`,{
+        headres: authHeaders()
+      })
       .then(res=>{
 
         if(res.data.length < 1){
@@ -66,7 +69,9 @@ const Content = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      api.post(`task-priority-update/${items[i].id}/${i+1}`)
+      api.post(`task-priority-update/${items[i].id}/${i+1}`,{
+        headres: authHeaders()
+      })
       .then(res=>{
         // console.log("The return: ",res.data, "The item: ", items[i]);
       })
@@ -110,7 +115,7 @@ const Content = (props) => {
                     return(
                       <Draggable
                         key={name + id}
-                        draggableId={name + id} 
+                        draggableId={name + id}
                         index={index}>
                         {(provided) => (
                           <TaskBar

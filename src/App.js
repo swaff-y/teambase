@@ -8,13 +8,15 @@ import Analytics from "./Analytics"
 import TeamMembers from "./TeamMembers"
 import { useHistory, useParams } from "react-router-dom";
 import api from './api';
+import { authHeaders } from './authUtils';
 
-const USER = localStorage.user;
+// const USER = localStorage.user;
 
 const App = () => {
   // let params = useParams();
   // const user = params.user;
 
+  const [user, setUser] = useState();
   const [selectedProject, setSelectedProject] = useState([]);
   const [floatStatus, setFloatStatus] = useState('none');
   const [floatTaskDelete, setFloatTaskDelete] = useState('none');
@@ -27,7 +29,15 @@ const App = () => {
   const [projectEdit, setProjectEdit] = useState(false);
 
   useEffect(()=>{
-    api.get(`projects-user/${USER}`)
+    setUser(localStorage.user)
+  },[])
+
+  useEffect(()=>{
+    console.log("The user:", user);
+    console.log("The authHeaders:", authHeaders());
+    api.get(`projects-user/${user}`,{
+      headres: authHeaders()
+    })
     .then(res=>{
       if(res.data.length < 1){
         setProjectData(res.data);

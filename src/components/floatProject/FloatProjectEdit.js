@@ -11,6 +11,7 @@ import {
 } from '@material-ui/pickers';
 import "./floatproject.css";
 import api from '../../api';
+import { authHeaders } from '../../authUtils';
 
 const FloatProjectEdit = (props) => {
 
@@ -38,7 +39,9 @@ const FloatProjectEdit = (props) => {
     });
 
     useEffect(()=>{
-      api.get(`/project-read/${props.projectID[1]}`)
+      api.get(`/project-read/${props.projectID[1]}`,{
+        headres: authHeaders()
+      })
       .then(res=>{
         setFormName(res.data.name);
         setStatusChange(res.data.status);
@@ -68,7 +71,9 @@ const FloatProjectEdit = (props) => {
     },[]);
 
     useEffect(()=>{
-      api.get(`/project_categories.json`)
+      api.get(`/project_categories.json`,{
+        headres: authHeaders()
+      })
       .then(res=>{
           setProjectCategories(res.data);
       })
@@ -153,7 +158,9 @@ const FloatProjectEdit = (props) => {
       const handleAddAssignee = (id) => {
         setSelected("");
 
-        api.get(`/users/${id}.json`)
+        api.get(`/users/${id}.json`,{
+          headres: authHeaders()
+        })
         .then(res=>{
           setAssigneesChange([...assigneesChange,res.data]);
           const newFormDetails = formDetails;
@@ -169,7 +176,9 @@ const FloatProjectEdit = (props) => {
 
     const saveData = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.post(`/project-update/${props.projectID[1]}`,formDetails)
+      api.post(`/project-update/${props.projectID[1]}`,formDetails,{
+        headres: authHeaders()
+      })
       .then(res=>{
           props.closeFloatProjectBar();
       })
@@ -179,7 +188,9 @@ const FloatProjectEdit = (props) => {
     }
     const deleteProject = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.delete(`/project-delete/${props.projectID[1]}`)
+      api.delete(`/project-delete/${props.projectID[1]}`,{
+        headres: authHeaders()
+      })
       .then(res=>{
           props.closeFloatProjectBar();
       })

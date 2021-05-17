@@ -11,6 +11,7 @@ import {
 } from '@material-ui/pickers';
 import "./floatproject.css";
 import api from '../../api';
+import { authHeaders } from '../../authUtils';
 
 const FloatProjectAdd = (props) => {
 
@@ -62,7 +63,9 @@ const FloatProjectAdd = (props) => {
   },[props.floatStatus])
 
   useEffect(()=>{
-    api.get(`/project_categories.json`)
+    api.get(`/project_categories.json`,{
+      headres: authHeaders()
+    })
     .then(res=>{
         setProjectCategories(res.data);
     })
@@ -147,7 +150,9 @@ const FloatProjectAdd = (props) => {
     const handleAddAssignee = (id) => {
       setSelected("");
 
-      api.get(`/users/${id}.json`)
+      api.get(`/users/${id}.json`,{
+        headres: authHeaders()
+      })
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);
         const newFormDetails = formDetails;
@@ -163,7 +168,9 @@ const FloatProjectAdd = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ",formDetails);
-    api.post(`/project-create/${props.user}`,formDetails)
+    api.post(`/project-create/${props.user}`,formDetails,{
+      headres: authHeaders()
+    })
     .then(res=>{
         props.closeFloatProjectBar();
         setSelectedDate(Date.now());

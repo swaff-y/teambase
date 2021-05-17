@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import api from '../../api';
 import "./floatnote.css";
+import { authHeaders } from '../../authUtils';
 
 const FloatNote = (props) => {
   const [name, setName] = useState();
@@ -13,7 +14,9 @@ const FloatNote = (props) => {
 
   useEffect(()=>{
     if(props.taskId !== undefined){
-      api.get(`/task-read/${props.taskId}`)
+      api.get(`/task-read/${props.taskId}`,{
+        headres: authHeaders()
+      })
       .then(res=>{
         setName(res.data.name);
       })
