@@ -3,13 +3,16 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Avatar from 'react-avatar';
 import api from '../../api';
+import { authHeaders } from '../../authUtils';
 
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
 
   useEffect(()=>{
-    api.get(`/users.json`)
+    api.get(`/users.json`,{
+      headers: authHeaders()
+    })
     .then(res=>{
         setUsers(res.data);
     })

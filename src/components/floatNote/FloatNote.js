@@ -15,7 +15,7 @@ const FloatNote = (props) => {
   useEffect(()=>{
     if(props.taskId !== undefined){
       api.get(`/task-read/${props.taskId}`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
         setName(res.data.name);
@@ -35,7 +35,9 @@ const FloatNote = (props) => {
   }
 
   const saveNote = () => {
-    api.post(`/note-create/${props.taskId}/${props.user}`,{note:text})
+    api.post(`/note-create/${props.taskId}/${props.user}`,{
+      note:text
+    })
     .then(res=>{
       setText("");
       props.closeFloatNote();

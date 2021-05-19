@@ -17,7 +17,7 @@ import api from '../../api';
 
 const Sidebar = (props) => {
   const [projectShow, setProjectShow] = useState("none");
-  const [projectList,setProjectList] = useState(props.projectData)
+  const [projectList,setProjectList] = useState(props.projectData);
 
   let history = useHistory();
   let params = useParams();
@@ -42,7 +42,7 @@ const Sidebar = (props) => {
 
     for( let i = 0; i < items.length; i++ ){
       api.post(`project-priority-update/${items[i].id}/${i+1}`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
           // console.log("The return: ",res.data, "The item: ", items[i]);

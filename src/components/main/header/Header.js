@@ -15,7 +15,7 @@ const Header = (props) => {
 
   useEffect(()=>{
     api.get(`/user-one/${USER}`,{
-      headres: authHeaders()
+      headers: authHeaders()
     })
     .then(res=>{
       setUserName(res.data.name)

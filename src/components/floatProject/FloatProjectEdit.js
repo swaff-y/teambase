@@ -29,6 +29,7 @@ const FloatProjectEdit = (props) => {
     });
 
     const [formDetails ,setFormDetails] = useState({
+      headers: authHeaders(),
       name: "",
       status: "",
       progress: "",
@@ -40,7 +41,7 @@ const FloatProjectEdit = (props) => {
 
     useEffect(()=>{
       api.get(`/project-read/${props.projectID[1]}`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
         setFormName(res.data.name);
@@ -72,7 +73,7 @@ const FloatProjectEdit = (props) => {
 
     useEffect(()=>{
       api.get(`/project_categories.json`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
           setProjectCategories(res.data);
@@ -159,7 +160,7 @@ const FloatProjectEdit = (props) => {
         setSelected("");
 
         api.get(`/users/${id}.json`,{
-          headres: authHeaders()
+          headers: authHeaders()
         })
         .then(res=>{
           setAssigneesChange([...assigneesChange,res.data]);
@@ -176,9 +177,7 @@ const FloatProjectEdit = (props) => {
 
     const saveData = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.post(`/project-update/${props.projectID[1]}`,formDetails,{
-        headres: authHeaders()
-      })
+      api.post(`/project-update/${props.projectID[1]}`,formDetails)
       .then(res=>{
           props.closeFloatProjectBar();
       })
@@ -189,7 +188,7 @@ const FloatProjectEdit = (props) => {
     const deleteProject = (e) => {
       // console.log("Before submit: ",formDetails);
       api.delete(`/project-delete/${props.projectID[1]}`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
           props.closeFloatProjectBar();

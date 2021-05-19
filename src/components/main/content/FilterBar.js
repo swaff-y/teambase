@@ -9,7 +9,7 @@ const FilterBar = (props) => {
 
   useEffect(()=>{
     api.get(`project-user/${props.selectedProject[1]}`,{
-      headres: authHeaders()
+      headers: authHeaders()
     })
     .then(res=>{
       if(res.data !== null){

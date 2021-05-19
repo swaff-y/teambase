@@ -29,6 +29,7 @@ const FloatProjectAdd = (props) => {
   });
 
   const [formDetails ,setFormDetails] = useState({
+    headers: authHeaders(),
     name: "",
     status: "",
     progress: "",
@@ -42,6 +43,7 @@ const FloatProjectAdd = (props) => {
   useEffect(()=>{
     setSelectedDate(Date.now());
     setFormDetails({
+      headers: authHeaders(),
       name:"",
       due_date: "",
       status:"New",
@@ -64,7 +66,7 @@ const FloatProjectAdd = (props) => {
 
   useEffect(()=>{
     api.get(`/project_categories.json`,{
-      headres: authHeaders()
+      headers: authHeaders()
     })
     .then(res=>{
         setProjectCategories(res.data);
@@ -151,7 +153,7 @@ const FloatProjectAdd = (props) => {
       setSelected("");
 
       api.get(`/users/${id}.json`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);
@@ -168,13 +170,12 @@ const FloatProjectAdd = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ",formDetails);
-    api.post(`/project-create/${props.user}`,formDetails,{
-      headres: authHeaders()
-    })
+    api.post(`/project-create/${props.user}`,formDetails)
     .then(res=>{
         props.closeFloatProjectBar();
         setSelectedDate(Date.now());
         setFormDetails({
+          headers: authHeaders(),
           name:"",
           due_date: "",
           status:"New",

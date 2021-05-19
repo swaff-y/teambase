@@ -18,6 +18,7 @@ const FloatTaskAdd = (props) => {
   // const [assigneeCount, setAssigneeCount] = useState(0);
   // const [users, setUsers] = useState([]);
   const [formDetails, setFormDetails] = useState({
+    headers: authHeaders(),
     name:"",
     due_date: Date.now(),
     status:"New",
@@ -39,6 +40,7 @@ const FloatTaskAdd = (props) => {
     // let isCancelled = false;
     setSelectedDate(Date.now());
     setFormDetails({
+      headers: authHeaders(),
       name:"",
       due_date: "",
       status:"New",
@@ -70,7 +72,9 @@ const FloatTaskAdd = (props) => {
   // },[props.floatStatus])
 
   useEffect(()=>{
-    api.get(`/task_categories.json`)
+    api.get(`/task_categories.json`,{
+      headers: authHeaders()
+    })
     .then(res=>{
         setTaskCategories(res.data);
     })
@@ -115,7 +119,7 @@ const FloatTaskAdd = (props) => {
       setSelected("");
 
       api.get(`/users/${id}.json`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);
@@ -168,11 +172,8 @@ const FloatTaskAdd = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ", formDetails );
-    api.post(`/task-create/${props.selectedProject[1]}`,formDetails,{
-      headres: authHeaders()
-    })
+    api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
     .then(res=>{
-
         props.closeFloatTaskBar();
     })
     .catch(err=>{

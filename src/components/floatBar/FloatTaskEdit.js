@@ -17,6 +17,7 @@ const FloatTaskEdit = (props) => {
   const [selectedDate, setSelectedDate] = useState(Date.now());
 
   const [formDetails, setFormDetails] = useState({
+    headers: authHeaders(),
     name:"",
     due_date: "",
     status:"New",

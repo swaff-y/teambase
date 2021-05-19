@@ -16,7 +16,7 @@ const Content = (props) => {
 
     if(props.selectedProject[1] > 1){
       api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
 
@@ -70,7 +70,7 @@ const Content = (props) => {
 
     for( let i = 0; i < items.length; i++ ){
       api.post(`task-priority-update/${items[i].id}/${i+1}`,{
-        headres: authHeaders()
+        headers: authHeaders()
       })
       .then(res=>{
         // console.log("The return: ",res.data, "The item: ", items[i]);

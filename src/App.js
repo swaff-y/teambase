@@ -15,6 +15,7 @@ import { authHeaders } from './authUtils';
 const App = () => {
   // let params = useParams();
   // const user = params.user;
+  let history = useHistory();
 
   const [user, setUser] = useState();
   const [selectedProject, setSelectedProject] = useState([]);
@@ -29,14 +30,16 @@ const App = () => {
   const [projectEdit, setProjectEdit] = useState(false);
 
   useEffect(()=>{
-    setUser(localStorage.user)
+    if(localStorage.user === ''){
+      history.push("/");
+    }else{
+      setUser(localStorage.user);
+    }
   },[])
 
   useEffect(()=>{
-    console.log("The user:", user);
-    console.log("The authHeaders:", authHeaders());
     api.get(`projects-user/${user}`,{
-      headres: authHeaders()
+      headers: authHeaders()
     })
     .then(res=>{
       if(res.data.length < 1){
