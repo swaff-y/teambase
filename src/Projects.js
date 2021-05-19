@@ -6,13 +6,19 @@ import FloatNote from './components/floatNote/FloatNote'
 import FloatProject from './components/floatProject/FloatProject'
 import Main from './components/main/Main'
 import {Helmet} from 'react-helmet'
-// import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-const USER = localStorage.user
+// const USER = localStorage.user
 
 const Projects = (props) => {
-  // let params = useParams();
-  // const user = params.user;
+  const history = useHistory();
+  let params = useParams();
+
+  useEffect(()=>{
+    if(params.user == ""){
+      history.push("/");
+    }
+  },[])
 
   return (
     <div className="app" data-test="component-app">
@@ -25,6 +31,7 @@ const Projects = (props) => {
         projectData={props.projectData}
         handleProjectAdd={props.handleProjectAdd}
         handleProjectEdit={props.handleProjectEdit}
+        user={props.user}
       />
       <Main
         selectedProject={props.selectedProject}
@@ -34,12 +41,13 @@ const Projects = (props) => {
         handleTaskNote={props.handleTaskNote}
         handleTaskDelete={props.handleTaskDelete}
         taskDelete={props.taskDelete}
+        user={props.user}
       />
       <FloatTaskBar
         floatStatus={props.floatStatus}
         closeFloatTaskBar={props.closeFloatTaskBar}
         selectedProject={props.selectedProject}
-        user={USER}
+        user={props.user}
         edit={props.taskEdit}
         taskId={props.taskId}
       />
@@ -47,21 +55,21 @@ const Projects = (props) => {
         closeFloatTaskDelete={props.closeFloatTaskDelete}
         floatTaskDelete={props.floatTaskDelete}
         selectedProject={props.selectedProject}
-        user={USER}
+        user={props.user}
         taskId={props.taskId}
       />
       <FloatNote
         closeFloatNote={props.closeFloatNote}
         floatNote={props.floatNote}
         selectedProject={props.selectedProject}
-        user={USER}
+        user={props.user}
         taskId={props.taskId}
       />
       <FloatProject
         closeFloatProject={props.closeFloatProject}
         floatProject={props.floatProject}
         selectedProject={props.selectedProject}
-        user={USER}
+        user={props.user}
         edit={props.projectEdit}
       />
 

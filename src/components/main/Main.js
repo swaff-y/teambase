@@ -13,7 +13,7 @@ const Main = (props) => {
 
   const getLocation = (location) => {
     const locationArray = location.split("/");
-    console.log("The location array: ", locationArray);
+    // console.log("The location array: ", locationArray);
     return locationArray[1];
   }
 
@@ -21,6 +21,7 @@ const Main = (props) => {
     <div className="main" data-test="component-main">
       <Header
         selectedProject={props.selectedProject}
+        user={params.user}
       />
       {
         getLocation(location) === "projects"

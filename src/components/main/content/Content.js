@@ -69,13 +69,16 @@ const Content = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      api.post(`task-priority-update/${items[i].id}/${i+1}`,{
-        headers: authHeaders()
+      api.post(`task-priority-update`, {
+        headers: authHeaders(),
+        project_id: items[i].id,
+        priority: i+1
       })
       .then(res=>{
         // console.log("The return: ",res.data, "The item: ", items[i]);
       })
       .catch(err=>{
+        console.log("this one");
         console.warn(err);
       })
     }

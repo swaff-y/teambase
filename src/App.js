@@ -15,7 +15,7 @@ import { authHeaders } from './authUtils';
 const App = () => {
   // let params = useParams();
   // const user = params.user;
-  let history = useHistory();
+  // let history = useHistory();
 
   const [user, setUser] = useState();
   const [selectedProject, setSelectedProject] = useState([]);
@@ -30,15 +30,11 @@ const App = () => {
   const [projectEdit, setProjectEdit] = useState(false);
 
   useEffect(()=>{
-    if(localStorage.user === ''){
-      history.push("/");
-    }else{
-      setUser(localStorage.user);
-    }
+    setUser(localStorage.user);
   },[])
 
   useEffect(()=>{
-    api.get(`projects-user/${user}`,{
+    api.get(`projects-user/${localStorage.user}`,{
       headers: authHeaders()
     })
     .then(res=>{
@@ -66,7 +62,7 @@ const App = () => {
     .catch(err=>{
       console.warn(err);
     })
-  },[floatProject]);
+  },[floatProject,user]);
 
   const compareNumbers = (num1,num2) => {
      return num1 - num2;
