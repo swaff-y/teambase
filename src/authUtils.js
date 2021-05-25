@@ -58,3 +58,12 @@ export const taskUpdate = (formDetails) => {
     headers: authHeaders()
   })
 }
+
+export const taskDelete = (task_id) => {
+  return api.delete(`/task-delete`,{
+    headers: authHeaders(),
+    data: {
+      task_id: task_id
+    }
+  })
+}

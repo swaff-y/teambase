@@ -4,20 +4,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
-import api from '../../api';
-import { authHeaders } from '../../authUtils';
+import { taskDelete } from '../../authUtils';
 
 import "./floatdeletetask.css";
 
 const FloatTaskDelete = (props) => {
 
   const deleteTask = () => {
-    api.delete(`/task-delete`,{
-      headers: authHeaders(),
-      data: {
-        task_id: props.taskId
-      }
-    })
+
+    taskDelete(props.taskId)
     .then(res=>{
       console.log(res.data);
       props.closeFloatTaskDelete()
