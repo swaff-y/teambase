@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import UserSelect from "./UserSelect";
 import Button from '@material-ui/core/Button';
 import "./floatbar.css";
-import { authHeaders, taskRead, taskCategoriesAll, userOne, taskUpdate } from '../../authUtils';
+import { taskRead, taskCategoriesAll, userOne, taskUpdate } from '../../authUtils';
 
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
