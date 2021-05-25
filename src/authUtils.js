@@ -16,3 +16,24 @@ export const projectPriorityUpdate = (project_id,priority) => {
     headers: authHeaders()
   })
 }
+
+export const taskCategoriesAll = () => {
+  return api.get(`/task-categories-all`,{
+    headers: authHeaders()
+  })
+}
+
+export const userOne = (user_id) => {
+  return  api.get(`/user-one`,{
+    headers: authHeaders(),
+    params: {
+      user_id: user_id
+    }
+  })
+}
+
+export const taskCreate = (formDetails) => {
+  return api.post(`/task-create`,formDetails,{
+    headers: authHeaders()
+  })
+}
