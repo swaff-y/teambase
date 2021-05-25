@@ -13,8 +13,11 @@ const Header = (props) => {
   // let params = useParams();
 
   useEffect(()=>{
-    api.get(`/user-one/${params.user}`,{
-      headers: authHeaders()
+    api.get(`/user-one`,{
+      headers: authHeaders(),
+      params: {
+        user_id: params.user
+      }
     })
     .then(res=>{
       setUserName(res.data.name)

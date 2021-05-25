@@ -22,7 +22,6 @@ const FloatTaskEdit = (props) => {
     due_date: "",
     status:"New",
     progress:5,
-    category:"",
     description:"",
     assignees:[]
   })
@@ -36,8 +35,11 @@ const FloatTaskEdit = (props) => {
   const [selected, setSelected] = useState('');
 
   useEffect(()=>{
-    api.get(`/task-read/${props.taskId}`,{
-      headres: authHeaders()
+    api.get(`/task-read`,{
+      headers: authHeaders(),
+      params:{
+        task_id: props.taskId
+      }
     })
     .then(res=>{
       setFormName(res.data.name);
@@ -51,7 +53,6 @@ const FloatTaskEdit = (props) => {
       newFormDetails.due_date = res.data.due_date
       newFormDetails.status = res.data.status
       newFormDetails.progress = res.data.progress
-      newFormDetails.category = res.data.task_category.id
       newFormDetails.description = res.data.description
       const inst = [];
       for( let i = 0; i < res.data.users.length; i++ ){
@@ -78,7 +79,6 @@ const FloatTaskEdit = (props) => {
       due_date: "",
       status:"New",
       progress:5,
-      category:"",
       description:"",
       assignees:[]
     });
@@ -95,7 +95,9 @@ const FloatTaskEdit = (props) => {
   },[props.floatStatus])
 
   useEffect(()=>{
-    api.get(`/task-categories-all`)
+    api.get(`/task-categories-all`,{
+      headers: authHeaders()
+    })
     .then(res=>{
         setTaskCategories(res.data);
     })
@@ -140,8 +142,11 @@ const FloatTaskEdit = (props) => {
   const handleAddAssignee = (id) => {
     setSelected("");
 
-    api.get(`/user-one/:user_id`,{
-      headres: authHeaders()
+    api.get(`/user-one`,{
+      headres: authHeaders(),
+      params: {
+        user_id: id
+      }
     })
     .then(res=>{
       setAssigneesChange([...assigneesChange,res.data]);
@@ -196,7 +201,7 @@ const FloatTaskEdit = (props) => {
   const saveData = (e) => {
     // console.log("Before submit: ",formDetails);
     api.post(`/task-update`,formDetails,{
-      headres: authHeaders()
+      headers: authHeaders()
     })
     .then(res=>{
         props.closeFloatTaskBar();
