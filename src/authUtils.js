@@ -37,3 +37,18 @@ export const taskCreate = (formDetails) => {
     headers: authHeaders()
   })
 }
+
+export const taskRead = (task_id) => {
+  return api.get(`/task-read`,{
+    headers: authHeaders(),
+    params:{
+      task_id: task_id
+    }
+  })
+}
+
+export const taskUpdate = (formDetails) => {
+  return api.post(`/task-update`,formDetails,{
+    headers: authHeaders()
+  })
+}
