@@ -94,8 +94,10 @@ const FloatTaskEdit = (props) => {
     };
   },[props.floatStatus])
 
-  //add cleanup function
+
   useEffect(()=>{
+    let isCancelled = false;
+
     api.get(`/task-categories-all`,{
       headers: authHeaders()
     })
@@ -105,6 +107,10 @@ const FloatTaskEdit = (props) => {
     .catch(err=>{
       console.warn(err);
     })
+
+    return () => {
+      isCancelled = true;
+    };
   },[props.floatStatus])
 
   const handleDateChange = (date) => {

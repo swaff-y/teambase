@@ -152,8 +152,11 @@ const FloatProjectAdd = (props) => {
     const handleAddAssignee = (id) => {
       setSelected("");
 
-      api.get(`/users/${id}.json`,{
-        headers: authHeaders()
+      api.get(`/user-one`,{
+        headers: authHeaders(),
+        params: {
+          user_id: id
+        }
       })
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);

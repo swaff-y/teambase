@@ -159,8 +159,11 @@ const FloatProjectEdit = (props) => {
       const handleAddAssignee = (id) => {
         setSelected("");
 
-        api.get(`/users/${id}.json`,{
-          headers: authHeaders()
+        api.get(`/user-one`,{
+          headers: authHeaders(),
+          params: {
+            user_id: id
+          }
         })
         .then(res=>{
           setAssigneesChange([...assigneesChange,res.data]);
@@ -190,9 +193,10 @@ const FloatProjectEdit = (props) => {
     const deleteProject = (e) => {
       // console.log("Before submit: ",formDetails);
       api.delete(`/project-delete`,{
-        project_id: props.projectID[1]
-      },{
-        headers: authHeaders()
+        headers: authHeaders(),
+        data: {
+          project_id: props.projectID[1]
+        }
       })
       .then(res=>{
           props.closeFloatProjectBar();

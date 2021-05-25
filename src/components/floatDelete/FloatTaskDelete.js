@@ -13,9 +13,10 @@ const FloatTaskDelete = (props) => {
 
   const deleteTask = () => {
     api.delete(`/task-delete`,{
-      task_id: props.taskId
-    },{
-      headers: authHeaders()
+      headers: authHeaders(),
+      data: {
+        task_id: props.taskId
+      }
     })
     .then(res=>{
       console.log(res.data);
