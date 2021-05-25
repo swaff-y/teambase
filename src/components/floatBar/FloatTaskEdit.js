@@ -94,6 +94,7 @@ const FloatTaskEdit = (props) => {
     };
   },[props.floatStatus])
 
+  //add cleanup function
   useEffect(()=>{
     api.get(`/task-categories-all`,{
       headers: authHeaders()
