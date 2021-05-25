@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useHistory, useParams } from "react-router-dom";
 import './sidebar.css'
-import { authHeaders } from '../../authUtils';
+import { projectPriorityUpdate } from '../../authUtils';
 import api from '../../api';
 
 const Sidebar = (props) => {
@@ -41,12 +41,13 @@ const Sidebar = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      api.post(`project-priority-update`,{
-        project_id: items[i].id,
-        priority: i+1
-      },{
-        headers: authHeaders()
-      })
+      // api.post(`project-priority-update`,{
+      //   project_id: items[i].id,
+      //   priority: i+1
+      // },{
+      //   headers: authHeaders()
+      // })
+      projectPriorityUpdate(items[i].id,i+1)
       .then(res=>{
           // console.log("The return: ",res.data, "The item: ", items[i]);
       })
