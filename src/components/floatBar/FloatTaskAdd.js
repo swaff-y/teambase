@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import UserSelect from "./UserSelect";
 import Button from '@material-ui/core/Button';
-import api from '../../api';
 import "./floatbar.css";
 import { taskCategoriesAll, userOne, taskCreate } from '../../authUtils';
 
