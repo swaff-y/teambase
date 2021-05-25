@@ -41,7 +41,10 @@ const Sidebar = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      api.post(`project-priority-update/${items[i].id}/${i+1}`,{
+      api.post(`project-priority-update`,{
+        project_id: items[i].id,
+        priority: i+1
+      },{
         headers: authHeaders()
       })
       .then(res=>{

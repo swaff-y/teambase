@@ -10,7 +10,7 @@ const UserSelect = (props) => {
   const [selectedUser, setSelectedUser] = useState("");
 
   useEffect(()=>{
-    api.get(`/users.json`,{
+    api.get(`/users-all`,{
       headers: authHeaders()
     })
     .then(res=>{

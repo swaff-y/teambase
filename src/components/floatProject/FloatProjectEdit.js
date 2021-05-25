@@ -29,7 +29,7 @@ const FloatProjectEdit = (props) => {
     });
 
     const [formDetails ,setFormDetails] = useState({
-      headers: authHeaders(),
+      project_id: props.projectID[1],
       name: "",
       status: "",
       progress: "",
@@ -72,7 +72,7 @@ const FloatProjectEdit = (props) => {
     },[]);
 
     useEffect(()=>{
-      api.get(`/project_categories.json`,{
+      api.get(`/project-categories-all`,{
         headers: authHeaders()
       })
       .then(res=>{
@@ -177,7 +177,9 @@ const FloatProjectEdit = (props) => {
 
     const saveData = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.post(`/project-update/${props.projectID[1]}`,formDetails)
+      api.post(`/project-update`,formDetails,{
+        headers: authHeaders()
+      })
       .then(res=>{
           props.closeFloatProjectBar();
       })
@@ -187,7 +189,9 @@ const FloatProjectEdit = (props) => {
     }
     const deleteProject = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.delete(`/project-delete/${props.projectID[1]}`,{
+      api.delete(`/project-delete`,{
+        project_id: props.projectID[1]
+      },{
         headers: authHeaders()
       })
       .then(res=>{

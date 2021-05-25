@@ -14,8 +14,10 @@ const Projects = (props) => {
   const history = useHistory();
   let params = useParams();
 
+  console.log("JWT", localStorage.jwt);
+
   useEffect(()=>{
-    if(params.user == ""){
+    if(localStorage.jwt === ""){
       history.push("/");
     }
   },[])

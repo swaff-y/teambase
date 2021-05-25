@@ -12,7 +12,9 @@ import "./floatdeletetask.css";
 const FloatTaskDelete = (props) => {
 
   const deleteTask = () => {
-    api.delete(`/task-delete/${props.taskId}`,{
+    api.delete(`/task-delete`,{
+      task_id: props.taskId
+    },{
       headers: authHeaders()
     })
     .then(res=>{

@@ -18,7 +18,7 @@ const FloatTaskAdd = (props) => {
   // const [assigneeCount, setAssigneeCount] = useState(0);
   // const [users, setUsers] = useState([]);
   const [formDetails, setFormDetails] = useState({
-    headers: authHeaders(),
+    project_id: props.selectedProject[1],
     name:"",
     due_date: Date.now(),
     status:"New",
@@ -40,7 +40,7 @@ const FloatTaskAdd = (props) => {
     // let isCancelled = false;
     setSelectedDate(Date.now());
     setFormDetails({
-      headers: authHeaders(),
+      project_id: props.selectedProject[1],
       name:"",
       due_date: "",
       status:"New",
@@ -61,18 +61,8 @@ const FloatTaskAdd = (props) => {
     };
   },[props.floatStatus])
 
-  // useEffect(()=>{
-  //   api.get(`/users.json`)
-  //   .then(res=>{
-  //       setUsers(res.data);
-  //   })
-  //   .catch(err=>{
-  //     console.warn(err);
-  //   })
-  // },[props.floatStatus])
-
   useEffect(()=>{
-    api.get(`/task_categories.json`,{
+    api.get(`/task-categories-all`,{
       headers: authHeaders()
     })
     .then(res=>{
@@ -118,7 +108,7 @@ const FloatTaskAdd = (props) => {
 
       setSelected("");
 
-      api.get(`/users/${id}.json`,{
+      api.get(`/user-one/${id}`,{
         headers: authHeaders()
       })
       .then(res=>{
@@ -172,7 +162,9 @@ const FloatTaskAdd = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ", formDetails );
-    api.post(`/task-create/${props.selectedProject[1]}`,formDetails)
+    api.post(`/task-create`,formDetails,{
+      headers: authHeaders()
+    })
     .then(res=>{
         props.closeFloatTaskBar();
     })
@@ -201,8 +193,10 @@ const FloatTaskAdd = (props) => {
                disableToolbar
                InputProps={{
                  disableUnderline: true,
-                 style:{backgroundColor:"#FFFFFF",
-                 marginTop:'25px'}
+                 style:{
+                   backgroundColor:"#FFFFFF",
+                   marginTop:'25px'
+                 }
                }}
                variant="inline"
                format="yyyy-MM-dd"

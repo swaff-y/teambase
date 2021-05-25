@@ -17,7 +17,7 @@ const FloatTaskEdit = (props) => {
   const [selectedDate, setSelectedDate] = useState(Date.now());
 
   const [formDetails, setFormDetails] = useState({
-    headers: authHeaders(),
+    task_id: props.taskId,
     name:"",
     due_date: "",
     status:"New",
@@ -73,6 +73,7 @@ const FloatTaskEdit = (props) => {
     let isCancelled = false;
     setSelectedDate(Date.now());
     setFormDetails({
+      task_id: props.taskId,
       name:"",
       due_date: "",
       status:"New",
@@ -94,7 +95,7 @@ const FloatTaskEdit = (props) => {
   },[props.floatStatus])
 
   useEffect(()=>{
-    api.get(`/task_categories.json`)
+    api.get(`/task-categories-all`)
     .then(res=>{
         setTaskCategories(res.data);
     })
@@ -139,7 +140,7 @@ const FloatTaskEdit = (props) => {
   const handleAddAssignee = (id) => {
     setSelected("");
 
-    api.get(`/users/${id}.json`,{
+    api.get(`/user-one/:user_id`,{
       headres: authHeaders()
     })
     .then(res=>{
@@ -194,7 +195,7 @@ const FloatTaskEdit = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ",formDetails);
-    api.post(`/task-update/${props.taskId}`,formDetails,{
+    api.post(`/task-update`,formDetails,{
       headres: authHeaders()
     })
     .then(res=>{
