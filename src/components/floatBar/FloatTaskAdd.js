@@ -23,7 +23,6 @@ const FloatTaskAdd = (props) => {
     due_date: Date.now(),
     status:"New",
     progress:5,
-    category:"",
     description:"",
     assignees:[]
   })
@@ -45,7 +44,6 @@ const FloatTaskAdd = (props) => {
       due_date: "",
       status:"New",
       progress:5,
-      category:"",
       description:"",
       assignees:[]
     });
@@ -108,8 +106,11 @@ const FloatTaskAdd = (props) => {
 
       setSelected("");
 
-      api.get(`/user-one/${id}`,{
-        headers: authHeaders()
+      api.get(`/user-one`,{
+        headers: authHeaders(),
+        params: {
+          user_id: id
+        }
       })
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);
@@ -172,8 +173,6 @@ const FloatTaskAdd = (props) => {
       console.warn(err);
     })
   }
-
-
 
   return(
     <div className="floatbar__container">

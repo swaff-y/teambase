@@ -143,7 +143,7 @@ const FloatTaskEdit = (props) => {
     setSelected("");
 
     api.get(`/user-one`,{
-      headres: authHeaders(),
+      headers: authHeaders(),
       params: {
         user_id: id
       }
