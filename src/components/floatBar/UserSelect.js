@@ -2,17 +2,16 @@ import React, {useEffect, useState} from 'react';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Avatar from 'react-avatar';
-import api from '../../api';
-import { authHeaders } from '../../authUtils';
+// import api from '../../api';
+import { authHeaders, usersAll } from '../../authUtils';
 
 const UserSelect = (props) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
 
   useEffect(()=>{
-    api.get(`/users-all`,{
-      headers: authHeaders()
-    })
+
+    usersAll()
     .then(res=>{
         setUsers(res.data);
     })

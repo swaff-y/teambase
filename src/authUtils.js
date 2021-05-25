@@ -32,6 +32,12 @@ export const userOne = (user_id) => {
   })
 }
 
+export const usersAll = () => {
+  return api.get(`/users-all`,{
+    headers: authHeaders()
+  })
+}
+
 export const taskCreate = (formDetails) => {
   return api.post(`/task-create`,formDetails,{
     headers: authHeaders()
