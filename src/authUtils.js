@@ -67,3 +67,25 @@ export const taskDelete = (task_id) => {
     }
   })
 }
+
+export const noteCreate = (task_id, user_id, note) => {
+  return api.post(`/note-create`, {
+    task_id: task_id,
+    user_id: user_id,
+    note: note
+  },{
+    headers: authHeaders()
+  })
+}
+
+export const projectCategoriesAll = () => {
+  return api.get(`/project-categories-all`,{
+      headers: authHeaders()
+    })
+}
+
+export const projectCreate = (formDetails) => {
+  return api.post(`/project-create`,formDetails,{
+    headers: authHeaders()
+  })
+}

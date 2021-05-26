@@ -10,10 +10,11 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import "./floatproject.css";
-import api from '../../api';
-import { authHeaders } from '../../authUtils';
+import { useParams } from "react-router-dom";
+import { projectCategoriesAll, userOne, projectCreate } from '../../authUtils';
 
 const FloatProjectAdd = (props) => {
+  let params = useParams();
 
   const [formName ,setFormName] = useState("");
   const [selectedDate, setSelectedDate] = useState(Date.now());
@@ -29,7 +30,7 @@ const FloatProjectAdd = (props) => {
   });
 
   const [formDetails ,setFormDetails] = useState({
-    user_id: props.user,
+    user_id: params.user,
     name: "",
     status: "",
     progress: "",
@@ -43,7 +44,7 @@ const FloatProjectAdd = (props) => {
   useEffect(()=>{
     setSelectedDate(Date.now());
     setFormDetails({
-      user_id: props.user,
+      user_id: params.user,
       name:"",
       due_date: "",
       status:"New",
@@ -65,12 +66,11 @@ const FloatProjectAdd = (props) => {
   },[props.floatStatus])
 
   useEffect(()=>{
-    api.get(`/project-categories-all`,{
-      headers: authHeaders()
-    })
+    projectCategoriesAll()
     .then(res=>{
         setProjectCategories(res.data);
     })
+    projectCategoriesAll()
     .catch(err=>{
       console.warn(err);
     })
@@ -152,12 +152,7 @@ const FloatProjectAdd = (props) => {
     const handleAddAssignee = (id) => {
       setSelected("");
 
-      api.get(`/user-one`,{
-        headers: authHeaders(),
-        params: {
-          user_id: id
-        }
-      })
+      userOne(id)
       .then(res=>{
         setAssigneesChange([...assigneesChange,res.data]);
         const newFormDetails = formDetails;
@@ -173,14 +168,13 @@ const FloatProjectAdd = (props) => {
 
   const saveData = (e) => {
     // console.log("Before submit: ",formDetails);
-    api.post(`/project-create`,formDetails,{
-      headers: authHeaders()
-    })
+
+    projectCreate(formDetails)
     .then(res=>{
         props.closeFloatProjectBar();
         setSelectedDate(Date.now());
         setFormDetails({
-          user_id: props.user,
+          user_id: params.user,
           name:"",
           due_date: "",
           status:"New",

@@ -4,19 +4,19 @@ import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import api from '../../api';
 import "./floatnote.css";
-import { authHeaders } from '../../authUtils';
+import { useParams } from "react-router-dom";
+import { taskRead, noteCreate } from '../../authUtils';
 
 const FloatNote = (props) => {
+  let params = useParams();
   const [name, setName] = useState();
   const [text, setText] = useState("");
 
   useEffect(()=>{
     if(props.taskId !== undefined){
-      api.get(`/task-read/${props.taskId}`,{
-        headers: authHeaders()
-      })
+
+      taskRead(props.taskId)
       .then(res=>{
         setName(res.data.name);
       })
@@ -35,9 +35,11 @@ const FloatNote = (props) => {
   }
 
   const saveNote = () => {
-    api.post(`/note-create/${props.taskId}/${props.user}`,{
-      note:text
-    })
+    // api.post(`/note-create/${props.taskId}/${props.user}`,{
+    //   note:text
+    // })
+
+    noteCreate(props.taskId, params.user, text)
     .then(res=>{
       setText("");
       props.closeFloatNote();
