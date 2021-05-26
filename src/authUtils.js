@@ -89,3 +89,55 @@ export const projectCreate = (formDetails) => {
     headers: authHeaders()
   })
 }
+
+export const projectRead = (project_id) => {
+  return api.get(`/project-read`,{
+    headers: authHeaders(),
+    params: {
+      project_id: project_id
+    }
+  })
+}
+
+export const projectUpdate = (formDetails) => {
+  return api.post(`/project-update`,formDetails,{
+    headers: authHeaders()
+  })
+}
+
+export const projectDelete = (project_id) => {
+  return api.delete(`/project-delete`,{
+    headers: authHeaders(),
+    data: {
+      project_id: project_id
+    }
+  })
+}
+
+export const projectsUser = (user_id) => {
+  return api.get(`projects-user`,{
+    headers: authHeaders(),
+    params: {
+      user_id: user_id
+    }
+  })
+}
+
+export const projectUserStatus = (project_id, selection) => {
+  return api.get(`project-user-status`,{
+    headers: authHeaders(),
+    params: {
+      project_id: project_id,
+      status: selection
+    }
+  })
+}
+
+export const taskPriorityUpdate = (task_id, priority) => {
+  return api.post(`task-priority-update`,{
+    task_id: task_id,
+    priority: priority
+  },{
+    headers: authHeaders()
+  })
+}

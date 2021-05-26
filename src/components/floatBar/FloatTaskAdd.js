@@ -23,6 +23,7 @@ const FloatTaskAdd = (props) => {
     status:"New",
     progress:5,
     description:"",
+    category: "",
     assignees:[]
   })
   const [formName, setFormName] = useState("");
@@ -44,6 +45,7 @@ const FloatTaskAdd = (props) => {
       status:"New",
       progress:5,
       description:"",
+      category:"",
       assignees:[]
     });
     setFormName("");

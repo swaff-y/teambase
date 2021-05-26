@@ -10,10 +10,11 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import "./floatproject.css";
-import api from '../../api';
-import { authHeaders } from '../../authUtils';
+import { useParams } from "react-router-dom";
+import { projectRead, projectCategoriesAll, userOne, projectUpdate, projectDelete } from '../../authUtils';
 
 const FloatProjectEdit = (props) => {
+  let params = useParams();
 
     const [formName,setFormName] = useState(props.projectID[0]);
     const [selectedDate, setSelectedDate] = useState(Date.now());
@@ -40,9 +41,7 @@ const FloatProjectEdit = (props) => {
     });
 
     useEffect(()=>{
-      api.get(`/project-read/${props.projectID[1]}`,{
-        headers: authHeaders()
-      })
+      projectRead(props.projectID[1])
       .then(res=>{
         setFormName(res.data.name);
         setStatusChange(res.data.status);
@@ -63,7 +62,7 @@ const FloatProjectEdit = (props) => {
           // console.log("users", res.data.users[i].id);
         }
         newFormDetails.assignees = inst;
-        newFormDetails.project_id = res.data.project_id
+        newFormDetails.project_id = res.data.id
         setFormDetails(newFormDetails);
       })
       .catch(err=>{
@@ -72,9 +71,7 @@ const FloatProjectEdit = (props) => {
     },[]);
 
     useEffect(()=>{
-      api.get(`/project-categories-all`,{
-        headers: authHeaders()
-      })
+      projectCategoriesAll()
       .then(res=>{
           setProjectCategories(res.data);
       })
@@ -159,12 +156,7 @@ const FloatProjectEdit = (props) => {
       const handleAddAssignee = (id) => {
         setSelected("");
 
-        api.get(`/user-one`,{
-          headers: authHeaders(),
-          params: {
-            user_id: id
-          }
-        })
+        userOne(id)
         .then(res=>{
           setAssigneesChange([...assigneesChange,res.data]);
           const newFormDetails = formDetails;
@@ -179,10 +171,8 @@ const FloatProjectEdit = (props) => {
     //Edit assignees
 
     const saveData = (e) => {
-      // console.log("Before submit: ",formDetails);
-      api.post(`/project-update`,formDetails,{
-        headers: authHeaders()
-      })
+      console.log("Before submit: ",formDetails);
+      projectUpdate(formDetails)
       .then(res=>{
           props.closeFloatProjectBar();
       })
@@ -192,12 +182,8 @@ const FloatProjectEdit = (props) => {
     }
     const deleteProject = (e) => {
       // console.log("Before submit: ",formDetails);
-      api.delete(`/project-delete`,{
-        headers: authHeaders(),
-        data: {
-          project_id: props.projectID[1]
-        }
-      })
+
+      projectDelete(props.projectID[1])
       .then(res=>{
           props.closeFloatProjectBar();
       })

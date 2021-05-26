@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import FilterBar from "./FilterBar";
 import TaskBar from "./TaskBar";
-import api from '../../../api';
 import "./content.css";
-import { authHeaders } from '../../../authUtils';
+import { projectUserStatus, taskPriorityUpdate } from '../../../authUtils';
 
 const Content = (props) => {
 
@@ -15,9 +14,8 @@ const Content = (props) => {
   useEffect(()=>{
 
     if(props.selectedProject[1] > 1){
-      api.get(`project-user-status/${props.selectedProject[1]}/${filterSelection}`,{
-        headers: authHeaders()
-      })
+
+      projectUserStatus(props.selectedProject[1],filterSelection)
       .then(res=>{
 
         if(res.data.length < 1){
@@ -69,17 +67,11 @@ const Content = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     for( let i = 0; i < items.length; i++ ){
-      api.post(`task-priority-update`,{
-        "task_id": items[i].id,
-        "priority": i+1
-      },{
-          "headers": authHeaders()
-      })
+      taskPriorityUpdate(items[i].id, i+1)
       .then(res=>{
         // console.log("The return: ",res.data, "The item: ", items[i]);
       })
       .catch(err=>{
-        console.log("this one", authHeaders(), items[i].id);
         console.warn(err);
       })
     }

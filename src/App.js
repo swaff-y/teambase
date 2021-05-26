@@ -7,8 +7,7 @@ import Projects from "./Projects"
 import Analytics from "./Analytics"
 import TeamMembers from "./TeamMembers"
 import { useHistory, useParams } from "react-router-dom";
-import api from './api';
-import { authHeaders } from './authUtils';
+import { authHeaders, projectsUser } from './authUtils';
 
 // const USER = localStorage.user;
 
@@ -33,40 +32,39 @@ const App = () => {
     setUser(localStorage.user);
   },[])
 
-  useEffect(()=>{
-    api.get(`projects-user/${localStorage.user}`,{
-      headers: authHeaders()
-    })
-    .then(res=>{
-      if(res.data.length < 1){
-        setProjectData(res.data);
-      }else{
-        const projectArray = res.data;
-        const numbers = [];
-        for( let i = 0; i < projectArray.length; i++ ){
-          numbers.push(projectArray[i].priority)
-        }
-        numbers.sort(compareNumbers);
-        //this is a O(n^2) --> refactor in the future
-        const returnArray = [];
-        for( let i = 0; i < numbers.length; i++ ){
-          for( let j = 0; j < projectArray.length; j++ ){
-            if(projectArray[j].priority === numbers[i]){
-              returnArray.push(projectArray[j]);
-            }
-          }
-        }
-        setProjectData(returnArray);
-      }
-    })
-    .catch(err=>{
-      console.warn(err);
-    })
-  },[floatProject,user]);
+  // useEffect(()=>{
+  //
+  //   projectsUser(localStorage.user)
+  //   .then(res=>{
+  //     if(res.data.length < 1){
+  //       setProjectData(res.data);
+  //     }else{
+  //       const projectArray = res.data;
+  //       const numbers = [];
+  //       for( let i = 0; i < projectArray.length; i++ ){
+  //         numbers.push(projectArray[i].priority)
+  //       }
+  //       numbers.sort(compareNumbers);
+  //       //this is a O(n^2) --> refactor in the future
+  //       const returnArray = [];
+  //       for( let i = 0; i < numbers.length; i++ ){
+  //         for( let j = 0; j < projectArray.length; j++ ){
+  //           if(projectArray[j].priority === numbers[i]){
+  //             returnArray.push(projectArray[j]);
+  //           }
+  //         }
+  //       }
+  //       setProjectData(returnArray);
+  //     }
+  //   })
+  //   .catch(err=>{
+  //     console.warn(err);
+  //   })
+  // },[floatProject,user]);
 
-  const compareNumbers = (num1,num2) => {
-     return num1 - num2;
-  }
+  // const compareNumbers = (num1,num2) => {
+  //    return num1 - num2;
+  // }
 
   const project = (projectName,projectId) => {
     setSelectedProject([projectName, projectId]);
@@ -118,6 +116,9 @@ const App = () => {
     setProjectEdit(false);
     setFloatProject('');
   }
+  const handleSetProjectData = (data) => {
+    setProjectData(data);
+  }
 
   return (
     <div className="app" data-test="component-app">
@@ -133,6 +134,7 @@ const App = () => {
         <Route exact path="/projects/:user">
           <Projects
             project={project}
+            handleSetProjectData={handleSetProjectData}
             selectedProject={selectedProject}
             floatStatus={floatStatus}
             floatTaskDelete={floatTaskDelete}
