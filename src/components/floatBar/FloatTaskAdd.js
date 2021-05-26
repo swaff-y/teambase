@@ -29,7 +29,7 @@ const FloatTaskAdd = (props) => {
   const [formName, setFormName] = useState("");
   const [statusChange, setStatusChange] = useState("");
   const [progressChange, setProgressChange] = useState(5);
-  const [categoryChange, setCategoryChange] = useState("");
+  const [categoryChange, setCategoryChange] = useState([]);
   const [descriptionChange, setDescriptionChange] = useState("");
   const [assigneesChange, setAssigneesChange] = useState([]);
   const [taskCategories, setTaskCategories] = useState([]);
@@ -51,7 +51,7 @@ const FloatTaskAdd = (props) => {
     setFormName("");
     setStatusChange("");
     setProgressChange(5);
-    setCategoryChange("");
+    setCategoryChange([]);
     setDescriptionChange("");
     setAssigneesChange([]);
     // setUsers([])
@@ -63,7 +63,11 @@ const FloatTaskAdd = (props) => {
   useEffect(()=>{
     taskCategoriesAll()
     .then(res=>{
+        setCategoryChange([res.data[0].id,res.data[0].name])
         setTaskCategories(res.data);
+        const newFormDetails = formDetails;
+        newFormDetails.category = res.data[0].id;
+        setFormDetails(newFormDetails);
     })
     .catch(err=>{
       console.warn(err);
@@ -137,6 +141,7 @@ const FloatTaskAdd = (props) => {
     newFormDetails.progress = e.target.value;
     setFormDetails(newFormDetails);
   }
+
   const handleCategoryChange = (e) => {
 
         for( let i = 0; i < taskCategories.length; i++ ){
@@ -148,6 +153,7 @@ const FloatTaskAdd = (props) => {
         newFormDetails.category = e.target.value;
         setFormDetails(newFormDetails);
   }
+
   const handleDescriptionChange = (e) => {
     setDescriptionChange(e.target.value);
     const newFormDetails = formDetails;
@@ -156,7 +162,7 @@ const FloatTaskAdd = (props) => {
   }
 
   const saveData = (e) => {
-    // console.log("Before submit: ", formDetails );
+    console.log("Before submit: ", formDetails );
     taskCreate(formDetails)
     .then(res=>{
         props.closeFloatTaskBar();
@@ -235,8 +241,9 @@ const FloatTaskAdd = (props) => {
           </div>
           <div className="floatbar__col">
             <label htmlFor="category">Category</label><br/>
-            <select onChange={handleCategoryChange} value={categoryChange[0]}>
-              <option></option>
+            <select
+              onChange={handleCategoryChange}
+            >
               {
                 taskCategories.map((category, index)=>
                   <option

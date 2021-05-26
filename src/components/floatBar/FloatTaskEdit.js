@@ -21,6 +21,7 @@ const FloatTaskEdit = (props) => {
     due_date: "",
     status:"New",
     progress:5,
+    category: "",
     description:"",
     assignees:[]
   })
@@ -73,6 +74,7 @@ const FloatTaskEdit = (props) => {
       due_date: "",
       status:"New",
       progress:5,
+      category:"",
       description:"",
       assignees:[]
     });
@@ -274,7 +276,9 @@ const FloatTaskEdit = (props) => {
           </div>
           <div className="floatbar__col">
             <label htmlFor="category">Category</label><br/>
-            <select onChange={handleCategoryChange} value={categoryChange[0]}>
+            <select
+              onChange={handleCategoryChange}
+              value={categoryChange[0]}>
               <option
                 value={categoryChange[0]}
               >

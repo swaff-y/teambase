@@ -68,7 +68,11 @@ const FloatProjectAdd = (props) => {
   useEffect(()=>{
     projectCategoriesAll()
     .then(res=>{
-        setProjectCategories(res.data);
+      setCategoryChange([res.data[0].id,res.data[0].name])
+      setProjectCategories(res.data);
+      const newFormDetails = formDetails;
+      newFormDetails.category = res.data[0].id;
+      setFormDetails(newFormDetails);
     })
     projectCategoriesAll()
     .catch(err=>{
@@ -269,14 +273,7 @@ const FloatProjectAdd = (props) => {
         </div>
         <div className="floatproject__col">
           <label htmlFor="category">Category</label><br/>
-          <select onChange={handleCategoryChange} value={categoryChange[0]}>
-            <option
-              value={categoryChange[0]}
-            >
-              {
-                categoryChange[1]
-              }
-            </option>
+          <select onChange={handleCategoryChange}>
             {
               projectCategories.map((category, index)=>
                 <option
